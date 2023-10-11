@@ -27,8 +27,8 @@ from step0_TrainTestSetting_local import *
 
 @ck.command()
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='Data file with training features')
-# @ck.option('--test-data-file', '-tsdf', default='data/predictions.pkl', help='Test data file')
-@ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
+@ck.option('--test-data-file', '-tsdf', default='data/predictions.pkl', help='Test data file')
+# @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
 
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='Data file with sequences and complete set of annotations')  # original: data/terms_all.pkl
 @ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')
@@ -40,7 +40,7 @@ from step0_TrainTestSetting_local import *
 
 
 
-def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont, alpha, go_file, run_label_block):  # FS 添加go_file
+def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, alpha, go_file, run_label_block):  # FS 添加go_file
     # # 从last_release_metadata文件中获取alpha ###
     # last_release_metadata = 'Alpha_last_release.json'
     # with open(last_release_metadata, 'r') as f:
@@ -55,7 +55,7 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
     # terms_dict = {v: i for i, v in enumerate(terms)}  # 没用上？
 
     train_df = pd.read_pickle(train_data_file)
-    test_df = pd.read_pickle(predictions_file)  # predictions.pkl的信息, original: test_data_file
+    test_df = pd.read_pickle(test_data_file)  # predictions.pkl的信息, original: test_data_file
     print("Length of test set: " + str(len(test_df)))
 
     annotations = train_df['prop_annotations'].values

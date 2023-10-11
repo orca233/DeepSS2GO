@@ -42,9 +42,9 @@ python AlphaBeta_Combine_aass8_PredictionsFile.py
 ##########################################
 
 ## 这三个不一定全要做，根据具体情况来
-python AlphaBeta_FindAlphasBetas.py -o bp
-python AlphaBeta_FindAlphasBetas.py -o cc
-python AlphaBeta_FindAlphasBetas.py -o mf
+python AlphaBeta_FindAlphaBeta.py -o bp
+python AlphaBeta_FindAlphaBeta.py -o cc
+python AlphaBeta_FindAlphaBeta.py -o mf
 
 
 ##########################################

@@ -31,38 +31,40 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 @ck.option('--go-file', '-gf', default=params_local['go_file'], help='Gene Ontology file in OBO Format')  # original: 'data/go.obo'  此行原本没有，FS加
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='Data file with training features')
 # @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
-@ck.option('--test-data-file', '-tsdf', default='data/predictions.pkl', help='Test data file')
-# @ck.option('--terms-file', '-tf', default='./data/terms_gominre_trxte_aa.pkl', help='Data file with sequences and complete set of annotations')  # original 'data/terms_all.pkl'
-@ck.option('--terms-file', '-tf', default='./data/terms_gominre_trxte_aa.pkl', help='set of annotations')  # original 'data/terms_all.pkl'
+@ck.option('--test-data-file-aa-ss8', '-tsdf', default='data/predictions_aa_ss8.pkl', help='Test data file')  # test_data_file_aa_ss8 只有一个 prop_annotations, 两个 preds_aa & preds_ss8
+
+@ck.option('--terms-file-aa', '-tf', default='./data/terms_gominre_trxte_aa.pkl', help='set of annotations')  # original 'data/terms_all.pkl'
+@ck.option('--terms-file-ss8', '-tf', default='./data/terms_gominre_trxte_ss8.pkl', help='set of annotations')  # original 'data/terms_all.pkl'
+
 @ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')  # test_diamond.res / blast_output_diamond.res
 @ck.option('--ont', '-o', default='mf', help='GO subontology (bp, mf, cc)')
 
 # new
-@ck.option('--run-block-x', '-rbx', default='T', help='judge whether run block X')
+@ck.option('--run-label-block', '-rbx', default='T', help='judge whether run block X')
 @ck.option('--alpha-range', '-ar', default='0, 101, 10', type=str, help='xx')  # [25, 80, 1]   params_local['alpha_range']， 初筛：'0, 101, 10'，细筛：'30, 50, 2'
 @ck.option('--beta-range', '-br', default='0, 101, 10', type=str, help='xx')  # [25, 80, 1]   params_local['beta_range']，初筛：'0, 101, 10'，细筛：'10, 30, 2'
 @ck.option('--num-cpu-cores', '-ncc', default=60, type=int, help='xx')  # 60
 @ck.option('--last-release-metadata', '-lrm', default='Alpha_last_release.json', help='xx')
 
 
-def main(go_file, train_data_file, test_data_file, terms_file, diamond_scores_file, ont,
-         run_block_x, alpha_range, beta_range, num_cpu_cores, last_release_metadata):  # FS加的go_file
+def main(go_file, train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, diamond_scores_file, ont,
+         run_label_block, alpha_range, beta_range, num_cpu_cores, last_release_metadata):  # FS加的go_file
 
     # 预处理
-    test_data_aa_file = 'data/predictions_aa_ss8.pkl'  # 用的是综合的 aa_ss8.pkl
+    # test_data_aa_file = 'data/predictions_aa_ss8.pkl'  # 用的是综合的 aa_ss8.pkl
     # test_data_ss8_file = 'data/predictions_ss8.pkl'
 
     go_rels = Ontology(go_file, with_rels=True)
-    terms_df_aa = pd.read_pickle(terms_file)
+    terms_df_aa = pd.read_pickle(terms_file_aa)
     terms_aa = terms_df_aa['terms'].values.flatten()  # ['GO:0051254' 'GO:0045637' 'GO:1905368' ...  'GO:0030665']
     terms_dict = {v: i for i, v in enumerate(terms_aa)}  # {'GO:0051254': 0, 'GO:0045637': 1, 'GO:1905368': 2, 'GO:0042129': 3, ... 'GO:0030665': 2087}
 
     # FS:
-    terms_df_ss8 = pd.read_pickle('data/terms_gominre_trxte_ss8.pkl')  # original: data/terms_all_ss8.pkl
+    terms_df_ss8 = pd.read_pickle(terms_file_ss8)  # original: data/terms_all_ss8.pkl
     terms_ss8 = terms_df_ss8['terms'].values.flatten()
 
     train_df = pd.read_pickle(train_data_file)
-    test_df_aa_ss8 = pd.read_pickle(test_data_aa_file)
+    test_df_aa_ss8 = pd.read_pickle(test_data_file_aa_ss8)
     # test_df_ss8 = pd.pdread_pickle(test_data_ss8_file)
     print("Length of test set: " + str(len(test_df_aa_ss8)))
 
@@ -168,7 +170,7 @@ def main(go_file, train_data_file, test_data_file, terms_file, diamond_scores_fi
     print('111', last_release_data)
 
     #### find alpha 方程里调用了 eval_alphas
-    last_release_data['alphas'][ont], last_release_data['betas'][ont] = find_alpha_beta(ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_block_x, alpha_range, beta_range, num_cpu_cores)
+    last_release_data['alphas'][ont], last_release_data['betas'][ont] = find_alpha_beta(ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_label_block, alpha_range, beta_range, num_cpu_cores)
     print('2222', last_release_data)
     with open(last_release_metadata, 'w') as f:
         json.dump(last_release_data, f)
@@ -182,7 +184,7 @@ def main(go_file, train_data_file, test_data_file, terms_file, diamond_scores_fi
 
 # ################ FS: ALGORITHM TO FIND BEST ALPHAS & BETAS PARAMETER ##################################
 
-def eval_alphas_betas(alpha, beta, ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_block_x):
+def eval_alphas_betas(alpha, beta, ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_label_block):
     print('alpha, beta = ', alpha, beta)
 
     deep_preds = []
@@ -195,7 +197,7 @@ def eval_alphas_betas(alpha, beta, ont, test_df_aa_ss8, blast_preds, go_rels, te
 
 
     # ####  FS 添加 # block X # 这里添加一下，把labels的每一个元素{GO,GO,GO},{GO,GO},{GO}和terms的2088做交集    这个block仅限于此！！！！！！！！！！！！！！！！！！！！！！！
-    if run_block_x == 'T':
+    if run_label_block == 'T':
         # print('it is running block X !!!!!!!!!!!!!!!!!')
         terms_set = set(terms_aa)
         labels = [s.intersection(terms_set) for s in labels]
@@ -239,10 +241,10 @@ def eval_alphas_betas(alpha, beta, ont, test_df_aa_ss8, blast_preds, go_rels, te
         for go_id in annots_dict:
             annots_dict[go_id] *= 1 - alphas[go_rels.get_namespace(go_id)] - betas[go_rels.get_namespace(go_id)]  # blast * (1-alpha- beta)
 
-        for j, score_aa in enumerate(row.preds_aa):  # deep深度学习中算的预测值preds
+        for j, score_aa in enumerate(row.preds_aa):  # deep深度学习中算的预测值preds  # test_df_aa_ss8 才有 preds_aa
             go_id = terms_aa[j]
             #original: score_aa *= 1 - alphas[go_rels.get_namespace(go_id)]  # 深度学习preds * (1-alpha)
-            score_aa *= alphas[go_rels.get_namespace(go_id)]  # 深度学习preds_aa * beta
+            score_aa *= alphas[go_rels.get_namespace(go_id)]  # 深度学习preds_aa * alpha
 
             if go_id in annots_dict:  # if 深度学习的go_id在diamond对比数据中
                 annots_dict[go_id] += score_aa
@@ -252,12 +254,11 @@ def eval_alphas_betas(alpha, beta, ont, test_df_aa_ss8, blast_preds, go_rels, te
         # 明天接着改，row需要改row的范围，然后把上面j换成beta，这里换成 1-alpha - beta。下面alpha取值范围间隔可设为0.03!!!!
         for k, score_ss8 in enumerate(row.preds_ss8):  # deep深度学习中算的预测值preds
             go_id = terms_ss8[k]   # FS: 这一点修改的很 有趣，简洁。因为ss8是按它自己的terms排序的!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            score_ss8 *= betas[go_rels.get_namespace(go_id)] # 深度学习preds_ss8 * (1-alpha-beta)
+            score_ss8 *= betas[go_rels.get_namespace(go_id)] # 深度学习preds_ss8 * beta
             if go_id in annots_dict:  # if 深度学习的go_id在diamond对比数据中
                 annots_dict[go_id] += score_ss8
             else:
                 annots_dict[go_id] = score_ss8
-
 
 
         # alpha=0.2:  'GO:0000045' = 0.6616454 * 0.01 + score = 0.042534434720873836。也可能*0.00修改alphas = {NAMESPACES['mf']: 0, NAMESPACES['bp']: 0, NAMESPACES['cc']: 0}
@@ -326,13 +327,13 @@ def eval_alphas_betas(alpha, beta, ont, test_df_aa_ss8, blast_preds, go_rels, te
 
 
 
-def find_alpha_beta(ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_block_x, alpha_range, beta_range, num_cpu_cores):
+def find_alpha_beta(ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_label_block, alpha_range, beta_range, num_cpu_cores):
     '''
     逐一过所有的alpha （范围：alpha_range）
     并将每一个alpha传到 eval_alphas 函数中，得到最大的 Fmax
     每一个 (alpha, Fmax) 组成 results，最后选出最大的那个Fmax对应的alpha
     '''
-    extra = [ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_block_x]
+    extra = [ont, test_df_aa_ss8, blast_preds, go_rels, terms_aa, terms_ss8, run_label_block]
 
     '''
     # # original:
