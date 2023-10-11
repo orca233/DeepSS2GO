@@ -3,8 +3,6 @@ from DeepGOPlus: evaluate_deepgoplus.py
 
 相比于Alpha_FindAlpha.py，（从25-80逐一过一遍alpha，每一个alpha又过 t(threshold)0-100）
 这个py文件只针对上述筛选出的某一个alpha进行，2min
-
-
 '''
 
 
@@ -24,9 +22,7 @@ from step0_TrainTestSetting_local import *
 
 # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
-
 os.system('mkdir -p results_alphabeta')
-
 
 @ck.command()
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='Data file with training features')

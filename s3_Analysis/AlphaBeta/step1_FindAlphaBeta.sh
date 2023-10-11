@@ -23,12 +23,15 @@ cp "${path_aa}data/train_data.pkl" "${path_current}data/train_data.pkl"
 
 cp "${path_aa}data/terms_gominre_trxte.pkl" "${path_current}data/terms_gominre_trxte_aa.pkl"  # 不一定是terms_all,
 cp "${path_aa}data/predictions.pkl" "${path_current}data/predictions_aa.pkl"
+cp "${path_aa}step0_TrainTestSetting_local.py" "${path_current}step0_TrainTestSetting_local_aa.py"
 
 # ss8
 #cd "$path_ss8" || exit 1
 #python ../../s2_TrainTest/step4_Diamond.py  # 有一个aa的 diamond_aa.res 即可
 cp "${path_ss8}data/terms_gominre_trxte.pkl" "${path_current}data/terms_gominre_trxte_ss8.pkl"  # 不一定是terms_all
 cp "${path_ss8}data/predictions.pkl" "${path_current}data/predictions_ss8.pkl"
+cp "${path_ss8}step0_TrainTestSetting_local.py" "${path_current}step0_TrainTestSetting_local_ss8.py"
+
 
 
 # 结合二者 (predictions_aa.pkl + predictions_ss8.pkl = predictions_aa_ss8.pkl)
