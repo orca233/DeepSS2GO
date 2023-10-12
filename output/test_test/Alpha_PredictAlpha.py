@@ -3,6 +3,8 @@
 '''
 引自deepgoplus中的predict.py
 很多函数引自 step2_Test.py
+
+需要model_checkpoint.pth，对test_data.fa/pkl进行预测
 '''
 
 import click as ck
@@ -14,16 +16,17 @@ from utils import Ontology, NAMESPACES
 # from sklearn.metrics import roc_curve, auc, matthews_corrcoef
 import torch
 from torch.utils.data import Dataset, DataLoader
+import json
 from step0_TrainTestSetting_local import *
 
 MAXLEN = params_local['MAXLEN']
 
 @ck.command()
-@ck.option('--in-file', '-if', default='data/test_data.fa', help='Input FASTA file', required=True)
+@ck.option('--in-file', '-if', default='data/test_data.fa', help='Input FASTA file', required=True)  # 提前准备好
 @ck.option('--out-file', '-of', default='data/results.csv', help='Output result file')
 @ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--model-file', '-mf', default='data/model_checkpoint.pth', help='Tensorflow model file')
-@ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='List of predicted terms')
+@ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
 @ck.option('--annotations-file', '-tf', default='data/train_data.pkl', help='Experimental annotations')
 @ck.option('--chunk-size', '-cs', default=100000, help='Number of sequences to read at a time')  # original 1000
 @ck.option('--diamond-file', '-df', default='data/diamond_aa.res', help='Diamond Mapping file')
@@ -31,13 +34,16 @@ MAXLEN = params_local['MAXLEN']
 @ck.option('--batch-size', '-bs', default=32, help='Batch size for prediction model')
 # @ck.option('--maxlen', '-ml', default=params_local['MAXLEN'])
 # new
-@ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')
+@ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')  # 提前准备好
 @ck.option('--aa-ss', '-aass', default=params_local['aa_ss'], help='aa/ss8/ss3')
 @ck.option('--prot-letter-aa', '-plaa', default=params_local['PROT_LETTER_aa'], type=list, help='XX')
 @ck.option('--prot-letter-ss8', '-plss8', default=params_local['PROT_LETTER_ss8'], type=list, help='XX')
 @ck.option('--prot-letter-ss3', '-plss3', default=params_local['PROT_LETTER_ss3'], type=list, help='XX')
 @ck.option('--kernels-list', '-kl', default=params_local['kernels'], type=list, help='XX')      # # kernels & filters 需要是list形式，即使只有一个 int，也要转成list
 @ck.option('--filters-list', '-fl', default=params_local['filters'], type=list, help='XX')
+@ck.option('--ont', '-o', default='mf', help='GO subontology (bp, mf, cc)')
+@ck.option('--alpha', '-a', default='json', help='alpha = json(with quote) or 0-1(without quote, eg 0.3 float)')  # 如果alpha='json'，则采用json数据，否则alpha=数字，或外来click引入
+
 
 # @ck.option('--maxlen', '-fl', default=params_local['filters'], type=list, help='XX')
 # @ck.option('--filters-list', '-fl', default=params_local['filters'], type=list, help='XX')
@@ -46,7 +52,7 @@ MAXLEN = params_local['MAXLEN']
 def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, chunk_size, diamond_file,
          threshold, batch_size,
          test_data_file, aa_ss, prot_letter_aa, prot_letter_ss8, prot_letter_ss3,
-         kernels_list, filters_list):  # maxlen
+         kernels_list, filters_list, ont, alpha):  # maxlen
 
 
     #######################################################################
@@ -73,9 +79,9 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
 
     kernels_tuple = [(value, PROT_LETTER_len + 1) for value in kernels_list]
 
-    go = Ontology(go_file, with_rels=True)
+    go = Ontology(go_file, with_rels=True)  # 这里的go即 alpha_EvaluateAlpha.py中的go_rels
     # test_data_file = 'data/test_data.pkl'
-    terms_df = pd.read_pickle(terms_file)
+    terms_df = pd.read_pickle(terms_file)  # 这个是s2_step1中 train_data X test_data 得到的
     terms = terms_df['terms'].values.flatten()
     terms_dict = {v: i for i, v in enumerate(terms)}
     terms_classes = len(terms_dict)
@@ -93,6 +99,7 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
     df = pd.read_pickle(annotations_file)
     for row in df.itertuples():
         annotations[row.proteins] = set(row.prop_annotations)
+
     go.calculate_ic(annotations.values())
     diamond_preds = {}
     mapping = {}
@@ -139,7 +146,7 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
     ################################################################################################
 
     # 创建ProteinDataset实例，不同于train，这里只有test的实例
-    test_df = pd.read_pickle(test_data_file)
+    test_df = pd.read_pickle(test_data_file)  # 这里需要test_data.pkl文件，重新进行类似于step3_Test.py的步骤，根据训练好的model再预测
     test_dataset = ProteinGODataset(test_df, terms_dict, PROT_LETTER_len, PROT_INDEX)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
@@ -182,9 +189,10 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
     ########## 第三部分：整合 #########################
     #################################################
 
+    # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
 
     # alphas = {NAMESPACES['mf']: 0.48, NAMESPACES['bp']: 0.4, NAMESPACES['cc']: 0.49}
-    alphas = {NAMESPACES['mf']: 1, NAMESPACES['bp']: 1, NAMESPACES['cc']: 1}
+    alphas = {NAMESPACES['mf']: 0, NAMESPACES['bp']: 0, NAMESPACES['cc']: 0}
 
     start_time = time.time()
     total_seq = 0
@@ -192,7 +200,7 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
 
     # 输出结果
     w = open(out_file, 'wt')
-    for prot_ids, sequences in read_fasta(in_file, chunk_size):
+    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
         total_seq += len(prot_ids)
         deep_preds = {}
         ids, data = get_data(sequences, PROT_LETTER_len, PROT_INDEX)
@@ -228,25 +236,36 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
                         deep_preds[prot_id][terms[l]] = max(deep_preds[prot_id][terms[l]], preds[i, l])
 
         # Combine diamond preds and deepgo
-        '''
-        # original
-        for prot_id in prot_ids:
-            annots = {}
-            if prot_id in diamond_preds:  # blast/diamond * (1-alpha)
-                for go_id, score in diamond_preds[prot_id].items():
-                    annots[go_id] = score * alphas[go.get_namespace(go_id)]
-            for go_id, score in deep_preds[prot_id].items():
-                if go_id in annots:
-                    annots[go_id] += (1 - alphas[go.get_namespace(go_id)]) * score
-                else:
-                    annots[go_id] = (1 - alphas[go.get_namespace(go_id)]) * score
-        '''
 
-        # FS   alpha & 1-alpha 对调
-        for prot_id in prot_ids:
+
+        # 如果alpha=NA，则采用json数据，否则alpha=数字，或外来click引入
+        if alpha == 'json':
+            # 从last_release_metadata文件中获取alpha ###
+            print('alpha is from json, alpha = ', alpha)
+            last_release_metadata = 'Alpha_last_release.json'
+            with open(last_release_metadata, 'r') as f:
+                print('Reading file from json')
+                last_release_data = json.load(f)
+                alpha = last_release_data["alphas"][ont]  # 从 json中读取数据
+                print('111111111', type(alpha))
+                alphas[NAMESPACES[ont]] = alpha  # ????????? 方便下面的迭代中使用alpha
+                print('alpha, alphas:')
+                print(alpha, alphas)
+
+        else:  # alpha = int，也就是在click中又指定
+            print('alpha is from click, alpha = ', alpha)
+            print('type_alpha = ', type(alpha))
+            alphas[NAMESPACES[ont]] = alpha
+
+        ###########################################################
+        # FS   alpha & 1-alpha 对调  这是核心！！！！！！！
+        ###########################################################
+        for prot_id in prot_ids:  # 逐一过 test_data.fa
             annots = {}
             if prot_id in diamond_preds:  # blast/diamond * (1-alpha)
                 for go_id, score in diamond_preds[prot_id].items():
+                    print('go.get_namespace(go_id) = ', go.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
+                    print('alphas[go.get_namespace(go_id)] = ', alphas[go.get_namespace(go_id)])
                     annots[go_id] = score * (1 - alphas[go.get_namespace(go_id)])
             for go_id, score in deep_preds[prot_id].items():
                 if go_id in annots:
@@ -254,6 +273,10 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
                 else:
                     annots[go_id] = alphas[go.get_namespace(go_id)] * score
 
+            # print('444444444')
+            # print(len(annots))
+            # annots = {'GO:0000156': 0.07886640414595605, 'GO:0000160': 0.5202934741973877, ...
+            # 每一次prot_id循环中的annots长度都不同， 148, 122, ...
 
 
             # Propagate scores with ontology structure
@@ -268,10 +291,16 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
             sannots = sorted(annots.items(), key=lambda x: x[1], reverse=True)
             for go_id, score in sannots:
                 if score >= threshold:
-                    w.write(prot_id + ', ' + go_id + ', ' + go.get_namespace(go_id) + ', ' +
-                            go.get_term(go_id)['name'] + ', %.3f\n' % score)
+                    # 明天修改，把这里添加一个只针对特定ont的
+                    print('go_id, ont = ', go_id, go.get_namespace(go_id))
+                    # w.write(prot_id + ', ' + go_id + ', ' + go.get_namespace(go_id) + ', ' + go.get_term(go_id)['name'] + ', %.3f\n' % score)
+                    if go.get_namespace(go_id) == NAMESPACES[ont]:  # i.e. molecular_function  只挑选属于ont(mf)的写入results.csv
+                        w.write(prot_id + ', ' + go_id + ', ' + go.get_namespace(go_id) + ', ' + go.get_term(go_id)['name'] + ', %.3f\n' % score)
 
             w.write('\n')
+
+
+
     w.close()
     total_time = time.time() - start_time
     print('Total prediction time for %d sequences is %d' % (total_seq, total_time))

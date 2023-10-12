@@ -4,8 +4,15 @@ README
 
 第一步，为Diamond做数据预处理，得到 train/test_data.fa文件
 case 0) if CAFA3
-case 1) elif aa_ss = aa, 分三步：pkl2fa, build *dmnd, querying 生成 diamond_aa.res
-case 2) elif aa_ss = ss8/ss3，则从 *aa/data/diamond_aa.res cp 到 *ss/data/.
+case 1) elif aa_ss = aa & test_data != 'New', 分三步：pkl2fa, build *dmnd, querying 生成 diamond_aa.res
+case 2) elif aa_ss = ss8/ss3 & test_data != 'New'，则先转化会aa，然后再 上面3步
+case 3) elif test_data != 'New'，这是测试新的数据集，完全未知的。此时fa应该是现成的，需要做的事把fa转成pkl方便再predict.py里进行model.pth预测
+
+
+
+
+
+
 
 # 第二步，Diamond  (不论 aa / ss，都是用 aa 做diamond比对)
 #

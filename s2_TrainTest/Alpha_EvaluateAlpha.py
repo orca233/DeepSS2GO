@@ -64,10 +64,11 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     test_annotations = list(map(lambda x: set(x), test_annotations))
     go_rels.calculate_ic(annotations + test_annotations)
 
+
     #####################################################################
-    ############################## Diamond ##############################
+    ########################## Diamond 计算IC ############################
     #####################################################################
-        # Print IC values of terms
+    # Print IC values of terms
     ics = {}
     for term in terms:
         ics[term] = go_rels.get_ic(term)
@@ -110,6 +111,7 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
             for go_id, score in zip(allgos, sim):
                 annots[go_id] = score
         blast_preds.append(annots)
+    # blast_preds, len = 662, [{'GO:0000045': 0.6616454, 'GO:0000285': 0.19235227, 'GO:0001505': 0.091541134,
 
 
     ############ 这里和 FindAlpha 是不一样的 ######################
@@ -117,6 +119,9 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     # DeepGOPlus
     deep_preds = []  # 都用在哪儿了？
     go_set = go_rels.get_namespace_terms(NAMESPACES[ont])
+    print('11111111111')
+    print(go_set)
+
     go_set.remove(FUNC_DICT[ont])  # 把最根的那三个之一给删了？
 
     labels = test_df['prop_annotations'].values
