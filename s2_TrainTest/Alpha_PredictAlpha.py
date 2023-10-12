@@ -3,6 +3,8 @@
 '''
 引自deepgoplus中的predict.py
 很多函数引自 step2_Test.py
+
+需要model_checkpoint.pth，对test_data.fa/pkl进行预测
 '''
 
 import click as ck
@@ -139,7 +141,7 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
     ################################################################################################
 
     # 创建ProteinDataset实例，不同于train，这里只有test的实例
-    test_df = pd.read_pickle(test_data_file)
+    test_df = pd.read_pickle(test_data_file)  # 这里需要test_data.pkl文件，重新进行类似于step3_Test.py的步骤，根据训练好的model再预测
     test_dataset = ProteinGODataset(test_df, terms_dict, PROT_LETTER_len, PROT_INDEX)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
@@ -192,7 +194,7 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
 
     # 输出结果
     w = open(out_file, 'wt')
-    for prot_ids, sequences in read_fasta(in_file, chunk_size):
+    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
         total_seq += len(prot_ids)
         deep_preds = {}
         ids, data = get_data(sequences, PROT_LETTER_len, PROT_INDEX)
