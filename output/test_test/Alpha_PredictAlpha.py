@@ -5,6 +5,11 @@
 很多函数引自 step2_Test.py
 
 需要model_checkpoint.pth，对test_data.fa/pkl进行预测
+
+如果是全新的未知的测试，一般会给出aa.fa文件，
+if 用aa预测，转成pkl，准备好test_data.fa & test_data.pkl即可
+elif 用ss8测试，转成ss8.fa，在转成pkl，再准备test_data.fa & test_data.pkl
+
 '''
 
 import click as ck
@@ -23,7 +28,12 @@ MAXLEN = params_local['MAXLEN']
 
 @ck.command()
 @ck.option('--in-file', '-if', default='data/test_data.fa', help='Input FASTA file', required=True)  # 提前准备好
-@ck.option('--out-file', '-of', default='data/results.csv', help='Output result file')
+# @ck.option('--out-file', '-of', default='data/results.csv', help='Output result file')
+@ck.option('--out-file-bp', '-of', default='data/results_bp.csv', help='Output result file')
+@ck.option('--out-file-cc', '-of', default='data/results_cc.csv', help='Output result file')
+@ck.option('--out-file-mf', '-of', default='data/results_mf.csv', help='Output result file')
+
+
 @ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--model-file', '-mf', default='data/model_checkpoint.pth', help='Tensorflow model file')
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
@@ -49,8 +59,8 @@ MAXLEN = params_local['MAXLEN']
 # @ck.option('--filters-list', '-fl', default=params_local['filters'], type=list, help='XX')
 
 
-def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, chunk_size, diamond_file,
-         threshold, batch_size,
+def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, terms_file,  # out_file
+         annotations_file, chunk_size, diamond_file, threshold, batch_size,
          test_data_file, aa_ss, prot_letter_aa, prot_letter_ss8, prot_letter_ss3,
          kernels_list, filters_list, ont, alpha):  # maxlen
 
@@ -87,7 +97,6 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
     terms_classes = len(terms_dict)
 
 
-    print('11111111111')
 
     ############################################################################
     ############ 第一步：计算diamond的IC 还是别的啥，反正和IC相关? ##################
@@ -198,8 +207,15 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
     total_seq = 0
 
 
-    # 输出结果
-    w = open(out_file, 'wt')
+    # 输出结果，每次只算一个ont，在step8_PredictAlpha.sh中设置
+    if ont == 'bp':
+        out_file_x = out_file_bp
+    elif ont == 'cc':
+        out_file_x = out_file_cc
+    elif ont == 'mf':
+        out_file_x = out_file_mf
+
+    w = open(out_file_x, 'wt')
     for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
         total_seq += len(prot_ids)
         deep_preds = {}
@@ -249,7 +265,7 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
                 alpha = last_release_data["alphas"][ont]  # 从 json中读取数据
                 print('111111111', type(alpha))
                 alphas[NAMESPACES[ont]] = alpha  # ????????? 方便下面的迭代中使用alpha
-                print('alpha, alphas:')
+                print('alpha, alphas = ')
                 print(alpha, alphas)
 
         else:  # alpha = int，也就是在click中又指定
@@ -264,8 +280,8 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
             annots = {}
             if prot_id in diamond_preds:  # blast/diamond * (1-alpha)
                 for go_id, score in diamond_preds[prot_id].items():
-                    print('go.get_namespace(go_id) = ', go.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
-                    print('alphas[go.get_namespace(go_id)] = ', alphas[go.get_namespace(go_id)])
+                    # print('go.get_namespace(go_id) = ', go.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
+                    # print('alphas[go.get_namespace(go_id)] = ', alphas[go.get_namespace(go_id)])
                     annots[go_id] = score * (1 - alphas[go.get_namespace(go_id)])
             for go_id, score in deep_preds[prot_id].items():
                 if go_id in annots:
@@ -292,22 +308,22 @@ def main(in_file, out_file, go_file, model_file, terms_file, annotations_file, c
             for go_id, score in sannots:
                 if score >= threshold:
                     # 明天修改，把这里添加一个只针对特定ont的
-                    print('go_id, ont = ', go_id, go.get_namespace(go_id))
+                    # print('before filtering: go_id, ont = ', go_id, go.get_namespace(go_id))
+
+                    # original:
                     # w.write(prot_id + ', ' + go_id + ', ' + go.get_namespace(go_id) + ', ' + go.get_term(go_id)['name'] + ', %.3f\n' % score)
+                    # FS: 想想也没必要只挑出来ont的，索性全部写入results.csv里，反正每一行都有注释是bp/mf/cc，需要什么挑什么即可
+                    # FS 又想了想，还是要测的，因为这里只读取了 json文件中的某一个ont-的alpha，其他两个默认为0，所以predict的也不准。
                     if go.get_namespace(go_id) == NAMESPACES[ont]:  # i.e. molecular_function  只挑选属于ont(mf)的写入results.csv
+                        # print('after filtering: go_id, ont = ', go_id, go.get_namespace(go_id))
                         w.write(prot_id + ', ' + go_id + ', ' + go.get_namespace(go_id) + ', ' + go.get_term(go_id)['name'] + ', %.3f\n' % score)
 
             w.write('\n')
 
 
-
     w.close()
     total_time = time.time() - start_time
     print('Total prediction time for %d sequences is %d' % (total_seq, total_time))
-
-
-
-
 
 
 

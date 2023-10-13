@@ -10,9 +10,16 @@
 
 
 # in-file & test-data-file 是可以更换成"待测的未知的全新的"
+# 每一次只选bp/cc/mf中的一个来预测，因为其他两个默认为0
 
-echo predicting
-python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/test_data.fa' --test-data-file 'data/test_data.pkl'
+echo predicting bp
+python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/test_data.fa' --test-data-file 'data/test_data.pkl' -o bp --alpha 'json' # 0.6
+
+echo predicting cc
+python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/test_data.fa' --test-data-file 'data/test_data.pkl' -o cc --alpha 'json' # 0.6
+
+echo predicting mf
+python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/test_data.fa' --test-data-file 'data/test_data.pkl' -o mf --alpha 'json' # 0.6
 
 
 

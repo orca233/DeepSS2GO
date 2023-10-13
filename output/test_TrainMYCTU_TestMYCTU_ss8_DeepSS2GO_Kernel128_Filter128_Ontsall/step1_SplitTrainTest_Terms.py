@@ -62,7 +62,8 @@ os.system('mkdir -p data')
 os.system('mkdir -p results')
 
 @ck.command()
-@ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')
+# @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')
+@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='train data file')
 @ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')
 

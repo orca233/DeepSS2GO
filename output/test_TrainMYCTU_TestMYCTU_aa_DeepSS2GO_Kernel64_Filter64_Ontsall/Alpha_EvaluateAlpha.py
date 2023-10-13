@@ -4,8 +4,6 @@ from DeepGOPlus: evaluate_deepgoplus.py
 相比于Alpha_FindAlpha.py，（从25-80逐一过一遍alpha，每一个alpha又过 t(threshold)0-100）
 这个py文件只针对上述筛选出的某一个alpha进行，2min
 
-
-
 '''
 
 
@@ -20,24 +18,27 @@ from utils import FUNC_DICT, Ontology, NAMESPACES
 from matplotlib import pyplot as plt
 import json
 # from step0_TrainTestSetting_global import *
-# from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_local import *
 
 # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
 
 @ck.command()
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='Data file with training features')
-# @ck.option('--test-data-file', '-tsdf', default='data/predictions.pkl', help='Test data file')
-@ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
+@ck.option('--test-data-file', '-tsdf', default='data/predictions.pkl', help='Test data file')
+# @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
 
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='Data file with sequences and complete set of annotations')  # original: data/terms_all.pkl
 @ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')
 @ck.option('--ont', '-o', default='mf', help='GO subontology (bp, mf, cc)')
-@ck.option('--alpha', '-a', default='json', help='alpha = json or 0-100')  # 如果alpha=json，则采用json数据，否则alpha=数字，或外来click引入
-@ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--alpha', '-a', default='json', help='alpha = json(with quote) or 0-1(without quote, eg 0.3 float)')  # 如果alpha='json'，则采用json数据，否则alpha=数字，或外来click引入
+@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--run-label-block', '-rbx', default='T', help='judge whether run block X')
 
 
-def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont, alpha, go_file):  # FS 添加go_file
+
+def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, alpha, go_file, run_label_block):  # FS 添加go_file
     # # 从last_release_metadata文件中获取alpha ###
     # last_release_metadata = 'Alpha_last_release.json'
     # with open(last_release_metadata, 'r') as f:
@@ -52,7 +53,7 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
     # terms_dict = {v: i for i, v in enumerate(terms)}  # 没用上？
 
     train_df = pd.read_pickle(train_data_file)
-    test_df = pd.read_pickle(predictions_file)  # predictions.pkl的信息, original: test_data_file
+    test_df = pd.read_pickle(test_data_file)  # predictions.pkl的信息, original: test_data_file
     print("Length of test set: " + str(len(test_df)))
 
     annotations = train_df['prop_annotations'].values
@@ -60,14 +61,21 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
     test_annotations = test_df['prop_annotations'].values
     test_annotations = list(map(lambda x: set(x), test_annotations))
     go_rels.calculate_ic(annotations + test_annotations)
+    # print(go_rels)
+
 
     #####################################################################
-    ############################## Diamond ##############################
+    ########################## Diamond 计算IC ############################
     #####################################################################
-        # Print IC values of terms
+    # Print IC values of terms
     ics = {}
     for term in terms:
         ics[term] = go_rels.get_ic(term)
+
+    # print('3333333')
+    # print(ics)
+    # print(len(ics))
+
 
     prot_index = {}
     for i, row in enumerate(train_df.itertuples()):
@@ -107,18 +115,35 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
             for go_id, score in zip(allgos, sim):
                 annots[go_id] = score
         blast_preds.append(annots)
+    # blast_preds, len = 662, [{'GO:0000045': 0.6616454, 'GO:0000285': 0.19235227, 'GO:0001505': 0.091541134,
 
 
     ############ 这里和 FindAlpha 是不一样的 ######################
     # 这里和 Alpha_FindAlpha.py 中的 eval_alpha 很像
     # DeepGOPlus
     deep_preds = []  # 都用在哪儿了？
-    go_set = go_rels.get_namespace_terms(NAMESPACES[ont])
+    go_set = go_rels.get_namespace_terms(NAMESPACES[ont])  # 这里只留下对应ont的go（不确定哈，猜的）!!!!!!!!!!!!!
+    # print('11111111111')
+    # print(len(go_set))
+    # go_set = {'GO:0061685', 'GO:0034909', 'GO:0016167', 'GO:0004902',  len = 12407
+
     go_set.remove(FUNC_DICT[ont])  # 把最根的那三个之一给删了？
 
     labels = test_df['prop_annotations'].values
     labels = list(map(lambda x: set(filter(lambda y: y in go_set, x)), labels))
     # print(len(go_set))
+
+    # ####  FS 添加 # block X # 这里添加一下，把labels的每一个元素{GO,GO,GO},{GO,GO},{GO}和terms的2088做交集
+    if run_label_block == 'T':
+        # print('it is running block X !!!!!!!!!!!!!!!!!')
+        terms_set = set(terms)
+        labels = [s.intersection(terms_set) for s in labels]
+        # print(labels)
+        # print('len(labels & terms_set) = ', len(labels))
+
+
+
+
     # alphas = {NAMESPACES['mf']: 0.55, NAMESPACES['bp']: 0.59, NAMESPACES['cc']: 0.46}
     alphas = {NAMESPACES['bp']: 0, NAMESPACES['cc']: 0, NAMESPACES['mf']: 0}  # 重新初始化？
 
@@ -140,9 +165,11 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
             print('Reading file from json')
             last_release_data = json.load(f)
             alpha = last_release_data["alphas"][ont]  # 从 json中读取数据
+            print('111111111', type(alpha))
             alphas[NAMESPACES[ont]] = alpha   # ????????? 方便下面的迭代中使用alpha
     else:  # alpha = int，也就是在click中又指定
         print('alpha is from click, alpha = ', alpha)
+        print('type_alpha = ', type(alpha))
         alphas[NAMESPACES[ont]] = alpha
 
 
@@ -150,11 +177,17 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
     print('lol')
     print('alphas', alphas)  # eg. alphas {'molecular_function': 0.5, 'biological_process': 0, 'cellular_component': 0}
 
+
+    ###########################################################
     # 这是核心 !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ###########################################################
     for i, row in enumerate(test_df.itertuples()):
         annots_dict = blast_preds[i].copy()
         for go_id in annots_dict:
             annots_dict[go_id] *= 1 - alphas[go_rels.get_namespace(go_id)]  # blast/diamond * (1-alpha)
+            # print('go.get_namespace(go_id) = ', go_rels.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
+            # print('alphas[go.get_namespace(go_id)] = ', alphas[go_rels.get_namespace(go_id)])
+
         for j, score in enumerate(row.preds):
             go_id = terms[j]
             score *= alphas[go_rels.get_namespace(go_id)]  # 深度学习deepgo_preds * (alpha)
@@ -174,6 +207,7 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
     rus = []
     mis = []
     for t in range(1, 101):  # the range in this loop has influence in the AUPR output
+        print('threshold =', t)
         threshold = t / 100.0
         preds = []
         for i, row in enumerate(test_df.itertuples()):
@@ -185,6 +219,7 @@ def main(train_data_file, predictions_file, terms_file, diamond_scores_file, ont
             new_annots = set()
             for go_id in annots:
                 new_annots |= go_rels.get_ancestors(go_id)
+            # print('new_annots = ', new_annots)
             preds.append(new_annots)
 
         # Filter classes

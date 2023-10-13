@@ -9,15 +9,14 @@
 
 # 如果alpha=json，则采用json数据，否则alpha=数字，或外来click引入，
 # alpha 为deepgo预测的
-# alpha=0，全由diamond主导， alpha=1，全为DeepSS2GO深度学习主导
+# alpha=0，全由diamond主导， alpha=1，全为DeepSS2GO深度学习主导，alpha可设为0.3等float
 
 echo evaluate bp
-python Alpha_Evaluate.py -o bp --alpha json
+python Alpha_EvaluateAlpha.py -o bp --alpha 'json' # 0.6
 echo evaluate cc
-python Alpha_Evaluate.py -o cc --alpha json
+python Alpha_EvaluateAlpha.py -o cc --alpha json
 echo evaluate mf
-python Alpha_Evaluate.py -o mf --alpha json
-
+python Alpha_EvaluateAlpha.py -o mf --alpha json
 
 
 

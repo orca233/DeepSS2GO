@@ -4,30 +4,31 @@ README
 
 第一步，为Diamond做数据预处理，得到 train/test_data.fa文件
 case 0) if CAFA3
-case 1) elif aa_ss = aa, 分三步：pkl2fa, build *dmnd, querying 生成 diamond_aa.res
-case 2) elif aa_ss = ss8/ss3，则从 *aa/data/diamond_aa.res cp 到 *ss/data/.
-
-第二步，Diamond  (不论 aa / ss，都是用 aa 做diamond比对)
-
-
-第二步：
+case 1) elif aa_ss = aa & test_data != 'New', 分三步：pkl2fa, build *dmnd, querying 生成 diamond_aa.res
+case 2) elif aa_ss = ss8/ss3 & test_data != 'New'，则先转化会aa，然后再 上面3步
+case 3) elif test_data != 'New'，这是测试新的数据集，完全未知的。此时fa应该是现成的，需要做的事把fa转成pkl方便再predict.py里进行model.pth预测
 
 
 
 
--d          = train_data.dmnd (数据库)
--q (query)  = test_data.fa （要查询的文件）
--o (output) = test_diamond.res （输出文件）
-qseqid      = Query Seq-id    查询列
-qseqid      = Subject Seq-id  数据库列
-bitscore    = Bit score     分数
 
-IN:
-train_data.dmnd    Diamond数据库
-test_data.fa            查询文件
 
-OUT:
-diamond_aa.res
+
+# 第二步，Diamond  (不论 aa / ss，都是用 aa 做diamond比对)
+#
+# -d          = train_data.dmnd (数据库)
+# -q (query)  = test_data.fa （要查询的文件）
+# -o (output) = test_diamond.res （输出文件）
+# qseqid      = Query Seq-id    查询列
+# qseqid      = Subject Seq-id  数据库列
+# bitscore    = Bit score     分数
+#
+# IN:
+# train_data.dmnd    Diamond数据库
+# test_data.fa            查询文件
+#
+# OUT:
+# diamond_aa.res
 """
 
 
@@ -67,7 +68,7 @@ def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrep
     path_pub_data = path_base + 'pub_data/'
 
     ################################################################################
-    ############ 第一步，为diamond做数据预处理，拿到 train/test_data.fa 文件 #############
+    ############ 第一步，为diamond做数据预处理，得到 train/test_data.fa 文件 #############
     ################################################################################
 
     # case 0, CAFA3， 直接cp过来， 两个fa文件已经在s1中预处理好了
@@ -88,6 +89,7 @@ def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrep
         # os.system('python Alpha_pkl2fa.py -df data/train_data.pkl -o data/train_data.fa')  #
         # os.system('python Alpha_pkl2fa.py -df data/test_data.pkl -o data/test_data.fa')
 
+    # case 2, 'ss8'
     elif params_local['aa_ss'] == 'ss8' or params_local['aa_ss'] == 'ss3':  # aa_ss = ss8 or ss3 & params_local['train_data'] != 'CAFA3'
         print('--------- case 2: aa_ss = ss8 or ss3, PLEASE run FS_ss8_2_aa first --------------')
 
@@ -144,20 +146,20 @@ def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrep
 
 
 
-
-    ######################################################################
-    ###################### 第二步，diamond #################################
-    ######################################################################
-
-    # 建库， train_data.fa--> train_data.dmnd 库
-    print('\n-------------- build database train_data.dmnd --------------')
-    os.system('diamond makedb --in data/train_data.fa -d data/train_data')
-    print('\n')
-
-    # 比对 查询 querying
-    print('-------------- querying from database, creating diamond_aa.res --------------')
-    os.system('diamond blastp -d data/train_data.dmnd --more-sensitive -t /tmp '
-              '-q data/test_data.fa --outfmt 6 qseqid sseqid bitscore -o data/diamond_aa.res')
+    #
+    # ######################################################################
+    # ###################### 第二步，diamond #################################
+    # ######################################################################
+    #
+    # # 建库， train_data.fa--> train_data.dmnd 库
+    # print('\n-------------- build database train_data.dmnd --------------')
+    # os.system('diamond makedb --in data/train_data.fa -d data/train_data')
+    # print('\n')
+    #
+    # # 比对 查询 querying
+    # print('-------------- querying from database, creating diamond_aa.res --------------')
+    # os.system('diamond blastp -d data/train_data.dmnd --more-sensitive -t /tmp '
+    #           '-q data/test_data.fa --outfmt 6 qseqid sseqid bitscore -o data/diamond_aa.res')
 
 
     print('\n################## And they all lived happily ever after! ##################\n')

@@ -8,11 +8,13 @@ params_local = {
     'run_step2_TrainTest': 'T',
     'run_step3_evaluate': 'F',
     'dir0': 'test_TrainMYCTU_TestHUMAN_aa/',
-    'path_base': '../../',  # 从output往前推两格
+    # 'path_base': '../../',  # 从output往前推两格
+    'path_base': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/',
+
     # 'path_pub_data': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/pub_data/',
     # 'path_redundancy': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/redundancy/',
     # 'path_s2_TrainTest': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/s2_TrainTest/',
-    'go_file': '../../pub_data/go.obo',
+    # 'go_file': '../../pub_data/go.obo',
     'GOMinRepeat': 50,
     'TrainTestRatio': 0.95,
     'TrainValidRatio': 0.9,
@@ -29,11 +31,11 @@ params_local = {
     'PROT_LETTER_ss3': ['C', 'E', 'H'],
     'aa_ss': 'aa',
     'train_data': 'MYCTU',
-    'test_data': 'HUMAN',
+    'test_data': 'MYCTU',
 
     # split: params_global_dynamic
-    'kernels': [32],
-    'filters': [32768],
+    'kernels': [64],
+    'filters': [64],
     'onts': 'all',
 
     # step5_FindAlpha

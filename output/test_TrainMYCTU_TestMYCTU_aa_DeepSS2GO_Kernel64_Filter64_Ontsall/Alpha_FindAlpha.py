@@ -29,14 +29,14 @@ import os
 @ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')  # test_diamond.res / blast_output_diamond.res
 @ck.option('--ont', '-o', default='mf', help='GO subontology (bp, mf, cc)')
 # new
-@ck.option('--run-block-x', '-rbx', default='T', help='judge whether run block X')
+@ck.option('--run-label-block', '-rbx', default='T', help='judge whether run block X')
 @ck.option('--alpha-range', '-ar', default='25, 80, 1', type=str, help='xx')  # [25, 80, 1]   params_local['alpha_range']
 @ck.option('--num-cpu-cores', '-ncc', default=60, type=int, help='xx')  # 60
 @ck.option('--last-release-metadata', '-lrm', default='Alpha_last_release.json', help='xx')
 
 
 def main(go_file, train_data_file, predictions_file, terms_file, diamond_scores_file, ont,
-         run_block_x, alpha_range, num_cpu_cores, last_release_metadata):
+         run_label_block, alpha_range, num_cpu_cores, last_release_metadata):
 
     # 预处理
     go_rels = Ontology(go_file, with_rels=True)
@@ -144,7 +144,7 @@ def main(go_file, train_data_file, predictions_file, terms_file, diamond_scores_
 
 
     # find alpha 执行下面的三个嵌套函数
-    last_release_data['alphas'][ont] = find_alpha(ont, test_df, blast_preds, go_rels, terms, run_block_x, alpha_range, num_cpu_cores)
+    last_release_data['alphas'][ont] = find_alpha(ont, test_df, blast_preds, go_rels, terms, run_label_block, alpha_range, num_cpu_cores)
     print('2222', last_release_data)
     with open(last_release_metadata, 'w') as f:
         json.dump(last_release_data, f)
@@ -213,7 +213,7 @@ def evaluate_annotations(go, real_annots, pred_annots):  # (go_rels, labels, pre
 
 
 
-def eval_alphas(alpha, ont, test_df, blast_preds, go_rels, terms, run_block_x):
+def eval_alphas(alpha, ont, test_df, blast_preds, go_rels, terms, run_label_block):
 
     '''
     第一步：建库 deep_preds (list格式)，根据 母函数 find_alpha传来的固定alpha数值，结合deepgo & diamond(IC) 计算建库。
@@ -241,7 +241,7 @@ def eval_alphas(alpha, ont, test_df, blast_preds, go_rels, terms, run_block_x):
     labels = list(map(lambda x: set(filter(lambda y: y in go_set, x)), labels))
 
     # ####  FS 添加 # block X # 这里添加一下，把labels的每一个元素{GO,GO,GO},{GO,GO},{GO}和terms的2088做交集
-    if run_block_x == 'T':
+    if run_label_block == 'T':
         # print('it is running block X !!!!!!!!!!!!!!!!!')
         terms_set = set(terms)
         labels = [s.intersection(terms_set) for s in labels]
@@ -362,13 +362,13 @@ def eval_alphas(alpha, ont, test_df, blast_preds, go_rels, terms, run_block_x):
     return alpha, -fmax  # original: alpha, np.sum([smin, -fmax, -aupr])  这里修改后，只根据fmax来判断选哪个alpha
 
 
-def find_alpha(ont, test_df, blast_preds, go_rels, terms, run_block_x, alpha_range, num_cpu_cores):
+def find_alpha(ont, test_df, blast_preds, go_rels, terms, run_label_block, alpha_range, num_cpu_cores):
     '''
     逐一过所有的alpha （范围：alpha_range）
     并将每一个alpha传到 eval_alphas 函数中，得到最大的 Fmax
     每一个 (alpha, Fmax) 组成 results，最后选出最大的那个Fmax对应的alpha
     '''
-    extra = [ont, test_df, blast_preds, go_rels, terms, run_block_x]
+    extra = [ont, test_df, blast_preds, go_rels, terms, run_label_block]
     # inputs = range(25, 80, 1)  ## ????? alpha 只能从？？？？？这个范围找么？？？？  # original range(45, 75, 1)
 
 

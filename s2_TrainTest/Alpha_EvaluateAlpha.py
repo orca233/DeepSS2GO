@@ -4,8 +4,6 @@ from DeepGOPlus: evaluate_deepgoplus.py
 相比于Alpha_FindAlpha.py，（从25-80逐一过一遍alpha，每一个alpha又过 t(threshold)0-100）
 这个py文件只针对上述筛选出的某一个alpha进行，2min
 
-
-
 '''
 
 
@@ -63,6 +61,7 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     test_annotations = test_df['prop_annotations'].values
     test_annotations = list(map(lambda x: set(x), test_annotations))
     go_rels.calculate_ic(annotations + test_annotations)
+    # print(go_rels)
 
 
     #####################################################################
@@ -72,6 +71,11 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     ics = {}
     for term in terms:
         ics[term] = go_rels.get_ic(term)
+
+    # print('3333333')
+    # print(ics)
+    # print(len(ics))
+
 
     prot_index = {}
     for i, row in enumerate(train_df.itertuples()):
@@ -118,9 +122,10 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     # 这里和 Alpha_FindAlpha.py 中的 eval_alpha 很像
     # DeepGOPlus
     deep_preds = []  # 都用在哪儿了？
-    go_set = go_rels.get_namespace_terms(NAMESPACES[ont])
-    print('11111111111')
-    print(go_set)
+    go_set = go_rels.get_namespace_terms(NAMESPACES[ont])  # 这里只留下对应ont的go（不确定哈，猜的）!!!!!!!!!!!!!
+    # print('11111111111')
+    # print(len(go_set))
+    # go_set = {'GO:0061685', 'GO:0034909', 'GO:0016167', 'GO:0004902',  len = 12407
 
     go_set.remove(FUNC_DICT[ont])  # 把最根的那三个之一给删了？
 
@@ -172,11 +177,17 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     print('lol')
     print('alphas', alphas)  # eg. alphas {'molecular_function': 0.5, 'biological_process': 0, 'cellular_component': 0}
 
+
+    ###########################################################
     # 这是核心 !!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ###########################################################
     for i, row in enumerate(test_df.itertuples()):
         annots_dict = blast_preds[i].copy()
         for go_id in annots_dict:
             annots_dict[go_id] *= 1 - alphas[go_rels.get_namespace(go_id)]  # blast/diamond * (1-alpha)
+            # print('go.get_namespace(go_id) = ', go_rels.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
+            # print('alphas[go.get_namespace(go_id)] = ', alphas[go_rels.get_namespace(go_id)])
+
         for j, score in enumerate(row.preds):
             go_id = terms[j]
             score *= alphas[go_rels.get_namespace(go_id)]  # 深度学习deepgo_preds * (alpha)
@@ -196,6 +207,7 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     rus = []
     mis = []
     for t in range(1, 101):  # the range in this loop has influence in the AUPR output
+        print('threshold =', t)
         threshold = t / 100.0
         preds = []
         for i, row in enumerate(test_df.itertuples()):
@@ -207,6 +219,7 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
             new_annots = set()
             for go_id in annots:
                 new_annots |= go_rels.get_ancestors(go_id)
+            # print('new_annots = ', new_annots)
             preds.append(new_annots)
 
         # Filter classes

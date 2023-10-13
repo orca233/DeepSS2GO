@@ -12,11 +12,11 @@
 # alpha=0，全由diamond主导， alpha=1，全为DeepSS2GO深度学习主导，alpha可设为0.3等float
 
 echo evaluate bp
-python Alpha_Evaluate.py -o bp --alpha 'json' # 0.6
-#echo evaluate cc
-#python Alpha_Evaluate.py -o cc --alpha json
-#echo evaluate mf
-#python Alpha_Evaluate.py -o mf --alpha json
+python Alpha_EvaluateAlpha.py -o bp --alpha 'json' # 0.6
+echo evaluate cc
+python Alpha_EvaluateAlpha.py -o cc --alpha 'json'
+echo evaluate mf
+python Alpha_EvaluateAlpha.py -o mf --alpha 'json'
 
 
 
