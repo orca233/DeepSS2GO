@@ -11,7 +11,7 @@ df = pd.read_pickle(fpath)
 print(df.info())
 # print(df['sequences'])
 
-print(df)
+print(df['proteins'])
 
 
 
