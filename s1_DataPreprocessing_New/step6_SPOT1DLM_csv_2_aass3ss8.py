@@ -14,7 +14,7 @@ AA = []
 SS3 = []
 SS8 = []
 
-fpath = path_redundancy + "SPOT1DLM_results/"
+fpath = path_redundancy + "SPOT1DLM_results_new/"
 
 
 fnames = os.listdir(fpath)  # 这是一个list，输出： ['ATD3A_DROME.csv', 'GMC2_YEAST.csv', 'YFFH_SCHPO.csv'...]
@@ -46,7 +46,7 @@ df_output['SS8'] = SS8
 print('df_output')
 print(df_output)
 
-df_output.to_pickle(path_pub_data + 'SPOT1DLM_aass3ss8.pkl')  # 包含4列：prot_name, AA, SS3, SS8， 一共69252行，每行一个蛋白质
+df_output.to_pickle(path_base + 'pub_data/data_new/new_SPOT1DLM_aass3ss8.pkl')  # 包含4列：prot_name, AA, SS3, SS8， 一共69252行，每行一个蛋白质
 
 
 # SPOT1DLM_AASS3SS8.pkl一共有四列: 格式

@@ -11,8 +11,8 @@ from step0_DataPreprocessingSetting import *
 # 后者的ss3/ss8信息替换给前者的’seq‘，生成'swissprot_clean_ALL00_aa_ss8/ss3.pkl'两个文件
 
 
-swissprot_clean_ALL00_aa_df = pd.read_pickle(path_pub_data + 'swissprot_clean_ALL00_aa.pkl')
-SPOT1DLM_aass3ss8 = pd.read_pickle(path_pub_data + 'SPOT1DLM_aass3ss8.pkl')
+swissprot_clean_ALL00_aa_df = pd.read_pickle(path_pub_data + 'data_new/new_clean_aa.pkl')  # original: swissprot_clean_ALL00_aa.pkl
+SPOT1DLM_aass3ss8 = pd.read_pickle(path_pub_data + 'data_new/new_SPOT1DLM_aass3ss8.pkl')  # original: SPOT1DLM_aass3ss8.pkl
 
 print(swissprot_clean_ALL00_aa_df['proteins'])
 print(SPOT1DLM_aass3ss8)
@@ -53,11 +53,11 @@ for aa_ss in ['ss8', 'ss3']:
     temp_df = swissprot_clean_ALL00_aa_df   # 这个可能是ss3或ss8替换了aa之后的df
 
     print('------------ check ------------ ')
-    print('swissprot_x_SPOT1DLM_all_ssX_df :::')
+    print('new_x_SPOT1DLM_all_ssX_df :::')
     print(temp_df['sequences'])  # 看看替换了ss3，ss8没有
 
     # 存成swissprot_clean_ALL00_aa_ss8.pk  &  swissprot_clean_ALL00_aa_ss3.pk
-    temp_df.to_pickle(path_pub_data + 'swissprot_clean_ALL00_' + aa_ss + '.pkl')
+    temp_df.to_pickle(path_pub_data + 'data_new/new_clean_' + aa_ss + '.pkl')
 
 
 

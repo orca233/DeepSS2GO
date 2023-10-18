@@ -29,10 +29,14 @@ path_redundancy = path_base + 'redundancy/'
 # /scem/work/songfu/prot_algo/DeepSS2GO/redundancy/sSPOT1DLM_inputs
 # save_path_npy = path_redundancy + 'SPOT1DLM_inputs/'  # for step3 & 4, esm/prottrans生成*npy
 # os.system('mkdir -p %s' % save_path_npy)
+save_path_npy = path_base + 'redundancy/SPOT1DLM_inputs_new/'  # for step3 & 4, esm/prottrans生成*npy
+os.system('mkdir -p %s' % save_path_npy)
 
 # /scem/work/songfu/prot_algo/DeepSS2GO/redundancy/sSPOT1DLM_results
 # save_path_csv = path_redundancy + 'SPOT1DLM_results/'  # for step5 inference生成的 *csv文件
 # os.system('mkdir -p %s' % save_path_csv)
+save_path_csv = path_redundancy + 'SPOT1DLM_results_new/'  # for step5 inference生成的 *csv文件
+os.system('mkdir -p %s' % save_path_csv)
 
 print('step0 done')
 
