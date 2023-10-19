@@ -18,7 +18,7 @@ from utils import FUNC_DICT, Ontology, NAMESPACES
 from matplotlib import pyplot as plt
 import json
 # from step0_TrainTestSetting_global import *
-from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_local_aa import *
 
 # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
@@ -155,7 +155,7 @@ def main(train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, 
     # 如果alpha=NA，则采用json数据，否则alpha=数字，或外来click引入
     if alpha == 'json' and beta == 'json':
         # 从last_release_metadata文件中获取alpha ###
-        print('alpha is from json, alpha = ', alpha)
+        print('alpha/beta is from json, alpha/beta = ', alpha, beta)
         last_release_metadata = 'Alpha_last_release.json'
         with open(last_release_metadata, 'r') as f:
             print('Reading file from json')
@@ -173,7 +173,7 @@ def main(train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, 
 
 
     else:  # alpha = int，也就是在click中又指定
-        print('alpha/beta is from click, alpha = ', alpha)
+        print('alpha/beta is from click, alpha/beta = ', alpha, beta)
         print('type_alpha/beta = ', type(alpha), type(beta))
         alphas[NAMESPACES[ont]] = alpha
         betas[NAMESPACES[ont]] = beta

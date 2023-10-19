@@ -166,7 +166,7 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
     if isinstance(device_ids, str):  # device_ids是个str="cuda:3"，用单GPU
         print('--- single GPU = ', device_ids)
         device = torch.device(device_ids if torch.cuda.is_available() else "cpu")  # 将模型移动到cuda:2
-        model = Model1(terms_classes, params_local)  # 创建Model1模型实例
+        model = Model1(terms_classes, params_local, kernels_tuple, filters_list)  # 创建Model1模型实例
         model.to(device)  # 将模型移动到GPU（单个或多个）
 
     else:  # device_ids是个list=[0, 1, 2, 3]，用多GPU，使用DataParallel进行并行计算
@@ -201,7 +201,30 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
     # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
 
     # alphas = {NAMESPACES['mf']: 0.48, NAMESPACES['bp']: 0.4, NAMESPACES['cc']: 0.49}
-    alphas = {NAMESPACES['mf']: 0, NAMESPACES['bp']: 0, NAMESPACES['cc']: 0}
+    alphas = {NAMESPACES['bp']: 0, NAMESPACES['cc']: 0, NAMESPACES['mf']: 0}
+
+    # 如果alpha=NA，则采用json数据，否则alpha=数字，或外来click引入
+    if alpha == 'json':
+        # 从last_release_metadata文件中获取alpha ###
+        print('alpha is from json, alpha = ', alpha)
+        last_release_metadata = 'Alpha_last_release.json'
+        with open(last_release_metadata, 'r') as f:
+            print('Reading file from json')
+            last_release_data = json.load(f)
+            alpha = last_release_data["alphas"][ont]  # 从 json中读取数据
+            print('111111111', type(alpha))
+            alphas[NAMESPACES[ont]] = alpha  # ????????? 方便下面的迭代中使用alpha
+            print('alpha, alphas = ')
+            print(alpha, alphas)
+
+    else:  # alpha = int，也就是在click中又指定
+        print('alpha is from click, alpha = ', alpha)
+        print('type_alpha = ', type(alpha))
+        alphas[NAMESPACES[ont]] = alpha
+
+
+
+
 
     start_time = time.time()
     total_seq = 0
@@ -216,7 +239,10 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
         out_file_ont = out_file_mf
 
     w = open(out_file_ont, 'wt')
-    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
+    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa。这个read_fasta是yeld返还，不过这个for循环有啥用？
+        # print('11111111111111111111111111111')
+        # print(prot_ids)
+        # prot_ids = ['MMAA3_MYCTU', 'RL14_MYCTU', 'MDH_MYCTU', 'G6PI_MYCTU'...]
         total_seq += len(prot_ids)
         deep_preds = {}
         ids, data = get_data(sequences, PROT_LETTER_len, PROT_INDEX)
@@ -251,27 +277,15 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
                     else:
                         deep_preds[prot_id][terms[l]] = max(deep_preds[prot_id][terms[l]], preds[i, l])
 
+        print('33333333333333')
+        print('deep_preds = ', deep_preds)
+        # deep_preds =  {'MMAA3_MYCTU': {'GO:0019222': 0.06975121, 'GO:0046872': 0.07646799, ...},
+        #                'RL14_MYCTU': {'GO:0019222': 0.06489174, 'GO:0046872': 0.0781393, ...},
+        #                MYCTU: {GO, GO},MYCTU: {GO, GO},...}
+
+
+
         # Combine diamond preds and deepgo
-
-
-        # 如果alpha=NA，则采用json数据，否则alpha=数字，或外来click引入
-        if alpha == 'json':
-            # 从last_release_metadata文件中获取alpha ###
-            print('alpha is from json, alpha = ', alpha)
-            last_release_metadata = 'Alpha_last_release.json'
-            with open(last_release_metadata, 'r') as f:
-                print('Reading file from json')
-                last_release_data = json.load(f)
-                alpha = last_release_data["alphas"][ont]  # 从 json中读取数据
-                print('111111111', type(alpha))
-                alphas[NAMESPACES[ont]] = alpha  # ????????? 方便下面的迭代中使用alpha
-                print('alpha, alphas = ')
-                print(alpha, alphas)
-
-        else:  # alpha = int，也就是在click中又指定
-            print('alpha is from click, alpha = ', alpha)
-            print('type_alpha = ', type(alpha))
-            alphas[NAMESPACES[ont]] = alpha
 
         ###########################################################
         # FS   alpha & 1-alpha 对调  这是核心！！！！！！！
@@ -283,7 +297,7 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
                     # print('go.get_namespace(go_id) = ', go.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
                     # print('alphas[go.get_namespace(go_id)] = ', alphas[go.get_namespace(go_id)])
                     annots[go_id] = score * (1 - alphas[go.get_namespace(go_id)])
-            for go_id, score in deep_preds[prot_id].items():
+            for go_id, score in deep_preds[prot_id].items():  # 深度学习的预测结果
                 if go_id in annots:
                     annots[go_id] += alphas[go.get_namespace(go_id)] * score
                 else:
@@ -320,6 +334,8 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
 
             w.write('\n')
 
+    print('44444444444')
+    print('deep_preds = ', deep_preds)
 
     w.close()
     total_time = time.time() - start_time

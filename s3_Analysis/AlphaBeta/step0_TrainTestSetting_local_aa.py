@@ -29,7 +29,7 @@ params_local = {
     'PROT_LETTER_ss3': ['C', 'E', 'H'],
     'aa_ss': 'aa',
     'train_data': 'MYCTU',
-    'test_data': 'HUMAN',
+    'test_data': 'MYCTU',
 
     # split: params_global_dynamic
     'kernels': [32],

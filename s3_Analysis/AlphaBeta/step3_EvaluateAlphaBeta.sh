@@ -1,4 +1,5 @@
 
+
 echo evaluate bp
 python AlphaBeta_EvaluateAlphaBeta.py -o bp --alpha 'json' --beta 'json'  # 0.6
 echo evaluate cc

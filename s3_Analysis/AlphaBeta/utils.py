@@ -6,7 +6,7 @@ import numpy as np
 from xml.etree import ElementTree as ET
 import math
 import torch
-from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_local_aa import *
 #
 
 

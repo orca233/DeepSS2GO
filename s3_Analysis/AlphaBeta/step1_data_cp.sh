@@ -16,14 +16,18 @@ path_ss8="${path_base}output/test_TrainMYCTU_TestMYCTU_ss8_DeepSS2GO_Kernel128_F
 # Diamond & 预处理文件
 # aa
 cd "$path_aa" || exit 1
-python ../../s2_TrainTest/step4_Diamond.py  # 要在 path_aa中进行step4_Diamond.py
+bash step5_Diamond.sh  # 要在 path_aa中进行step4_Diamond.py
 cp "${path_aa}data/diamond_aa.res" "${path_current}data/diamond_aa.res"
 cp "${path_aa}data/train_data.pkl" "${path_current}data/train_data.pkl"
+
 
 
 cp "${path_aa}data/terms_gominre_trxte.pkl" "${path_current}data/terms_gominre_trxte_aa.pkl"  # 不一定是terms_all,
 cp "${path_aa}data/predictions.pkl" "${path_current}data/predictions_aa.pkl"
 cp "${path_aa}step0_TrainTestSetting_local.py" "${path_current}step0_TrainTestSetting_local_aa.py"
+cp "${path_aa}data/test_data.pkl" "${path_current}data/test_data_aa.pkl"
+cp "${path_aa}data/test_data.fa" "${path_current}data/test_data_aa.fa"
+cp "${path_aa}data/model_checkpoint.pth" "${path_current}data/model_checkpoint_aa.pth"
 
 # ss8
 #cd "$path_ss8" || exit 1
@@ -31,35 +35,40 @@ cp "${path_aa}step0_TrainTestSetting_local.py" "${path_current}step0_TrainTestSe
 cp "${path_ss8}data/terms_gominre_trxte.pkl" "${path_current}data/terms_gominre_trxte_ss8.pkl"  # 不一定是terms_all
 cp "${path_ss8}data/predictions.pkl" "${path_current}data/predictions_ss8.pkl"
 cp "${path_ss8}step0_TrainTestSetting_local.py" "${path_current}step0_TrainTestSetting_local_ss8.py"
-
-
-
-# 结合二者 (predictions_aa.pkl + predictions_ss8.pkl = predictions_aa_ss8.pkl)
-cd $path_current || exit 1
-python AlphaBeta_Combine_aass8_PredictionsFile.py
-
-
-
-##########################################
-####### Find AlphaBeta ###################
-##########################################
-
-## 这三个不一定全要做，根据具体情况来
-python AlphaBeta_FindAlphaBeta.py -o bp
-python AlphaBeta_FindAlphaBeta.py -o cc
-python AlphaBeta_FindAlphaBeta.py -o mf
-
-
-##########################################
-########### evaluate #####################
-##########################################
+cp "${path_ss8}data/test_data.pkl" "${path_current}data/test_data_ss8.pkl"
+cp "${path_ss8}data/test_data.fa" "${path_current}data/test_data_ss8.fa"
+cp "${path_ss8}data/model_checkpoint.pth" "${path_current}data/model_checkpoint_ss8.pth"
 
 
 
 
-##########################################
-########### predict #####################
-##########################################
+#
+## 结合二者 (predictions_aa.pkl + predictions_ss8.pkl = predictions_aa_ss8.pkl)
+#cd $path_current || exit 1
+#python AlphaBeta_Combine_aass8_PredictionsFile.py
+#
+#
+#
+###########################################
+######## Find AlphaBeta ###################
+###########################################
+#
+### 这三个不一定全要做，根据具体情况来
+#python AlphaBeta_FindAlphaBeta.py -o bp
+#python AlphaBeta_FindAlphaBeta.py -o cc
+#python AlphaBeta_FindAlphaBeta.py -o mf
+#
+#
+###########################################
+############ evaluate #####################
+###########################################
+#
+#
+#
+#
+###########################################
+############ predict #####################
+###########################################
 
 
 

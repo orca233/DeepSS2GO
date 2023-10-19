@@ -22,7 +22,7 @@ import multiprocessing
 import json
 # from step0_TrainTestSetting_global import *  # 这一行有问题，一旦取消注释 找不到data/terms_....pkl
 
-from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_local_aa import *
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
