@@ -13,6 +13,7 @@ cp "${path_base}pub_data/data_new/new_clean_ss8.fa" data/
 cp "${path_base}pub_data/data_new/new_clean_ss8.pkl" data/
 
 
+
 # diamond
 ##### 需要重新跑Diamond，因为这个是用 data_new/new_clean_aa.fa作为查询querying的 ！！！！！！！！！！！！！！
 # 在当下文件夹 Diamond，因为 不是用 aa/ 文件夹中的test.fa，而是用这个New.fa
@@ -30,20 +31,10 @@ echo -------------- querying from database, creating diamond_aa.res ------------
 diamond blastp -d data/train_data.dmnd --more-sensitive -t /tmp -q data/new_clean_aa.fa --outfmt 6 qseqid sseqid bitscore -o data/diamond_aa.res  # New
 
 
-
-# 预测
-echo predicting bp
-python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/new_clean_ss8.fa' --test-data-file 'data/new_clean_ss8.pkl' -o bp --alpha 'json' # 0.6
-#
-#echo predicting cc
-#python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/new_clean_ss8.fa' --test-data-file 'data/new_clean_ss8.pkl' -o cc --alpha 'json' # 0.6
-#
-#echo predicting mf
-#python Alpha_PredictAlpha.py -t 0.1 --in-file 'data/new_clean_ss8.fa' --test-data-file 'data/new_clean_ss8.pkl' -o mf --alpha 'json' # 0.6
-
-
-
-
+#这里要查看输出结果，有多少匹配上了!!!!!!!!!!!!!!!!!!!!!
+#e.g.
+#Reported 45470 pairwise alignments, 45470 HSPs.
+#3252 queries aligned.
 
 
 

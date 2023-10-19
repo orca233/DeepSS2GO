@@ -1,6 +1,0 @@
-Length of test set: 73 
-threshold: 0.29 
-alpha=0.00 
-Smin: 10.810 
-Fmax: 0.370 
-AUPR: 0.097 

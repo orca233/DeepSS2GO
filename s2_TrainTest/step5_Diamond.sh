@@ -25,7 +25,7 @@ diamond makedb --in data/train_data.fa -d data/train_data
 
 # 比对 查询 querying
 echo -------------- querying from database, creating diamond_aa.res --------------
-diamond blastp -d data/train_data.dmnd --more-sensitive -t /tmp -q data/test_data.fa --outfmt 6 qseqid sseqid bitscore -o data/diamond_aa.res
+diamond blastp -d data/train_data.dmnd --more-sensitive -t /tmp -q data/test_data.fa --outfmt 6 qseqid sseqid bitscore -o data/diamond_aa.res  # routine
 
 
 

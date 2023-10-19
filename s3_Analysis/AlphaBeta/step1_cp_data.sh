@@ -9,18 +9,15 @@ mkdir -p data
 path_current="$(pwd)/"  # path_current后面没有/
 
 path_base="/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/"
-path_aa="${path_base}output/test_TrainMYCTU_TestMYCTU_aa_DeepSS2GO_Kernel64_Filter64_Ontsall/"
-path_ss8="${path_base}output/test_TrainMYCTU_TestMYCTU_ss8_DeepSS2GO_Kernel128_Filter128_Ontsall/"
+path_aa="${path_base}output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
+path_ss8="${path_base}output/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
 
 
-# Diamond & 预处理文件
+#### cp ####
 # aa
-cd "$path_aa" || exit 1
-bash step5_Diamond.sh  # 要在 path_aa中进行step4_Diamond.py
-cp "${path_aa}data/diamond_aa.res" "${path_current}data/diamond_aa.res"
-cp "${path_aa}data/train_data.pkl" "${path_current}data/train_data.pkl"
-
-
+#cp "${path_aa}data/diamond_aa.res" "${path_current}data/diamond_aa.res"
+cp "${path_aa}data/train_data.pkl" "${path_current}data/train_data_aa.pkl"
+cp "${path_aa}data/train_data.fa" "${path_current}data/train_data_aa.fa"
 
 cp "${path_aa}data/terms_gominre_trxte.pkl" "${path_current}data/terms_gominre_trxte_aa.pkl"  # 不一定是terms_all,
 cp "${path_aa}data/predictions.pkl" "${path_current}data/predictions_aa.pkl"
@@ -38,37 +35,6 @@ cp "${path_ss8}step0_TrainTestSetting_local.py" "${path_current}step0_TrainTestS
 cp "${path_ss8}data/test_data.pkl" "${path_current}data/test_data_ss8.pkl"
 cp "${path_ss8}data/test_data.fa" "${path_current}data/test_data_ss8.fa"
 cp "${path_ss8}data/model_checkpoint.pth" "${path_current}data/model_checkpoint_ss8.pth"
-
-
-
-
-#
-## 结合二者 (predictions_aa.pkl + predictions_ss8.pkl = predictions_aa_ss8.pkl)
-#cd $path_current || exit 1
-#python AlphaBeta_Combine_aass8_PredictionsFile.py
-#
-#
-#
-###########################################
-######## Find AlphaBeta ###################
-###########################################
-#
-### 这三个不一定全要做，根据具体情况来
-#python AlphaBeta_FindAlphaBeta.py -o bp
-#python AlphaBeta_FindAlphaBeta.py -o cc
-#python AlphaBeta_FindAlphaBeta.py -o mf
-#
-#
-###########################################
-############ evaluate #####################
-###########################################
-#
-#
-#
-#
-###########################################
-############ predict #####################
-###########################################
 
 
 
