@@ -47,7 +47,7 @@ MAXLEN = params_local_aa['MAXLEN']
 @ck.option('--terms-file-aa', '-tf', default='data/terms_gominre_trxte_aa.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
 @ck.option('--terms-file-ss8', '-tf', default='data/terms_gominre_trxte_ss8.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
 
-@ck.option('--annotations-file', '-tf', default='data/train_data.pkl', help='Experimental annotations')
+@ck.option('--annotations-file', '-tf', default='data/train_data_aa.pkl', help='Experimental annotations')
 @ck.option('--chunk-size', '-cs', default=100000, help='Number of sequences to read at a time')  # original 1000
 @ck.option('--diamond-file', '-df', default='data/diamond_aa.res', help='Diamond Mapping file')
 @ck.option('--threshold', '-t', default=0.1, help='Prediction threshold')

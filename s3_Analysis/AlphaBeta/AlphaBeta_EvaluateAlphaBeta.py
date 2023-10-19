@@ -25,7 +25,7 @@ from step0_TrainTestSetting_local_aa import *
 os.system('mkdir -p results_alphabeta')
 
 @ck.command()
-@ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='Data file with training features')
+@ck.option('--train-data-file', '-trdf', default='data/train_data_aa.pkl', help='Data file with training features')
 @ck.option('--test-data-file-aa-ss8', '-tsdf', default='data/predictions_aa_ss8.pkl', help='Test data file')  # test_data_file_aa_ss8 只有一个 prop_annotations, 两个 preds_aa & preds_ss8
 # @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
 
@@ -43,7 +43,8 @@ os.system('mkdir -p results_alphabeta')
 
 
 
-def main(train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, diamond_scores_file, ont, alpha, beta, go_file, run_label_block):  # FS 添加go_file
+def main(train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, diamond_scores_file, ont, alpha, beta,
+         go_file, run_label_block):  # FS 添加go_file
     # # 从 last_release_metadata 文件中获取alpha ###
     # last_release_metadata = 'Alpha_last_release.json'
     # with open(last_release_metadata, 'r') as f:

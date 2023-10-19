@@ -30,12 +30,12 @@ params_local = {
     'PROT_LETTER_ss8': ['C', 'S', 'T', 'H', 'G', 'I', 'E', 'B'],
     'PROT_LETTER_ss3': ['C', 'E', 'H'],
     'aa_ss': 'aa',
-    'train_data': 'MYCTU',
-    'test_data': 'MYCTU',
+    'train_data': 'ALL00',
+    'test_data': 'ALL00',
 
     # split: params_global_dynamic
-    'kernels': [32],
-    'filters': [32],
+    'kernels': [16],
+    'filters': [65536],
     'onts': 'all',
 
     # step5_FindAlpha
