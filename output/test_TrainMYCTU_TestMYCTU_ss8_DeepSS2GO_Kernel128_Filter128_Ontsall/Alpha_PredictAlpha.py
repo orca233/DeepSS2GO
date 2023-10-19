@@ -209,13 +209,13 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
 
     # 输出结果，每次只算一个ont，在step8_PredictAlpha.sh中设置
     if ont == 'bp':
-        out_file_x = out_file_bp
+        out_file_ont = out_file_bp
     elif ont == 'cc':
-        out_file_x = out_file_cc
+        out_file_ont = out_file_cc
     elif ont == 'mf':
-        out_file_x = out_file_mf
+        out_file_ont = out_file_mf
 
-    w = open(out_file_x, 'wt')
+    w = open(out_file_ont, 'wt')
     for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
         total_seq += len(prot_ids)
         deep_preds = {}
