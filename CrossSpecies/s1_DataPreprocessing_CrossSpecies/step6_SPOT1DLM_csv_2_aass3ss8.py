@@ -1,12 +1,14 @@
-
 # README:
 # /SPOT1DLM_results/ 70,000个csv文件（每一个是一个蛋白，包含AA/SS3/SS8/溶解度等信息）提取 AA/SS3/SS8信息，
 # 生成新的pkl文件，SPOT1DLM_prot_AA_SS3_SS8.pkl，类似于
 # 方便下一步swissprot的替换
 
 import pandas as pd
-import os
 from step0_DataPreprocessingSetting import *
+
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step6_SPOT1DLM_csv_2_aass3ss8 #')
+
 
 df_output = pd.DataFrame(columns=['proteins', 'AA', 'SS3', 'SS8'])  # 输出文件4列
 proteins = []
@@ -15,7 +17,6 @@ SS3 = []
 SS8 = []
 
 fpath = path_redundancy + "SPOT1DLM_results/"
-
 
 fnames = os.listdir(fpath)  # 这是一个list，输出： ['ATD3A_DROME.csv', 'GMC2_YEAST.csv', 'YFFH_SCHPO.csv'...]
 #fnames = ['ATD3A_DROME.csv', 'GMC2_YEAST.csv', 'YFFH_SCHPO.csv']  # 仅做尝试，运行时候注释掉！！！！
@@ -58,9 +59,7 @@ df_output.to_pickle(path_pub_data + 'SPOT1DLM_aass3ss8.pkl')  # 包含4列：pro
 # 'CCCHHHHHHTSCHHHHHHHHHHHHHHHHHHTTSSCHHHHCCCHHHHHTTCCHHHHHHTTTCCSSCCHHHHHHHHHHHHHHHHHHHHSSTTCHHHHHHHHHHHHHHHHHHHHHSCCCCCCHHHHHHHHHHHHHHCTTCEEEETTTEEEEGGGHHHHHHHHHHHHHSSCCHHHHHHHHHHHHHHHHHTTCCC']
 
 
-
 print('step6_done')
-
-
+print('\n################## And they all lived happily ever after! ##################\n')
 
 

@@ -4,13 +4,10 @@ from step0_DataPreprocessingSetting import *
 
 # swissprot_x_cullPDB_all_aa/ss8.pkl按物种分类： HUIMAN/MOUSE/RAT/ECOLI。。。
 # swissprot 'protein' 名字里有分类  e.g. TEN1L_HUMAN
-# 以及选中5个要保留的物种类别 keep_species_0/1/2/3/4/5 = xxxxxx， 执行 2 遍，分别执行aa_ss = 'aa' / 'ss8'
-
 
 # 对于cullPDB：
 # 'HUMAN': 198, 'ECOLI': 198, 'MOUSE': 113, 'YEAST': 79, 'RAT': 71, 'MYCTU': 33, 'PSEAE': 25, 'BOVIN': 21,
 # 'DROME': 17, 'BACSU': 13, 'ARATH': 13, 'CHICK': 11, 'BPT4': 10, 'SCHPO': 9, 'SALTY': 8, 'PYRHO': 6, 'CAEEL': 6,
-
 
 
 # 对于全集swissprot
@@ -21,12 +18,10 @@ from step0_DataPreprocessingSetting import *
 # 'EMENI': 316, 'BACSU': 272, 'PIG': 216, 'MAIZE': 170, 'ASPFU': 152, 'ORYSI': 126, 'RABIT': 120, 'PLAF7': 119,
 # 'SALTY': 115, 'CANGB': 106, 'CANLF': 104, 'SYNY3': 101,
 
-
 # 对于经过 step2筛选后的 swissprot 物种个数species_num （除去过长的）
 # 最后一段代码
 # ['HUMAN: 13238', 'ARATH: 10002', 'MOUSE: 10152', 'YEAST: 4964', 'SCHPO: 4296', 'RAT: 4217', 'ECOLI: 3288',
 # 'DROME: 2472', 'CAEEL: 2042', 'MYCTU: 1456']
-
 
 ### backup
 # 'ARATH'  # Arabidopsis thaliana 拟南芥
@@ -42,6 +37,8 @@ from step0_DataPreprocessingSetting import *
 # ORYSJ=
 # BOVIN=
 
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step8_ClassifySpecies #')
 
 for aa_ss in ['aa', 'ss8', 'ss3']:
     for keep_species in ['HUMAN', 'ARATH', 'MOUSE', 'YEAST', 'SCHPO', 'RAT', 'ECOLI', 'DROME', 'CAEEL', 'MYCTU']:  #
@@ -72,10 +69,7 @@ for aa_ss in ['aa', 'ss8', 'ss3']:
         print('species count:::::::')
         print(species)
 
-
-print('\n')
-print('--------------------------------------------\n')
-print('\n')
+print('\n--------------------------------------------\n\n')
 
 # 对于经过 step2筛选后的 swissprot 物种个数 species_num （除去过长的），这是我们已经知道了这十类最靠前
 output_species_num = []
@@ -87,7 +81,7 @@ for keep_species in ['HUMAN', 'ARATH', 'MOUSE', 'YEAST', 'SCHPO', 'RAT', 'ECOLI'
 print(output_species_num)
 
 
-
 print('done')
+print('\n################## And they all lived happily ever after! ##################\n')
 
 

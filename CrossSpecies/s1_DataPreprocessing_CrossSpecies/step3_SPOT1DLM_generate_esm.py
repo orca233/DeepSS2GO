@@ -1,24 +1,11 @@
-
-import time
-import os.path
-
-
 import pandas as pd
 import torch
 import argparse
 import numpy as np
-# from tqdm import tqdm
-# from dataset.data_functions import read_list, read_fasta_file  # original
-# from data_functions import read_list, read_fasta_file
-# from tape import ProteinBertModel, TAPETokenizer
-
-# import esm
-# from esm.pretrained import load_model_and_alphabet_local
-
 from step0_DataPreprocessingSetting import *
 
-
-
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step3_SPOT1DLM_generage_esm #')
 
 ### FS ###
 parser = argparse.ArgumentParser()
@@ -36,8 +23,6 @@ model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR
 
 ### 方法二： FS try 2 用esm方法下载： 把hub下载好的加载到对应文件夹，适合在lab——linux_3090上运行 #####
 # model, alphabet = esm.pretrained.esm1b_t33_650M_UR50S()
-### FS try 2 done ###
-
 
 # ### 方法三 FS: load model  不好使。。。 ###
 # model_path = '/home/fsong/work/py_proj/prot_data/esm/esm1b_t33_650M_UR50S.pt'
@@ -46,11 +31,6 @@ model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR
 # tokenizer = TAPETokenizer()
 # alphabet = tokenizer.vocab
 # ### FS change done ###
-
-
-
-
-
 
 batch_converter = alphabet.get_batch_converter()
 model = model.to(args.device)
@@ -69,7 +49,6 @@ for index, row in prot_df.iterrows():
     esm_count += 1
     print(prot_name)
 
-
     batch_labels, batch_strs, batch_tokens = batch_converter(data)
     batch_tokens = batch_tokens.to(args.device)
     with torch.no_grad():
@@ -86,30 +65,5 @@ for index, row in prot_df.iterrows():
 
 print(" ESM-1b embeddings generation completed ... ")
 
+print('\n################## And they all lived happily ever after! ##################\n')
 
-
-
-
-#### original: #####
-
-# for prot_path in tqdm(prot_list):
-#
-#     prot_name = prot_path.split('/')[-1].split('.')[0]
-#     save_path = "inputs/" + prot_name + "_esm.npy"
-#     seq = read_fasta_file(prot_path)
-#     data = [(prot_name, seq)]
-#
-#     batch_labels, batch_strs, batch_tokens = batch_converter(data)
-#     batch_tokens = batch_tokens.to(args.device)
-#     with torch.no_grad():
-#         results = model(batch_tokens, repr_layers=[33], return_contacts=True)
-#     token_representations = results["representations"][33]
-#
-#     sequence_representations = []
-#     for i, (prot_n, seq) in enumerate(data):
-#         if args.device == "cpu":
-#             save_arr = token_representations[i, 1: len(seq) + 1].numpy()
-#         else:
-#             save_arr = token_representations[i, 1: len(seq) + 1].cpu().numpy()
-#         np.save(save_path, save_arr)
-# print(" ESM-1b embeddings generation completed ... ")

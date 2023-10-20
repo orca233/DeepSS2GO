@@ -4,20 +4,16 @@ import re
 import torch
 import argparse
 import numpy as np
-# from tqdm import tqdm
 from transformers import T5EncoderModel, T5Tokenizer
-# from dataset.data_functions import read_list, read_fasta_file  # original
-# from data_functions import read_list, read_fasta_file
-
 from step0_DataPreprocessingSetting import *
-
 import pandas as pd
 
 # # step3已经建立了 redundancy/SPOT1DLM_inputs/
 # # 用来储存esm/prottrans.npy文件/scem/work/songfu/prot_algo/DeepSS2GO/redundancy/sSPOT1DLM_inputs
 # os.system('mkdir -p %sSPOT1DLM_inputs' % path_redundancy)
 
-
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step4_SPOT1DLM_generate_prottrans #')
 
 parser = argparse.ArgumentParser()
 # parser.add_argument('--file_list', default='', type=str, help='file list path ')
@@ -30,7 +26,6 @@ args = parser.parse_args()
 
 ### FS 提前下载好 '/scem/work/songfu/prot_data/Prot_T5_XL_UniRef50'
 tokenizer = T5Tokenizer.from_pretrained(path_Prot_T5_XL_UniRef50, do_lower_case=False)  #
-
 model = T5EncoderModel.from_pretrained(path_Prot_T5_XL_UniRef50)
 
 device = torch.device(args.device)
@@ -74,3 +69,5 @@ for index, row in prot_df.iterrows():
 
 
 print(" ProtTrans embeddings generation completed ... ")
+
+print('\n################## And they all lived happily ever after! ##################\n')

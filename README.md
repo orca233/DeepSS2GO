@@ -1,11 +1,28 @@
 # DeepSS2GO_AB
+三大类： CrossSpecies, CAFA3, PredictNew  
+output/ 存放CS中大量的输出文件  
+pub_data/ 存放三大类的公共数据  
+redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件  
 
 
 ## Cross species
-跨物种训练了6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST, & ALL00  
-s1_DataPreprocessing_CrossSpecies/: 预处理数据  
+跨物种训练6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST, & ALL00  
 
-s2_TrainTest/:   
+![CrossSpecies_Stage1_DataPreprocessing](figs/CrossSpecies_Stage1_DataPreprocessing.png)
+
+s1_DataPreprocessing_CrossSpecies/: 预处理数据  
+- step1_Uniprot2Swissprot.py: 挑出手工注释蛋白质
+- step2_Swissprot_x_SPOT1DLM.py: 删除长度超过1024的蛋白质，和非标准氨基酸
+- step3_SPOT1DLM_generage_esm.py: 生成 *esm.npy
+- step4_SPOT1DLM_generate_prottrans.py: 生成 *pt.npy
+- step5_SPOT1DLM_run_inference.py： 生成 *.csv
+- step6_SPOT1DLM_csv_2_aass3ss8.py: 生成 SPOT1DLM_aass3ss8.pkl 
+- step7_aa_2_ss3ss8.py: 生成 swissprot_clean_ALL00_ss3.pkl & swissprot_clean_ALL00_ss8.pkl
+- step8_ClassifySpecies.py: 生成不同物种的 ss3/ss8.pkl
+
+
+
+s2_TrainTest/: 训练，测试，评估   
 - step1_SplitTrainTest_Terms: 拆分原始数据为train & test，找到对应terms 
 - step2_Train: 训练，得到model + training.csv  
 - step3_Test: 测试，得到predictions.pkl  

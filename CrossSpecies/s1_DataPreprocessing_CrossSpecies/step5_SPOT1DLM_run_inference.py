@@ -1,4 +1,3 @@
-
 # README
 # 把esm & prottrans的结果整合，*esm.npy & *pt.npy 各有71000个文件
 # 联合SPOT1DLM自己算的checkpoint得到新的输出结果，结果包含ss3, ss8和溶解度等信息
@@ -10,19 +9,17 @@ from torch.utils.data import DataLoader
 # from config import PATH, LIST, VAL_LIST, TEST_LIST, TEST2_LIST, TEST3_LIST, TEST4_LIST, IGNORE_LABEL, DEVICE
 import pandas as pd
 from dataset_inference import text_collate_fn, FS_Proteins_Dataset  # FS_Proteins_Dataset会调用inputs/*esm.npy *pt.npy
-
 from models.bilstm import Network
 from models.ms_resnet import Network as Network2
 from models.ms_res_lstm import Network as Network3
 from models.bilstm_reg import Network as Network4
 from models.ms_resnet_reg import Network as Network5
 from models.ms_res_lstm_reg import Network as Network6
-
 from main import main_reg, main_class, write_csv
-
 from step0_DataPreprocessingSetting import *
 
-
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step5_SPOT1DLM_run_inference #')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--file_list', default='', type=str, help='file list path ')
@@ -45,7 +42,6 @@ test_loader = DataLoader(FS_test_set, batch_size=1, collate_fn=text_collate_fn, 
 # print("test_dataset Loaded with ", len(test_set), "proteins")
 # # this implementation has only been tested for batch size 1 only.
 # test_loader = DataLoader(test_set, batch_size=1, collate_fn=text_collate_fn, num_workers=16)
-
 
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
@@ -79,3 +75,4 @@ psi_list, phi_list, theta_list, tau_list, hseu_list, hsed_list, cn_list, asa_lis
 print(len(ss3_pred_list), len(psi_list))
 write_csv(class_out, reg_out, args.save_path)  # save
 
+print('\n################## And they all lived happily ever after! ##################\n')

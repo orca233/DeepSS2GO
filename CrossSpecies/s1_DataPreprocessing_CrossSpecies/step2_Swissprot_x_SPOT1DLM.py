@@ -1,5 +1,3 @@
-
-### 重要 !!!!!!!!!!!!!!!
 # README
 # 从DeepGOPlus step1 得到的swissprot.pkl  因为SPOT1DLM的两个部分，esm和prottrans对序列有要求，所以进行清理数据
 # seq长度超过1024-esm不开心/
@@ -11,6 +9,9 @@
 
 import pandas as pd
 from step0_DataPreprocessingSetting import *
+
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step2_Swissprot_x_SPOT1DLM #')
 
 df = pd.read_pickle(path_pub_data + 'swissprot.pkl')  # 全集 79230
 print('original swissprot.pkl::::::::::::::::::')
@@ -34,9 +35,7 @@ print('swissprot_clean_ALL00_aa.pkl:::::')
 print(df.info())
 print(df)
 
-
 print('step2 done')
 
-
-
+print('\n################## And they all lived happily ever after! ##################\n')
 

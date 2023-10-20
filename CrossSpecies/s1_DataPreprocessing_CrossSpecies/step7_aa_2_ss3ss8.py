@@ -1,8 +1,3 @@
-import pandas as pd
-# import tensorflow as tf
-import os
-from step0_DataPreprocessingSetting import *
-
 # README:
 # INPUT：
 # “swissprot_clean_ALL00_aa.pkl”     (包含10列，prot_name, seq, GO, CAFA等信息，step2_swissprot_x_SPOT1DLM_aa.py生成)
@@ -10,6 +5,11 @@ from step0_DataPreprocessingSetting import *
 # OUT:
 # 后者的ss3/ss8信息替换给前者的’seq‘，生成'swissprot_clean_ALL00_aa_ss8/ss3.pkl'两个文件
 
+import pandas as pd
+from step0_DataPreprocessingSetting import *
+
+print('\n################## a long, long time ago ... ##################\n')
+print('# starting step7_aa_2_ss3ss8 #')
 
 swissprot_clean_ALL00_aa_df = pd.read_pickle(path_pub_data + 'swissprot_clean_ALL00_aa.pkl')
 SPOT1DLM_aass3ss8 = pd.read_pickle(path_pub_data + 'SPOT1DLM_aass3ss8.pkl')
@@ -60,5 +60,4 @@ for aa_ss in ['ss8', 'ss3']:
     temp_df.to_pickle(path_pub_data + 'swissprot_clean_ALL00_' + aa_ss + '.pkl')
 
 
-
-print('done')
+print('\n################## And they all lived happily ever after! ##################\n')
