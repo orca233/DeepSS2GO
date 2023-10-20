@@ -1,4 +1,3 @@
-
 #第二步，Diamond  (不论 aa / ss，都是用 aa 做diamond比对)，因为diamond的种子算法只认20个氨基酸，不认8个或3个的ss
 
 #-d          = train_data.dmnd (数据库)

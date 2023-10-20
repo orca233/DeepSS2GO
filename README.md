@@ -25,6 +25,8 @@ s1_DataPreprocessing_CrossSpecies/: 预处理数据
 - step8_ClassifySpecies.py: 生成不同物种的 ss3/ss8.pkl
 
 
+![CrossSpecies_Stage1_DataPreprocessing](figs/CrossSpecies_Stage2_TrainTest.png)
+
 s2_TrainTest/: 训练，测试，评估   
 - step1_SplitTrainTest_Terms: 拆分原始数据为train & test，找到对应terms 
 - step2_Train: 训练，得到model + training.csv  
@@ -56,39 +58,46 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
    - 'dir0': 'test_TrainHUMAN_TestHUMAN_aa_test/'
    - 'aa_ss': 'aa'
    - 'train_data': 'HUMAN'
-   - 'test_data': 'HUMAN'  
-
+   - 'test_data': 'HUMAN'
    - 'kernels': [8, 16, 24, ...]
    - 'filters': [16, 32, 64, ...]   
    
-3. 执行 run_KernelX_FilterY.py，会在 output/中新建文件夹：
-   test_TrainECOLI_TestYEAST_aa/ (此为local文件夹的母文件夹 = dir0)
-   并结合不同的kernel&filter生成一系列的local子文件夹：
-   e.g. DeepSS2GO_Kernel104_Filter8192_Ontsall/ (此为local文件夹的子文件夹 = dir1)
-   并将global文件夹中的文件cp到local子文件夹中，生成新的step0_TrainTestSetting_local.py
-   i.e.
-   cp -rf CrossSpecies/s2_TrainTest_TrainX_TestY_aa/ output/dir0/dir1/
-   e.g.
-   cp -rf CrossSpecies/s2_TrainTest_TrainECOLI_TestYEAST_aa/ output/test_TrainECOLI_TestYEAST_aa/DeepSS2GO_Kernel104_Filter8192_Ontsall/
+3. 执行 run_KernelX_FilterY.py，会在 output/中新建文件夹：  
+   test_TrainECOLI_TestYEAST_aa/ (此为local文件夹的母文件夹 = dir0)  
+   并结合不同的kernel&filter生成一系列的local子文件夹：  
+   e.g. DeepSS2GO_Kernel104_Filter8192_Ontsall/ (此为local文件夹的子文件夹 = dir1)  
+   并将global文件夹中的文件cp到local子文件夹中，生成新的step0_TrainTestSetting_local.py  
+   i.e.  
+   cp -rf CrossSpecies/s2_TrainTest_TrainX_TestY_aa/ output/dir0/dir1/  
+   e.g.  
+   cp -rf CrossSpecies/s2_TrainTest_TrainECOLI_TestYEAST_aa/ output/test_TrainECOLI_TestYEAST_aa/DeepSS2GO_Kernel104_Filter8192_Ontsall/  
 4. 在每一个local子文件夹中，根据step0_TrainTestSetting_local.py的具体参数，执行: step1-8。
    一般可能只运行 step1-3，后面选择合适的单独运行 step4-8用来 find_alpha。
-
-
 
 
 ## CAFA3
 可以横向和其他文章做对比。
 
 
+
+
+
+
+
 ## TrainALL & Predict New
 
+### case 0: 只用 aa/ss8_model + Diamond 预测
 前两步**相同**：   
-1. 准备初始fasta文件：pub_data/data_new/new_aa.fa  
+1. 准备初始fasta文件，aa格式：pub_data/data_new/new_aa.fa  
 2. 执行 s1_DataPreprocessing_New中的step1-7，得到在pub_data/data_new/中：  
 new_clean_aa.pkl  
 new_clean_ss8.pkl
 
-### 只用 aa/ss8_model + Diamond 预测
+
+
+
+
+
 
 3. 把这两个pkl文件cp到对应文件夹中。  
 e.g. output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel8_Filter65536_Ontsall/data/
@@ -98,13 +107,49 @@ step9_Diamond4New: 为全新的，未知的数据 更新Diamond
 step10_Predict_New: 根据aa/ss8 对未知数据进行预测
 
 
-### 用 aa_model + ss8_model + Diamond 预测
+### case 1: 用 aa_model + ss8_model + Diamond 预测
 3. 数据预处理  
 cd PredictNew_AlphaBeta/s1_DataPreprocessing_PredictNew/  
 
 执行该文件夹下:  
 - step1_fa2pkl: 转格式 
 - step2_New_x_SPOT1DLM: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

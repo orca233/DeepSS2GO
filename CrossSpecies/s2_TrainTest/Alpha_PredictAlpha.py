@@ -9,7 +9,6 @@
 如果是全新的未知的测试，一般会给出aa.fa文件，
 if 用aa预测，转成pkl，准备好test_data.fa & test_data.pkl即可
 elif 用ss8测试，转成ss8.fa，在转成pkl，再准备test_data.fa & test_data.pkl
-
 '''
 
 import click as ck

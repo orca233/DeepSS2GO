@@ -7,7 +7,6 @@
 
 '''
 改编自deepgoplus.py
-
 '''
 
 
