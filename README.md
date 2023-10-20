@@ -1,8 +1,9 @@
 # DeepSS2GO
-三大类：   
+3个板块：     
 CrossSpecies/ 不同物种之间的交叉训练验证     
 CAFA3/ 横向对比三大指标结果  
-PredictNew/ 给出新的未知的fasta，GO预测  
+PredictNew/ 给出新的未知的fasta，GO预测
+
 其他文件夹：  
 output/ 存放CS中大量的输出文件  
 pub_data/ 存放三大类的公共数据  
@@ -12,9 +13,9 @@ redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件
 ## Cross species
 跨物种训练6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST, & ALL00  
 
-![CrossSpecies_Stage1_DataPreprocessing](figs/CrossSpecies_Stage1_DataPreprocessing.png)
+![CrossSpecies_s1](figs/CrossSpecies_Stage1_DataPreprocessing.png)
 
-s1_DataPreprocessing_CrossSpecies/: 预处理数据  
+### s1_DataPreprocessing_CrossSpecies/: 预处理数据  
 - step1_Uniprot2Swissprot.py: 挑出手工注释蛋白质
 - step2_Swissprot_x_SPOT1DLM.py: 删除长度超过1024的蛋白质，和非标准氨基酸
 - step3_SPOT1DLM_generage_esm.py: 生成 *esm.npy
@@ -25,9 +26,10 @@ s1_DataPreprocessing_CrossSpecies/: 预处理数据
 - step8_ClassifySpecies.py: 生成不同物种的 ss3/ss8.pkl
 
 
-![CrossSpecies_Stage1_DataPreprocessing](figs/CrossSpecies_Stage2_TrainTest.png)
+![CrossSpecies_s2](figs/CrossSpecies_Stage2_TrainTest.png)
 
-s2_TrainTest/: 训练，测试，评估   
+### s2_TrainTest/: 训练，测试，评估   
+> 评估&预测CrossSpecies数据
 - step1_SplitTrainTest_Terms: 拆分原始数据为train & test，找到对应terms 
 - step2_Train: 训练，得到model + training.csv  
 - step3_Test: 测试，得到predictions.pkl  
@@ -37,21 +39,18 @@ s2_TrainTest/: 训练，测试，评估
 - step7_EvaluateAlpha: 根据上面得到的Alpha，评估三大指标，Fmax, AUPR, Smin
 - step8_PredictAlpha: 预测 test_data.pkl的结果，得到 results_bp/cc/mf.csv
 
-
->预测新的未知的数据有两种情况，
-> 1. 只用aa/ss8的model。 (下面这两行命令用于情况1)  
-> 2. 用aa+ss8的model。 (详见章节 PredictNew_AlphaBeta)  
-
-- step9_Diamond4New: 为全新的，未知的数据 更新Diamond  
+> 评估&预测新的未知的数据有两种情况，
+- step9_cpData_Diamond4New: 为全新的，未知的数据 更新Diamond  
 - step10_Predict_New: 根据aa/ss8 对未知数据进行预测  
 
-> s2_TrainTest 使用方法：
+> s2_TrainTest 使用方法： 
 
 CrossSpecies/s2_TrainTest/ 为global文件夹，  
 
 在构建好pub_data后，比如需要 TrainECOLI_TestYEAST_aa，则
 1. 在 CrossSpecies/下将整个 s2_TrainTest/ 复制为：
    s2_TrainTest_TrainECOLI_TestYEAST_aa/ (此为global文件夹)
+   
 2. 修改新文件夹中的 step0_TrainTestSetting_global.py 参数。  
    特别注意： 
    - 'device_ids': [0, 1]
@@ -70,13 +69,68 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
    i.e.  
    cp -rf CrossSpecies/s2_TrainTest_TrainX_TestY_aa/ output/dir0/dir1/  
    e.g.  
-   cp -rf CrossSpecies/s2_TrainTest_TrainECOLI_TestYEAST_aa/ output/test_TrainECOLI_TestYEAST_aa/DeepSS2GO_Kernel104_Filter8192_Ontsall/  
+   cp -rf CrossSpecies/s2_TrainTest_TrainECOLI_TestYEAST_aa/ output/test_TrainECOLI_TestYEAST_aa/DeepSS2GO_Kernel104_Filter8192_Ontsall/
+   
 4. 在每一个local子文件夹中，根据step0_TrainTestSetting_local.py的具体参数，执行: step1-8。
    一般可能只运行 step1-3，后面选择合适的单独运行 step4-8用来 find_alpha。
 
 
+
+![CrossSpecies_s3](figs/CrossSpecies_Stage2_xxx.png)
+### s3_AlphaBeta/ 结合 alpha + beta + Diamond 计算 (和s2逻辑有点像)
+> 评估&预测CrossSpecies数据
+- step1_cp_data.sh:  把aa&ss8 中的各种 pkl/fa cp到当前文件夹
+- step2_Diamond4CrossSpecies.sh
+- step3_FindAlphaBeta.sh
+- step4_EvaluateAlphaBeta.sh: 三大指标
+- step5_PredictAlphaBeta.sh： 预测结果，得到results_bp/cc/mf.csv
+  
+> 评估&预测新的未知数据
+- step6_cpData_Diamond4New.sh
+- step7_PredictAlphaBeta_new.sh
+
+> s3_AlphaBeta 使用方法:
+
+1. 在s2_TrainTest_TrainALL00_TestALL00_aa/ss8结束，找到各自的 bp/cc/mf最值。
+   
+2. 相互组合，比如对于bp，aa在K16F65536最大，ss8在K48F8192最大，则将s3_AlphaBeta/ 完整 cp成：  
+   s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F65536_ss8K48F8192/
+   
+3. 修改step1_cp_data.sh中的参数：  
+   - path_aa="${path_base}output/best/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
+   - path_ss8="${path_base}output/best/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
+
+4. 执行 step1-5  
+   <font color=red size=4>特别注意：step3_FindAlphaBeta要进行两轮 </font>
+   - 粗筛：  
+     对指定的某一个ont(bp/cc/mf)进行    
+     -o bp --alpha-range '0, 101, 10' --beta-range '0, 101, 10'   
+   
+   - 细筛：  
+     e.g. 粗筛结果：bp 在a=0.2, b=0.3取最大，所以新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：  
+     -o bp --alpha-range '10, 31, 2' --beta-range '20, 41, 2'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## CAFA3
 可以横向和其他文章做对比。
+
+。。。本章节加载中。。。
+
+
+
+
 
 
 
@@ -85,35 +139,56 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 
 
 ## TrainALL & Predict New
+> case 0 & case 1 前两步的数据预处理 **"相同"**  
 
 ### case 0: 只用 aa/ss8_model + Diamond 预测
-前两步**相同**：   
-1. 准备初始fasta文件，aa格式：pub_data/data_new/new_aa.fa  
-2. 执行 s1_DataPreprocessing_New中的step1-7，得到在pub_data/data_new/中：  
-new_clean_aa.pkl  
+#### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
+1. 准备初始fasta文件，aa格式，存放在：pub_data/data_new/new_aa.fa  
+2. 执行 s1_DataPreprocessing_New中的step1-8:
+- step1_fa2pkl.py: new_aa.fa 转成 pkl
+- step2_New_x_SPOT1DLM.py:  去掉aa长度>1024的
+- step3_SPOT1DLM_generate_esm.py: 
+- step4_SPOT1DLM_generate_prottrans.py: 
+- step5_SPOT1DLM_run_inference.py: 
+- step6_SPOT1DLM_csv_2_aass3ss8.py: 生成 new_SPOT1DLM_aass3ss8.pkl 
+- step7_aa_2_ss3ss8.py: 生成 new_clean_aa.pkl & new_clean_ss8.pkl
+- step8_pkl2fa.py: 上面两个转成 fa
+
+最终在pub_data/data_new/生成：  
+new_clean_aa.pkl
+new_clean_aa.fa  
 new_clean_ss8.pkl
+new_clean_ss8.fa  
 
 
+#### CrossSpecies/s2_TrainTest/step9-10
+3. 执行 CrossSpecies/s2_TrainTest/step9_cpData_Diamond4New.sh：把这4个pkl/fa文件cp到对应文件夹中，并diamond。      
+   e.g. output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel8_Filter65536_Ontsall/data/
+   
+4. 执行 CrossSpecies/s2_TrainTest/step10_Predict_New: 根据aa/ss8 对未知数据进行预测
 
 
-
-
-
-3. 把这两个pkl文件cp到对应文件夹中。  
-e.g. output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel8_Filter65536_Ontsall/data/
-
-4. 执行：  
-step9_Diamond4New: 为全新的，未知的数据 更新Diamond  
-step10_Predict_New: 根据aa/ss8 对未知数据进行预测
 
 
 ### case 1: 用 aa_model + ss8_model + Diamond 预测
-3. 数据预处理  
-cd PredictNew_AlphaBeta/s1_DataPreprocessing_PredictNew/  
+#### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
+同 case0 数据预处理 (PredictNew/s1_DataPreprocessing_PredictNew/)
 
-执行该文件夹下:  
-- step1_fa2pkl: 转格式 
-- step2_New_x_SPOT1DLM: 
+
+#### CrossSpecies/s3_AlphaBeta/step6-7
+
+3. 执行 CrossSpecies/s3_AlphaBeta/step6_cpData_Diamond4New.sh
+
+4. 执行 CrossSpecies/s3_AlphaBeta/step7_PredictAlphaBeta_new.sh
+
+
+
+<font face="STCAIYUN">And they all lived happily ever after!</font>
+
+
+
+
+
 
 
 

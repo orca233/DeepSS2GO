@@ -1,33 +1,27 @@
 import os
-import configparser
-import numpy as np
-
+# import configparser
+# import numpy as np
 
 # step0_TrainTestSetting_global.py 中包含 params_global_dynamic & params_global_constant 两个字典，
 # 读取 params_global_dynamic，拆分list成元素，更新到 params_global_constant，
 # 保存在 step0_TrainTestSetting_local.py 中的 params_local 字典
 
-print('step0 starting ##############################')
+print('##################### step0 starting ##############################')
 
 #################### path_base ################
-### fpath  判断root根目录，看是HPC还是lab的workstation，设置path_base=绝对路径
-# dir_sustech_hpc = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
-# lab_linux3090 = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
+## fpath  判断root根目录，看是HPC还是lab的workstation，设置path_base=绝对路径
+dir_sustech_hpc = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO/'  # change -----------------
+lab_linux3090 = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/'  # change -----------------
 
-# path_base = ''
-# # 判断该路径是否存在，决定path_base是采用HPC集群路径，或是实验室的Liao_lab路径
-# if os.path.exists(dir_sustech_hpc):
-#     path_base = dir_sustech_hpc
-# elif os.path.exists(lab_linux3090):
-#     path_base = lab_linux3090
-# else:
-#     print('HOLY SHIT, NO --path_base-- available !!!')
+path_base = ''
+# 判断该路径是否存在，决定path_base是采用HPC集群路径，或是实验室的Liao_lab路径
+if os.path.exists(dir_sustech_hpc):
+    path_base = dir_sustech_hpc
+elif os.path.exists(lab_linux3090):
+    path_base = lab_linux3090
+else:
+    print('HOLY SHIT, NO --path_base-- available !!!')
 
-##### path_base = 相对路径
-path_base = '../'  # cd到 /home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/ 目录下
-
-os.chdir(path_base)
-print('path_base = ', os.getcwd())
 
 
 ################################################
@@ -40,32 +34,28 @@ params_global_constant = {
 
     ##### 下面这几行内容，是打算分开计算 Train & Test
     # 是否运行哪几个step，
-    'run_step1_splittraintest_terms': 'T',
-    'run_step2_Train': 'F',  # 如果 train = T，则 不加载 pretrained model，需要预训练
-    'run_step3_Test': 'F',  #
-    'run_step4_FindAlpha': 'F',  #
-    'run_step5_Evaluate': 'F',  # 评价三大指标，Fmax, AUPR, Smin，分别用带alpha的和不带alpha的
-    'run_step6_FindAlphaBeta': 'F',
-    'run_step7_EvaluateAB': 'F',  # 评价三大指标，Fmax, AUPR, Smin，分别用带alpha+beta 的和不带alpha+beta的
-    # 'load_pretrained_model_root_path': 'output/test_TrainHUMAN_TestARATH_aa/step3_done/',  # 如果 run_step2_1_Train = F，则运行此行
+    'run_step1_SplitTrainTest_Terms': 'T',
+    'run_step2_Train': 'T',  # 如果 train = T，则 不加载 pretrained model，需要预训练
+    'run_step3_Test': 'T',  #
+    'run_step4_pkl2fa': 'F',  #
+    'run_step5_Diamond4CrossSpecies': 'F',  #
+    'run_step6_FindAlpha': 'F',
+    'run_step7_EvaluateAlpha': 'F',  # 评价三大指标，Fmax, AUPR, Smin，分别用带alpha的和不带alpha的
+    'run_step8_PredictAlpha': 'F',
 
-
-    # ##### 下面这几行，Train & Test要一起算
-    # # 是否运行哪几个step
-    # 'run_step1_splittraintest_terms': 'T',
-    # 'run_step2_TrainTest': 'T',
-    # 'run_step3_evaluate': 'F',  # 评价，得到Fmax, AUPR, Smin
-
+    # 下面这几个可能会和 global_dynamic的互换：
+    'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
+    'train_data': 'ECOLI',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
+    'test_data': 'YEAST',  # ['HUMAN', 'MOUSE']
 
     # 文件夹
     # dir0 = 是“非变量，不参与循环”       dir1 = 变量，参与循环
-    'dir0': 'test_TrainHUMAN_TestHUMAN_aa_test/',  # output/dir0/ 同一批次实验的root文件夹， change -----
+    'dir0': 'test_TrainECOLI_TestYEAST_aa_test/',  # output/dir0/ 同一批次实验的root文件夹， change -----
 
     'path_base': path_base,
-    # 'path_pub_data': path_base + 'pub_data/',
-    # 'path_redundancy': path_base + 'redundancy/',
-    # 'path_s2_TrainTest': path_base + 's2_TrainTest/',
+    'path_pub_data': path_base + 'pub_data/',
     'go_file': path_base + 'pub_data/go.obo',
+    # 'path_redundancy': path_base + 'redundancy/',
 
     # model 软件训练参数
     'GOMinRepeat': 50,  # 最少GO term出现次数, GO Min Repeat - gominre
@@ -85,14 +75,14 @@ params_global_constant = {
     'PROT_LETTER_ss8': ['C', 'S', 'T', 'H', 'G', 'I', 'E', 'B'],  # no E in aa_letter
     'PROT_LETTER_ss3': ['C', 'E', 'H'],  # C = C+S+T    E = E+B     H = H+G+I
 
-    # 下面这几个可能会和 global_dynamic的互换：
-    'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
-    'train_data': 'HUMAN',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
-    'test_data': 'HUMAN',  # ['HUMAN', 'MOUSE']
+
 
 }
 
-############# params_global_dynamic ############
+
+################################################
+############# params_global_dynamic ###########
+################################################
 
 # 把list拆开分散到每个子文件夹，kernels & filters，可作为loop，也可整体作为List，kernel目前最大也就1024了，因为受到esm限制
 # 这里必须写list，否则在run_step1_2.py中就会循环HUMAN的每一个字母了
@@ -101,7 +91,10 @@ params_global_constant = {
 params_global_dynamic = {
     # ont 一定参与循环：可以是 ['all'] -- 训练所有三种terms，或 ['bp', 'cc', 'mf'] -- 逐一训练
     # 在 param_local.py 只有一个str: all/bp/cc/mf 四选一
-    'onts': ['all'],  #  onts 有几种形式： ['bp'], ['cc'], ['mf'], ['gominre_trxte'], ['gominre], ['bp', 'cc', 'mf']  # 旧版本有 ['all'], ['gominre']只针对>50条件1
+    'onts': ['all'],  # onts 有几种形式： ['bp'], ['cc'], ['mf'], ['gominre_trxte'], ['gominre], ['bp', 'cc', 'mf']  # 旧版本有 ['all'], ['gominre']只针对>50条件1
+
+    'kernels': [8, 16],
+    'filters': [16, 32]   # 不需要变成 tuple
 
     # 顺序
     # kernels = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]  # 512
@@ -115,12 +108,12 @@ params_global_dynamic = {
     # 'kernels': [[8, 8], [16, 16], [24, 24], [131072, 131072]],
     # 'filters': [[32, 32], [64, 64]]   # 不需要变成 tuple
 
-    'kernels': [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256],
-    'filters': [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]   # 不需要变成 tuple
-
 }
 
 print('step0 done ')
+
+
+### 一些尝试：###
 
 ###### TrainHUMAN_TestHUMAN_KernelX_FilterY  ######
 # 单核下：cuda:3  VS  [3]，区别不大
@@ -188,8 +181,7 @@ kernels = [[8, 8], [16, 16], [24, 24]], filters': [[32, 32], [64, 64]]
 # 答案：如果运行ALL00，要考虑的是，不要TrainALL00_TestHUMAN  ！！ 在 两个list里会交叉选，
 # 比如 train_data = [ALL00, HUMAN, MOUSE], test_data = [ALL00, ECOLI]，就会出现 TrainALL00_TestECOLI
 
-# run_trainall00_testall00 = F
-# run_trainx_testy = 'T'
+
 
 
 

@@ -18,7 +18,9 @@ from utils import FUNC_DICT, Ontology, NAMESPACES
 from matplotlib import pyplot as plt
 import json
 # from step0_TrainTestSetting_global import *
-from step0_TrainTestSetting_local_aa import *
+# from step0_TrainTestSetting_local_aa import *
+from step0_TrainTestSetting_local_aa import params_local as params_local_aa
+from step0_TrainTestSetting_local_ss8 import params_local as params_local_ss8
 
 # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
@@ -37,7 +39,7 @@ os.system('mkdir -p results_alphabeta')
 @ck.option('--alpha', '-a', default='json', help='alpha = json(with quote) or 0-1(without quote, eg 0.3 float)')  # 如果alpha='json'，则采用json数据，否则alpha=数字，或外来click引入
 @ck.option('--beta', '-b', default='json', help='beta = json(with quote) or 0-1(without quote, eg 0.3 float)')  # 如果beta='json'，则采用json数据，否则beta=数字，或外来click引入
 
-@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--go-file', '-gf', default=params_local_aa['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 # @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--run-label-block', '-rbx', default='T', help='judge whether run block X')
 

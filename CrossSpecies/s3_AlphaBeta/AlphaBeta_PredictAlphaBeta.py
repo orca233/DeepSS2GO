@@ -208,7 +208,7 @@ def main(in_file_aa, in_file_ss8, out_file_bp, out_file_cc, out_file_mf, go_file
 
 
     # 判断用 single_GPU / multi_GPU 并行运算。      创建model模型实例
-    device_ids_aa = params_local_aa['device_ids']  # cuda:3"   or    [0, 1, 2, 3]   特注：aa用[0, 1], ss8用[2, 3]
+    device_ids_aa = [0, 1] # 这里就直接指定了，aa用[0,1], ss8用[2,3]. params_local_aa['device_ids']  # cuda:3"   or    [0, 1, 2, 3]   特注：aa用[0, 1], ss8用[2, 3]
 
     if isinstance(device_ids_aa, str):  # device_ids是个str="cuda:3"，用单GPU
         print('--- single GPU = ', device_ids_aa)
@@ -242,7 +242,7 @@ def main(in_file_aa, in_file_ss8, out_file_bp, out_file_cc, out_file_mf, go_file
     test_dataloader_ss8 = DataLoader(test_dataset_ss8, batch_size=batch_size, shuffle=False)
 
     # 判断用 single_GPU / multi_GPU 并行运算。      创建model模型实例
-    device_ids_ss8 = params_local_ss8['device_ids']  # cuda:3"   or    [0, 1, 2, 3]   特注：aa用[0, 1], ss8用[2, 3]
+    device_ids_ss8 = [2, 3] # 这里就直接指定了，aa用[0,1], ss8用[2,3]. params_local_ss8['device_ids']  # cuda:3"   or    [0, 1, 2, 3]   特注：aa用[0, 1], ss8用[2, 3]
 
     if isinstance(device_ids_ss8, str):  # device_ids是个str="cuda:3"，用单GPU
         print('--- single GPU = ', device_ids_ss8)
