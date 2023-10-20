@@ -76,10 +76,10 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 
 
 
-![CrossSpecies_s3](figs/CrossSpecies_Stage2_xxx.png)
+![CrossSpecies_s3](figs/CrossSpecies_Stage3_AlphaBeta.png)
 ### s3_AlphaBeta/ 结合 alpha + beta + Diamond 计算 (和s2逻辑有点像)
 > 评估&预测CrossSpecies数据
-- step1_cp_data.sh:  把aa&ss8 中的各种 pkl/fa cp到当前文件夹
+- step1_cpData_Combine_Predictions_aass8.sh:  把aa&ss8 中的各种 pkl/fa cp到当前文件夹，将predictions_aa.pkl & predictions_ss8.pkl结合
 - step2_Diamond4CrossSpecies.sh
 - step3_FindAlphaBeta.sh
 - step4_EvaluateAlphaBeta.sh: 三大指标
@@ -87,7 +87,7 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
   
 > 评估&预测新的未知数据
 - step6_cpData_Diamond4New.sh
-- step7_PredictAlphaBeta_new.sh
+- step7_PredictAlphaBeta_New.sh
 
 > s3_AlphaBeta 使用方法:
 
@@ -101,7 +101,7 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
    - path_ss8="${path_base}output/best/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
 
 4. 执行 step1-5  
-   <font color=red size=4>特别注意：step3_FindAlphaBeta要进行两轮 </font>
+   <font color=red size=5>**特别注意：step3_FindAlphaBeta要进行两轮**</font>
    - 粗筛：  
      对指定的某一个ont(bp/cc/mf)进行    
      -o bp --alpha-range '0, 101, 10' --beta-range '0, 101, 10'   
@@ -109,6 +109,9 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
    - 细筛：  
      e.g. 粗筛结果：bp 在a=0.2, b=0.3取最大，所以新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：  
      -o bp --alpha-range '10, 31, 2' --beta-range '20, 41, 2'
+     (得到结果：(0.16, 0.28, -0.535361639858736))
+     
+
 
 
 

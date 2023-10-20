@@ -1,14 +1,6 @@
 ##!/bin/bash
 
 
-# 当前文件夹要重新命名，i.e. step1_FindAlphaBeta_TrainMYCTU_TestMYCTU_aaK64F64_ss8K128F128
-
-
-
-# 结合二者 (predictions_aa.pkl + predictions_ss8.pkl = predictions_aa_ss8.pkl)
-#cd $path_current || exit 1
-python AlphaBeta_Combine_aass8_PredictionsFile.py
-
 
 
 ##########################################

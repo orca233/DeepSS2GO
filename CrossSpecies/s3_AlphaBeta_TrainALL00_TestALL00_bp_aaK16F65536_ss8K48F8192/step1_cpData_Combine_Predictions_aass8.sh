@@ -37,5 +37,8 @@ cp "${path_ss8}data/test_data.fa" "${path_current}data/test_data_ss8.fa"
 cp "${path_ss8}data/model_checkpoint.pth" "${path_current}data/model_checkpoint_ss8.pth"
 
 
+# 结合二者 (predictions_aa.pkl + predictions_ss8.pkl = predictions_aa_ss8.pkl)
+#cd $path_current || exit 1
+python AlphaBeta_Combine_aass8_PredictionsFile.py
 
 
