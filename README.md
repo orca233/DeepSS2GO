@@ -1,5 +1,9 @@
-# DeepSS2GO_AB
-三大类： CrossSpecies, CAFA3, PredictNew  
+# DeepSS2GO
+三大类：   
+CrossSpecies/ 不同物种之间的交叉训练验证     
+CAFA3/ 横向对比三大指标结果  
+PredictNew/ 给出新的未知的fasta，GO预测  
+其他文件夹：  
 output/ 存放CS中大量的输出文件  
 pub_data/ 存放三大类的公共数据  
 redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件  
@@ -21,7 +25,6 @@ s1_DataPreprocessing_CrossSpecies/: 预处理数据
 - step8_ClassifySpecies.py: 生成不同物种的 ss3/ss8.pkl
 
 
-
 s2_TrainTest/: 训练，测试，评估   
 - step1_SplitTrainTest_Terms: 拆分原始数据为train & test，找到对应terms 
 - step2_Train: 训练，得到model + training.csv  
@@ -32,12 +35,43 @@ s2_TrainTest/: 训练，测试，评估
 - step7_EvaluateAlpha: 根据上面得到的Alpha，评估三大指标，Fmax, AUPR, Smin
 - step8_PredictAlpha: 预测 test_data.pkl的结果，得到 results_bp/cc/mf.csv
 
+
 >预测新的未知的数据有两种情况，
 > 1. 只用aa/ss8的model。 (下面这两行命令用于情况1)  
 > 2. 用aa+ss8的model。 (详见章节 PredictNew_AlphaBeta)  
 
-step9_Diamond4New: 为全新的，未知的数据 更新Diamond  
-step10_Predict_New: 根据aa/ss8 对未知数据进行预测  
+- step9_Diamond4New: 为全新的，未知的数据 更新Diamond  
+- step10_Predict_New: 根据aa/ss8 对未知数据进行预测  
+
+> s2_TrainTest 使用方法：
+
+CrossSpecies/s2_TrainTest/ 为global文件夹，  
+
+在构建好pub_data后，比如需要 TrainECOLI_TestYEAST_aa，则
+1. 在 CrossSpecies/下将整个 s2_TrainTest/ 复制为：
+   s2_TrainTest_TrainECOLI_TestYEAST_aa/ (此为global文件夹)
+2. 修改新文件夹中的 step0_TrainTestSetting_global.py 参数。  
+   特别注意： 
+   - 'device_ids': [0, 1]
+   - 'dir0': 'test_TrainHUMAN_TestHUMAN_aa_test/'
+   - 'aa_ss': 'aa'
+   - 'train_data': 'HUMAN'
+   - 'test_data': 'HUMAN'  
+
+   - 'kernels': [8, 16, 24, ...]
+   - 'filters': [16, 32, 64, ...]   
+   
+3. 执行 run_KernelX_FilterY.py，会在 output/中新建文件夹：
+   test_TrainECOLI_TestYEAST_aa/ (此为local文件夹的母文件夹 = dir0)
+   并结合不同的kernel&filter生成一系列的local子文件夹：
+   e.g. DeepSS2GO_Kernel104_Filter8192_Ontsall/ (此为local文件夹的子文件夹 = dir1)
+   并将global文件夹中的文件cp到local子文件夹中，生成新的step0_TrainTestSetting_local.py
+   i.e.
+   cp -rf CrossSpecies/s2_TrainTest_TrainX_TestY_aa/ output/dir0/dir1/
+   e.g.
+   cp -rf CrossSpecies/s2_TrainTest_TrainECOLI_TestYEAST_aa/ output/test_TrainECOLI_TestYEAST_aa/DeepSS2GO_Kernel104_Filter8192_Ontsall/
+4. 在每一个local子文件夹中，根据step0_TrainTestSetting_local.py的具体参数，执行: step1-8。
+   一般可能只运行 step1-3，后面选择合适的单独运行 step4-8用来 find_alpha。
 
 
 
