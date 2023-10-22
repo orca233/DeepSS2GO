@@ -186,7 +186,7 @@ new_clean_ss8.fa
 
 
 
-<font face="STCAIYUN">And they all lived happily ever after!</font>
+<font face="STCAIYUN">******** And they all lived happily ever after! ********</font>
 
 
 
