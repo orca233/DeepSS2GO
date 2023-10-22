@@ -1,17 +1,23 @@
 # 这只是个放在“主文件夹”的例子，后面会在每个“子文件夹”生成独特的 params_local
 
-
 params_local = {
     # from params_global_constant
-    'dir0': 'test_TrainHUMAN_TestHUMAN_KernelXFilterY_aassZ_OntK/',
-    'path_pub_data': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/pub_data/',
-    'path_redundancy': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/redundancy/',
-    'path_s2_TrainTest': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/s2_TrainTest/',
-    'go_file': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/pub_data/go.obo',
-    'run_step1_splittraintest_terms': 'T',
-    'run_step2_TrainTest': 'T',
-    'run_step3_evaluate': 'F',
-    'device_ids': 'cuda:3',
+    'device_ids': [0, 1],
+    'run_step1_SplitTrainTest_Terms': 'T',
+    'run_step2_Train': 'T',
+    'run_step3_Test': 'T',
+    'run_step4_pkl2fa': 'F',
+    'run_step5_Diamond4CrossSpecies': 'F',
+    'run_step6_FindAlpha': 'F',
+    'run_step7_EvaluateAlpha': 'F',
+    'run_step8_PredictAlpha': 'F',
+    'aa_ss': 'aa',
+    'train_data': 'CAFA3',
+    'test_data': 'CAFA3',
+    'dir0': 'test_CAFA3_round3_aa/',
+    'path_base': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/',
+    'path_pub_data': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/pub_data/',
+    'go_file': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/pub_data/go.obo',
     'GOMinRepeat': 50,
     'TrainTestRatio': 0.95,
     'TrainValidRatio': 0.9,
@@ -19,19 +25,18 @@ params_local = {
     'MAXLEN': 1024,
     'FC_depth': 0,
     'learning_rate': 0.0003,
-    'epochs': 100,
-    'whether_load_pretrained_model': 0,
+    'epochs': 50,
+    'load_pretrained_model': 0,
+    'load_pretrained_model_addr': 'data/model_checkpoint.pth',
     'EarlyStopping_patience': 6,
     'PROT_LETTER_aa': ['A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V'],
     'PROT_LETTER_ss8': ['C', 'S', 'T', 'H', 'G', 'I', 'E', 'B'],
     'PROT_LETTER_ss3': ['C', 'E', 'H'],
-    'aa_ss': 'aa',
-    'onts': 'bp',
-    'train_data': 'HUMAN',
-    'test_data': 'HUMAN',
 
     # split: params_global_dynamic
-    'kernels': 16,
-    'filters': 128,
+    'kernels': [8],
+    'filters': [16],
+    'onts': 'all',
 }
+
 

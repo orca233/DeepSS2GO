@@ -1,11 +1,9 @@
-import os
 from collections import deque, Counter
 import warnings
 import pandas as pd
 import numpy as np
 from xml.etree import ElementTree as ET
 import math
-import torch
 from step0_TrainTestSetting_local import *
 #
 
@@ -24,6 +22,7 @@ min_n高：很多的父辈，n少自己出现次数少
 
 =0，没祖先，最大爷
 '''
+
 
 BIOLOGICAL_PROCESS = 'GO:0008150'
 MOLECULAR_FUNCTION = 'GO:0003674'
@@ -59,11 +58,7 @@ def is_exp_code(code):
 
 
 class Ontology(object):
-    # def __init__(self, filename='../../pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
-    def __init__(self, filename=params_local['path_base'] + 'pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
-
-        # print(os.getcwd())
-        os.system('ls %s' % filename)
+    def __init__(self, filename=params_local['path_pub_data'] +'go.obo', with_rels=False):  # original: 'data/go.obo'
         self.ont = self.load(filename, with_rels)
         self.ic = None
 
@@ -96,6 +91,11 @@ class Ontology(object):
                 min_n = n
             else:
                 min_n = min([cnt[x] for x in parents])  # min_n 父辈中出现最少的次数
+
+            if min_n == 0:
+                min_n = 0.0000000000001
+
+
 
             # print('go_id, min_n, n = ', go_id, min_n, n)  # add by FU
             self.ic[go_id] = math.log(min_n / n, 2)
@@ -374,78 +374,6 @@ def extract_go_terms(file_path):
         go_terms.add(term_id)
 
     return go_terms
-
-
-
-
-
-class EarlyStopping:
-    """Early stops the training if validation loss doesn't improve after a given patience."""
-
-    def __init__(self, patience=7, verbose=False, delta=0):
-        """
-        Args:
-            patience (int): How long to wait after last time validation loss improved.
-                            上次验证集损失值改善后等待几个epoch
-                            Default: 7
-            verbose (bool): If True, prints a message for each validation loss improvement.
-                            如果是True，为每个验证集损失值改善打印一条信息
-                            Default: False
-            delta (float): Minimum change in the monitored quantity to qualify as an improvement.
-                            监测数量的最小变化，以符合改进的要求
-                            Default: 0
-        """
-        self.patience = patience
-        self.verbose = verbose
-        self.counter = 0
-        self.best_score = None
-        self.early_stop = False
-        self.val_loss_min = np.Inf
-        self.delta = delta
-
-    def __call__(self, val_loss, model):
-
-        score = -val_loss
-
-        if self.best_score is None:
-            self.best_score = score
-            self.save_checkpoint(val_loss, model)
-        elif score < self.best_score + self.delta:
-            self.counter += 1
-            # print(f'EarlyStopping counter: {self.counter} out of {self.patience}')
-            if self.counter >= self.patience:
-                self.early_stop = True
-        else:
-            self.best_score = score
-            self.save_checkpoint(val_loss, model)
-            self.counter = 0
-
-    def save_checkpoint(self, val_loss, model):
-        '''
-        Saves model when validation loss decrease.
-        验证损失减少时保存模型。
-        '''
-        if self.verbose:
-            # print(f'Valid_loss drops ({self.val_loss_min:.6f} --> {val_loss:.6f}).  Saving model ...')
-            print(f'Valid_loss drops.  Saving model ...')
-        torch.save(model.state_dict(),
-                   'data/model_checkpoint.pth')  # 存迄今最优模型参数， model_file='data/model_checkpoint.pth'
-        # torch.save(model, 'finish_model.pkl') # 这里会存储迄今最优的模型???
-        self.val_loss_min = val_loss
-
-
-
-
-def pkl2fa(input_file, output_file):  # DeepGOPlus 原文件为 diamond_data.py
-    # Load interpro data
-    df = pd.read_pickle(input_file)
-    print('pkl length', len(df))
-    with open(output_file, 'w') as f:
-        for row in df.itertuples():
-            f.write('>' + row.proteins + '\n')
-            f.write(row.sequences + '\n')
-
-
 
 
 
