@@ -1,4 +1,6 @@
-
+mkdir -p results
+mkdir -p results_alpha
+mkdir -p results_alphabeta
 
 #####################################################
 # 前面 train & test 中，已经从model的到了 predictions.pkl，在test_data.pkl 后加上了两列，

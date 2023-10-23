@@ -141,10 +141,11 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
             annots[go_id] = score
         diamond_preds[prot_id] = annots
 
-    print('22222222')
+    print('22222222 diamond_preds = ')
 
-    print(type(diamond_preds))
+    print(len(diamond_preds))
     # print(diamond_preds)
+    # diamond_preds = {'6PGD1_YEAST': {'GO:0000166': 0.90855575, 'GO:0000255': 0.09144427,}, 'prot':{GO1:X, GO2,X}...}
 
 
 
@@ -270,11 +271,18 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
         else:  # alpha = int，也就是在click中又指定
             print('alpha is from click, alpha = ', alpha)
             print('type_alpha = ', type(alpha))
+            alpha = float(alpha)
             alphas[NAMESPACES[ont]] = alpha
+            print('updated_type_alpha = ', type(alphas[NAMESPACES[ont]]))
 
         ###########################################################
         # FS   alpha & 1-alpha 对调  这是核心！！！！！！！
         ###########################################################
+        # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
+        # alpha=0: 全由 diamond 统计
+        # alpha=1: 全由 deepSS2GO_aa 统计
+        # beta=1: 全由 deepSS2GO_ss8 统计
+
         for prot_id in prot_ids:  # 逐一过 test_data.fa
             annots = {}
             if prot_id in diamond_preds:  # blast/diamond * (1-alpha)

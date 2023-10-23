@@ -4,6 +4,7 @@ from DeepGOPlus: evaluate_deepgoplus.py
 相比于Alpha_FindAlpha.py，（从25-80逐一过一遍alpha，每一个alpha又过 t(threshold)0-100）
 这个py文件只针对上述筛选出的某一个alpha进行，2min
 
+这个py是逐一过每一个threshold,从0-100，几分钟时间
 '''
 
 
@@ -155,32 +156,41 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     ############## 引入 json 参数 #####################
     ##################################################
 
+
     # 第一步，建库 deep_preds
     # 如果alpha=NA，则采用json数据，否则alpha=数字，或外来click引入
     if alpha == 'json':
         # 从last_release_metadata文件中获取alpha ###
-        print('alpha is from json, alpha = ', alpha)
+        print('alpha is from json, alpha = ', alpha, 'alpha_type = ', type(alpha))
+
         last_release_metadata = 'Alpha_last_release.json'
         with open(last_release_metadata, 'r') as f:
             print('Reading file from json')
             last_release_data = json.load(f)
             alpha = last_release_data["alphas"][ont]  # 从 json中读取数据
-            print('111111111', type(alpha))
+            print('type_alpha = ', type(alpha))
             alphas[NAMESPACES[ont]] = alpha   # ????????? 方便下面的迭代中使用alpha
-    else:  # alpha = int，也就是在click中又指定
+    else:  # e.g. alpha = 0.6，也就是在click中又指定。因为这个0.6是str，所以要转格式
         print('alpha is from click, alpha = ', alpha)
         print('type_alpha = ', type(alpha))
+        alpha = float(alpha)
         alphas[NAMESPACES[ont]] = alpha
-
+        print('updated_type_alpha = ', type(alphas[NAMESPACES[ont]]))
 
     ### FS 从find_alpha的json文件中获取 alpha
     print('lol')
-    print('alphas', alphas)  # eg. alphas {'molecular_function': 0.5, 'biological_process': 0, 'cellular_component': 0}
+    print('alphas=', alphas)  # eg. alphas {'molecular_function': 0.5, 'biological_process': 0, 'cellular_component': 0}
 
 
     ###########################################################
     # 这是核心 !!!!!!!!!!!!!!!!!!!!!!!!!!!
     ###########################################################
+
+    # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
+    # alpha=0: 全由 diamond 统计
+    # alpha=1: 全由 deepSS2GO_aa 统计
+    # beta=1: 全由 deepSS2GO_ss8 统计
+
     for i, row in enumerate(test_df.itertuples()):
         annots_dict = blast_preds[i].copy()
         for go_id in annots_dict:
@@ -207,7 +217,7 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     rus = []
     mis = []
     for t in range(1, 101):  # the range in this loop has influence in the AUPR output
-        print('threshold =', t)
+        # print('threshold =', t)
         threshold = t / 100.0
         preds = []
         for i, row in enumerate(test_df.itertuples()):

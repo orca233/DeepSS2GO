@@ -128,7 +128,7 @@ The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 在step0_global/local.py中修改 train_data = test_data = 'CAFA3' 即可。
 
 
-![Oops, This is CAFA3_s1](figs/x.png)
+![Oops, This is CAFA3_s1](figs/CAFA3_Stage2_TrainTest.png)
 ### s2_TrainTest_CAFA3/: 训练，测试，评估
 同 CrossSpecies 的 s2 类似
 

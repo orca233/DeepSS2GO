@@ -1,4 +1,7 @@
 
+mkdir -p results
+mkdir -p results_alpha
+mkdir -p results_alphabeta
 
 #####################################################
 # Predict ， 当alpha=1 时，即全有deepSS2GO统计，alpha=0时，即全由diamond统计
