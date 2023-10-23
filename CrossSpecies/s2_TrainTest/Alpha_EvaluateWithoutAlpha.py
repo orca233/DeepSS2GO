@@ -29,7 +29,7 @@ from step0_TrainTestSetting_local import *
 # @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
 
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='Data file with sequences and complete set of annotations')  # original: data/terms_all.pkl
-@ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')
+# @ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')
 @ck.option('--ont', '-o', default='mf', help='GO subontology (bp, mf, cc)')
 @ck.option('--alpha', '-a', default='json', help='alpha = json(with quote) or 0-1(without quote, eg 0.3 float)')  # 如果alpha='json'，则采用json数据，否则alpha=数字，或外来click引入
 @ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
@@ -38,7 +38,7 @@ from step0_TrainTestSetting_local import *
 
 
 
-def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, alpha, go_file, run_label_block):  # FS 添加go_file
+def main(train_data_file, test_data_file, terms_file, ont, alpha, go_file, run_label_block):  # FS 添加go_file  diamond_scores_file
     # # 从last_release_metadata文件中获取alpha ###
     # last_release_metadata = 'Alpha_last_release.json'
     # with open(last_release_metadata, 'r') as f:
@@ -64,6 +64,10 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     # print(go_rels)
 
 
+
+
+
+    ''' withoutAlpha 注释掉
     #####################################################################
     ########################## Diamond 计算IC ############################
     #####################################################################
@@ -116,6 +120,7 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
                 annots[go_id] = score
         blast_preds.append(annots)
     # blast_preds, len = 662, [{'GO:0000045': 0.6616454, 'GO:0000285': 0.19235227, 'GO:0001505': 0.091541134,
+    '''
 
 
     ############ 这里和 FindAlpha 是不一样的 ######################
@@ -184,11 +189,12 @@ def main(train_data_file, test_data_file, terms_file, diamond_scores_file, ont, 
     ###########################################################
     # 这是核心 !!!!!!!!!!!!!!!!!!!!!!!!!!!
     ###########################################################
-
     # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
     # alpha=0: 全由 diamond 统计
     # alpha=1: 全由 deepSS2GO_aa 统计
     # beta=1: 全由 deepSS2GO_ss8 统计
+
+    blast_preds = [{} for _ in range(10000)]  # blast_preds = [{},{},{},{},{},...10000个{}]  # 专为Evaluate Without Alpha准备！！！
 
     for i, row in enumerate(test_df.itertuples()):
         annots_dict = blast_preds[i].copy()
