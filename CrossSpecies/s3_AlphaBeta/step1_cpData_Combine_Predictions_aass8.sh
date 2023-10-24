@@ -13,6 +13,8 @@ path_aa="${path_base}output/Best4PredictNew/test_TrainALL00_TestALL00_aa_DeepSS2
 path_ss8="${path_base}output/Best4PredictNew/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
 
 
+###################### predictions.pkl & model_checkpoint.pth 的aa/ss8 最好还是用 link -s .... 要不太大了 #############
+
 #### cp ####
 # aa
 #cp "${path_aa}data/diamond_aa.res" "${path_current}data/diamond_aa.res"

@@ -13,9 +13,10 @@ redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件
 ## Cross species
 跨物种训练6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST, & ALL00  
 
-![Oops, This is CrossSpecies_s1](figs/CrossSpecies_Stage1_DataPreprocessing.png)
 
 ### s1_DataPreprocessing_CrossSpecies/: 预处理数据  
+![Oops, This is CrossSpecies_s1](figs/CrossSpecies_Stage1_DataPreprocessing.png)
+
 - step1_Uniprot2Swissprot.py: 挑出手工注释蛋白质
 - step2_Swissprot_x_SPOT1DLM.py: 删除长度超过1024的蛋白质，和非标准氨基酸
 - step3_SPOT1DLM_generage_esm.py: 生成 *esm.npy
@@ -26,9 +27,10 @@ redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件
 - step8_ClassifySpecies.py: 生成不同物种的 ss3/ss8.pkl
 
 
-![Oops, This is CrossSpecies_s2](figs/CrossSpecies_Stage2_TrainTest.png)
 
 ### s2_TrainTest/: 训练，测试，评估   
+![Oops, This is CrossSpecies_s2](figs/CrossSpecies_Stage2_TrainTest.png)
+
 > 评估&预测CrossSpecies数据
 - step1_SplitTrainTest_Terms: 拆分原始数据为train & test，找到对应terms 
 - step2_Train: 训练，得到model + training.csv  
@@ -76,8 +78,9 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 
 
 
-![Oops, This is CrossSpecies_s3](figs/CrossSpecies_Stage3_AlphaBeta.png)
 ### s3_AlphaBeta/ 结合 alpha + beta + Diamond 计算 (和s2逻辑有点像)
+![Oops, This is CrossSpecies_s3](figs/CrossSpecies_Stage3_AlphaBeta.png)
+
 > 评估&预测CrossSpecies数据
 - step1_cpData_Combine_Predictions_aass8.sh: 
   把aa&ss8 中的各种 pkl/fa cp到当前文件夹，将predictions_aa.pkl & predictions_ss8.pkl结合
@@ -95,8 +98,8 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 
 1. 在s2_TrainTest_TrainALL00_TestALL00_aa/ss8结束，找到各自的 bp/cc/mf最值。
    
-2. 相互组合，比如对于bp，aa在K16F65536最大，ss8在K48F8192最大，则将s3_AlphaBeta/ 完整 cp成：  
-   s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F65536_ss8K48F8192/
+2. 相互组合，比如对于bp，aa在K16F65536最大，ss8在K48F8192最大，则将s3_AlphaBeta/ 完整 复制拷贝到：    
+   output/AlphaBeta/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F65536_ss8K48F8192/
    
 3. 执行 step1-5  
    <font color=red size="6">**特别注意 3点：**</font>  
@@ -138,21 +141,21 @@ The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 可标准以横向和其他文章做对比。
 
 
-
+### s1_DataPreprocessing_CAFA3/: 预处理数据
 ![Oops, This is CAFA3_s1](figs/CAFA3_Stage1_DataPreprocessing.png)
 
-### s1_DataPreprocessing_CAFA3/: 预处理数据
 同 s1_DataPreprocessing_CrossSpecies/步骤，
 在step0_global/local.py中修改 train_data = test_data = 'CAFA3' 即可。
 
 
-![Oops, This is CAFA3_s1](figs/CAFA3_Stage2_TrainTest.png)
 ### s2_TrainTest_CAFA3/: 训练，测试，评估
+![Oops, This is CAFA3_s1](figs/CAFA3_Stage2_TrainTest.png)
+
 同 CrossSpecies 的 s2 类似
 
 
 
-。。。 未完，本章节继续加载中 。。。
+[comment]: <> (。。。 未完，本章节继续加载中 。。。)
 
 
 
@@ -164,6 +167,9 @@ The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 
 ### case 0: 只用 aa/ss8_model + Diamond 预测
 #### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
+![Oops, This is PredictNew_s1](figs/PredictNew_Stage1_DataPreprocessing.png)
+
+
 1. 准备初始fasta文件，aa格式，存放在：pub_data/data_new/new_aa.fa  
 2. 执行 s1_DataPreprocessing_New中的step1-8:
 - step1_fa2pkl.py: new_aa.fa 转成 pkl

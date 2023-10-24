@@ -18,8 +18,8 @@
 # 因为 bp 在a=0.2, b=0.3取最大，所以新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：
 
 #python AlphaBeta_FindAlphaBeta.py -ncc 80 -o bp --alpha-range '10, 31, 2' --beta-range '20, 41, 2'
-python AlphaBeta_FindAlphaBeta.py -ncc 80 -o cc --alpha-range '0, 101, 2' --beta-range '0, 101, 2'
-#python AlphaBeta_FindAlphaBeta.py -ncc 80 -o mf --alpha-range '0, 101, 2' --beta-range '0, 101, 2'
+#python AlphaBeta_FindAlphaBeta.py -ncc 80 -o cc --alpha-range '0, 101, 2' --beta-range '0, 101, 2'
+python AlphaBeta_FindAlphaBeta.py -ncc 80 -o mf --alpha-range '30, 51, 2' --beta-range '20, 41, 2'
 
 
 # 得到 (0.16, 0.28, -0.535361639858736)
