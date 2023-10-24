@@ -106,7 +106,7 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
       path_aa="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
       path_ss8="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
       ```
-   2. 前期设定：step3.0-3.1-4-5中的ont只选一个即可, bp/cc/mf   
+   2. 前期设定：step3.0-3.1-4-5中的ont只选一个即可, bp/cc/mf。其他的注释掉。    
 
    <br>
    

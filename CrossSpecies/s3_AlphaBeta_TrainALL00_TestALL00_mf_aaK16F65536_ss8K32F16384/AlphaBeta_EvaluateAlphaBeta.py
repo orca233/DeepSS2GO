@@ -274,7 +274,7 @@ def main(train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, 
     print(f'AUPR: {aupr:0.3f}')
 
     ### FS 保存Smin,Fmax,AUPR ###
-    with open(f'results_alphabeta/Fmax_AUPR_Smin_{ont}_{alpha:0.2f}.txt', 'w') as f:
+    with open(f'results_alphabeta/Fmax_AUPR_Smin_{ont}_alpha{alpha:0.2f}_beta{beta:0.2f}.txt', 'w') as f:
         f.write(f'Length of test set: {len(test_df_aa_ss8)} \n')
         f.write(f'threshold: {tmax} \n')
         f.write(f'alpha={alpha:0.2f} \n')
@@ -297,7 +297,7 @@ def main(train_data_file, test_data_file_aa_ss8, terms_file_aa, terms_file_ss8, 
     # plt.legend(loc="lower right")
     #### plt.savefig(f'results_alphabeta/aupr_{ont}_{alpha:0.2f}.pdf')  # 不保存pdf了，就是个precission-recall图
     df = pd.DataFrame({'precisions': precisions, 'recalls': recalls})
-    df.to_pickle(f'results_alphabeta/PR_{ont}_{alpha:0.2f}.pkl')
+    df.to_pickle(f'results_alphabeta/PR_{ont}_alpha{alpha:0.2f}_beta{beta:0.2f}.pkl')
 
 
 
