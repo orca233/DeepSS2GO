@@ -10,7 +10,7 @@ pub_data/ 存放三大类的公共数据
 redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件  
 
 
-## Cross species
+## 板块一：Cross species
 跨物种训练6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST, & ALL00  
 
 
@@ -136,7 +136,7 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 
    
 
-## CAFA3
+## 板块二：CAFA3
 The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 可标准以横向和其他文章做对比。
 
@@ -162,7 +162,7 @@ The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 
 
 
-## TrainALL & Predict New
+## 板块三：TrainALL & Predict New
 > case 0 & case 1 前两步的数据预处理 **"相同"**  
 
 ### case 0: 只用 aa/ss8_model + Diamond 预测
