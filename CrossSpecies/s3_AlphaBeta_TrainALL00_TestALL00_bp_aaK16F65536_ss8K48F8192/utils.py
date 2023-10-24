@@ -59,7 +59,7 @@ def is_exp_code(code):
 
 
 class Ontology(object):
-    def __init__(self, filename='../../pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
+    def __init__(self, filename=params_local['path_base']+'pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
         # print(os.getcwd())
         os.system('ls %s' % filename)
         self.ont = self.load(filename, with_rels)

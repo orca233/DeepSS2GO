@@ -9,7 +9,7 @@ params_local = {
     'run_step3_evaluate': 'F',
     'dir0': 'test_TrainMYCTU_TestHUMAN_aa/',
     # 'path_base': '../../',  # 从output往前推两格
-    'path_base': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/',
+    'path_base': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/',
 
     # 'path_pub_data': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/pub_data/',
     # 'path_redundancy': '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/redundancy/',

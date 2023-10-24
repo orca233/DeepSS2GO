@@ -79,9 +79,11 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 ![Oops, This is CrossSpecies_s3](figs/CrossSpecies_Stage3_AlphaBeta.png)
 ### s3_AlphaBeta/ 结合 alpha + beta + Diamond 计算 (和s2逻辑有点像)
 > 评估&预测CrossSpecies数据
-- step1_cpData_Combine_Predictions_aass8.sh:  把aa&ss8 中的各种 pkl/fa cp到当前文件夹，将predictions_aa.pkl & predictions_ss8.pkl结合
-- step2_Diamond4CrossSpecies.sh
-- step3_FindAlphaBeta.sh
+- step1_cpData_Combine_Predictions_aass8.sh: 
+  把aa&ss8 中的各种 pkl/fa cp到当前文件夹，将predictions_aa.pkl & predictions_ss8.pkl结合
+- step2_Diamond4CrossSpecies.sh: 不解释了
+- step3.0_FindAlphaBeta_CoarseScreening.sh：粗筛，间隔10 
+- step3.1_FindAlphaBeta_FineScreening.sh：细筛，间隔2
 - step4_EvaluateAlphaBeta.sh: 三大指标
 - step5_PredictAlphaBeta.sh： 预测结果，得到results_bp/cc/mf.csv
   
@@ -96,39 +98,40 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
 2. 相互组合，比如对于bp，aa在K16F65536最大，ss8在K48F8192最大，则将s3_AlphaBeta/ 完整 cp成：  
    s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F65536_ss8K48F8192/
    
-3. 修改step1_cp_data.sh中的参数：  
-   - path_aa="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
-   - path_ss8="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
+3. 执行 step1-5  
+   <font color=red size="6">**特别注意 3点：**</font>  
+   每个新文件夹要修改两点：  
+   1. 前期设定：修改step1_cp_data.sh中的参数    
+      ```
+      path_aa="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
+      path_ss8="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
+      ```
+   2. 前期设定：step3.0-3.1-4-5中的ont只选一个即可, bp/cc/mf   
 
-4. 执行 step1-5  
-   <font color=red size=8>**特别注意两点：**</font>  
-   <font color=green size=5> 第一点：step3_FindAlphaBeta要进行两轮</font>  
-   - 第一轮，粗筛：  
+   <br>
+   
+   3. 后期执行： step3 Find Alpha Beta 筛选要进行两轮 (step3.0 & step 3.1)，要人工不能自动  
+   - 第一轮，粗筛，step3.0_FindAlphaBeta_CoarseScreening：
      对指定的某一个ont(bp/cc/mf)进行    
-     
-      ```bash
+     ```bash
       -o bp --alpha-range '0, 101, 10' --beta-range '0, 101, 10'   
-      #  粗筛结果：bp 在a=0.2, b=0.3取最大
-      ```   
+      # 粗筛结果：  
+      # bp 在a=0.2, b=0.3取最大  (0.2, 0.3, -0.5345571091830763)  
+      # {'alphas': {'bp': 0.2, 'cc': 0.5, 'mf': 0.0}, 'betas': {'bp': 0.3, 'cc': 0.3, 'mf': 0.8}}
 
-   - 第二轮，细筛：  
-     根据粗筛结果，新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：  
+      ```
      
+   - 第二轮，细筛，step3.1_FindAlphaBeta_FineScreening：  
+     根据粗筛结果，新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：  
       ```bash
       -o bp --alpha-range '10, 31, 2' --beta-range '20, 41, 2'  
-      #(细筛结果：(0.16, 0.28, -0.535361639858736))
+      # 细筛结果：  
+      # (0.16, 0.28, -0.535361639858736)  
+      # {'alphas': {'bp': 0.16, 'cc': 0.5, 'mf': 0.0}, 'betas': {'bp': 0.28, 'cc': 0.3, 'mf': 0.8}}
       ```
+    
 
-
-     
    
-
-
-
-<font color=green size=5> 第二点：step3_FindAlphaBeta要进行两轮</font>  
-
-
-
 
 ## CAFA3
 The Critical Assessment of protein Function Annotation algorithms (CAFA3)
