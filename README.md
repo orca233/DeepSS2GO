@@ -97,20 +97,35 @@ CrossSpecies/s2_TrainTest/ 为global文件夹，
    s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F65536_ss8K48F8192/
    
 3. 修改step1_cp_data.sh中的参数：  
-   - path_aa="${path_base}output/best/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
-   - path_ss8="${path_base}output/best/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
+   - path_aa="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/"
+   - path_ss8="${path_base}output/Best4PredictAlphaBeta/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel48_Filter8192_Ontsall/"
 
 4. 执行 step1-5  
-   <font color=red size=5>**特别注意：step3_FindAlphaBeta要进行两轮**</font>
-   - 粗筛：  
+   <font color=red size=8>**特别注意两点：**</font>  
+   <font color=green size=5> 第一点：step3_FindAlphaBeta要进行两轮</font>  
+   - 第一轮，粗筛：  
      对指定的某一个ont(bp/cc/mf)进行    
-     -o bp --alpha-range '0, 101, 10' --beta-range '0, 101, 10'   
-   
-   - 细筛：  
-     e.g. 粗筛结果：bp 在a=0.2, b=0.3取最大，所以新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：  
-     -o bp --alpha-range '10, 31, 2' --beta-range '20, 41, 2'
-     (得到结果：(0.16, 0.28, -0.535361639858736))
      
+      ```bash
+      -o bp --alpha-range '0, 101, 10' --beta-range '0, 101, 10'   
+      #  粗筛结果：bp 在a=0.2, b=0.3取最大
+      ```   
+
+   - 第二轮，细筛：  
+     根据粗筛结果，新的range 去 0.1-0.3, 0.2-0.4，间隔均为2：  
+     
+      ```bash
+      -o bp --alpha-range '10, 31, 2' --beta-range '20, 41, 2'  
+      #(细筛结果：(0.16, 0.28, -0.535361639858736))
+      ```
+
+
+     
+   
+
+
+
+<font color=green size=5> 第二点：step3_FindAlphaBeta要进行两轮</font>  
 
 
 
