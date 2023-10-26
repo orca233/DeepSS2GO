@@ -12,10 +12,36 @@ import numpy as np
 # from data_functions import read_list, read_fasta_file
 # from tape import ProteinBertModel, TAPETokenizer
 
-# import esm
-# from esm.pretrained import load_model_and_alphabet_local
+import esm
+from esm.pretrained import load_model_and_alphabet_local
 
 from step0_DataPreprocessingSetting import *
+
+'''
+# 如果下载esm出现ssl证书验证失败问题：
+# 方法一 更新证书
+
+import certifi
+import urllib.request
+
+urllib.request.urlopen('https://example.com', cafile=certifi.where())
+
+# 方法二：禁用SSL（不推荐）
+import urllib.request
+import ssl
+
+context = ssl.create_default_context()
+context.check_hostname = False
+context.verify_mode = ssl.CERT_NONE
+
+urllib.request.urlopen('https://example.com', context=context)
+'''
+
+
+
+
+
+
 
 save_path_npy = path_base + 'redundancy/SPOT1DLM_inputs_new/'  # for step3 & 4, esm/prottrans生成*npy
 os.system('mkdir -p %s' % save_path_npy)
@@ -32,11 +58,11 @@ args = parser.parse_args()
 ##########################################
 
 ### 方法一：original: load model  适合在SUSTech上运行 ###
-model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR50S")
+# model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR50S")
 # # Using cache found in /home/songfu/.cache/torch/hub/facebookresearch_esm_main  在线找数据？啥也没有
 
 ### 方法二： FS try 2 用esm方法下载： 把hub下载好的加载到对应文件夹，适合在lab——linux_3090上运行 #####
-# model, alphabet = esm.pretrained.esm1b_t33_650M_UR50S()
+model, alphabet = esm.pretrained.esm1b_t33_650M_UR50S()
 ### FS try 2 done ###
 
 

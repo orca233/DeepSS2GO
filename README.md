@@ -10,8 +10,8 @@ pub_data/ 存放三大类的公共数据
 redundancy/ 存放 data preprocessing中生成的大量 *.npt & *.csv 文件  
 
 
-## 板块一：Cross species
-跨物种训练6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST, & ALL00  
+## 板块一：Cross Species
+跨物种训练6类：ARATH, ECOLI, HUMAN, MOUSE, MYCTU, YEAST & ALL00  
 
 
 ### s1_DataPreprocessing_CrossSpecies/: 预处理数据  
@@ -169,6 +169,30 @@ The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 #### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
 ![Oops, This is PredictNew_s1](figs/PredictNew_Stage1_DataPreprocessing.png)
 
+> 仅供内部使用方法：
+
+conda环境文件：
+/home/fsong/work/py_proj/prot_data/conda_env/CondaEnv_PT18PY38.tar.gz
+
+- 登录test@ml-apus账户
+
+   ```bash
+   cd work
+   git clone https://github.com/orca233/DeepSS2GO_AB.git
+   cd DeepSS2GO_AB
+   # 解压预处理文件
+   cp /home/fsong/work/py_proj/prot_algo/DeepSS2GO/temp/pub_data.tar.gz . 
+   tar -xzvf pub_data.tar.gz
+   
+   # 进入下面文件夹，准备新的待测fasta文件
+   cd PredictNew/s1_DataPreprocessing_PredictNew
+   # 修改 step0_DataPreprocessingSetting.py 第6行 的 dir_liao_lab 为你的个人目录，即 path_base
+   # e.g. dir_liao_lab='/home/test/work/DeepSS2GO_AB/' 
+  
+
+   
+   ```
+
 
 1. 准备初始fasta文件，aa格式，存放在：pub_data/data_new/new_aa.fa  
 2. 执行 s1_DataPreprocessing_New中的step1-8:
@@ -189,10 +213,40 @@ new_clean_ss8.fa
 
 
 #### CrossSpecies/s2_TrainTest/step9-10
+
+> 内部文件，回头把整个test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/上传
+> 
+
+   ```
+   cd output/Best4PredictNew
+   
+   cp -rf /home/fsong/work/py_proj/prot_algo/DeepSS2GO/output/Best4PredictNew/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall .
+   cp -rf /home/fsong/work/py_proj/prot_algo/DeepSS2GO/output/Best4PredictNew/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel32_Filter16384_Ontsall .
+   ```
+
 3. 执行 CrossSpecies/s2_TrainTest/step9_cpData_Diamond4New.sh：把这4个pkl/fa文件cp到对应文件夹中，并diamond。      
+
    e.g. output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel8_Filter65536_Ontsall/data/
    
 4. 执行 CrossSpecies/s2_TrainTest/step10_Predict_New: 根据aa/ss8 对未知数据进行预测
+
+
+如果用aa预测结果：
+
+```
+cd test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall  
+bash step9.0_Predict_New_aa.sh
+bash step10.0_Predict_New_aa.sh
+# 输出结果在 data/results.csv
+```
+
+如果用ss8预测结果：
+```
+cd test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel32_Filter16384_Ontsall
+bash step9.5_Predict_New_ss8.sh
+
+```
+
 
 
 

@@ -7,6 +7,17 @@
 path_base="/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/"
 
 
+# 调用Python脚本并将其输出存储在一个变量中
+output=$(python my_script.py)
+
+# 使用 grep 命令来提取特定字典键的值
+value=$(echo "$output" | grep -oP 'key1:\s*\K\S+')
+
+# 输出值
+echo "Value of key1: $value"
+
+
+
 cp "${path_base}pub_data/data_new/new_clean_aa.fa" data/
 cp "${path_base}pub_data/data_new/new_clean_aa.pkl" data/
 cp "${path_base}pub_data/data_new/new_clean_ss8.fa" data/
