@@ -1,23 +1,23 @@
 import os
 
 
-# ### fpath
-# dir_SUSTech_HPC = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_AB/'  # change ----------------- original: DeepSS2GO_Pytorch
-# dir_liao_lab = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/'  # change ----------------- original: DeepSS2GO_Pytorch
-#
-# if os.path.exists(dir_SUSTech_HPC):
-#     path_base = dir_SUSTech_HPC
-# elif os.path.exists(dir_liao_lab):
-#     path_base = dir_liao_lab
-# else:
-#     print('NO path_base avail')
+### fpath
+dir_SUSTech_HPC = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_AB/'  # change ----------------- original: DeepSS2GO_Pytorch
+dir_liao_lab = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/'  # change ----------------- original: DeepSS2GO_Pytorch
 
-# 获取当前文件夹路径
-current_directory = os.getcwd()
-# 选择上推两层的文件夹路径
-path_base = os.path.abspath(os.path.join(current_directory, '..', '..'))
-path_base = path_base + '/'
-print('path_base = ', path_base)
+if os.path.exists(dir_SUSTech_HPC):
+    path_base = dir_SUSTech_HPC
+elif os.path.exists(dir_liao_lab):
+    path_base = dir_liao_lab
+else:
+    print('NO path_base avail')
+
+# # 获取当前文件夹路径
+# current_directory = os.getcwd()
+# # 选择上推两层的文件夹路径
+# path_base = os.path.abspath(os.path.join(current_directory, '..', '..'))
+# path_base = path_base + '/'
+# print('path_base = ', path_base)
 
 
 # path_Prot_T5_XL_UniRef50 = '/scem/work/songfu/py_proj/prot_data/Prot_T5_XL_UniRef50'  # HPC change ---------------

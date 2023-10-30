@@ -169,30 +169,6 @@ The Critical Assessment of protein Function Annotation algorithms (CAFA3)
 #### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
 ![Oops, This is PredictNew_s1](figs/PredictNew_Stage1_DataPreprocessing.png)
 
-> 仅供内部使用方法：
-
-conda环境文件：
-/home/fsong/work/py_proj/prot_data/conda_env/CondaEnv_PT18PY38.tar.gz
-
-- 登录test@ml-apus账户
-
-   ```bash
-   cd work
-   git clone https://github.com/orca233/DeepSS2GO_AB.git
-   cd DeepSS2GO_AB
-   # 解压预处理文件
-   cp /home/fsong/work/py_proj/prot_algo/DeepSS2GO/temp/pub_data.tar.gz . 
-   tar -xzvf pub_data.tar.gz
-   
-   # 进入下面文件夹，准备新的待测fasta文件
-   cd PredictNew/s1_DataPreprocessing_PredictNew
-   # 修改 step0_DataPreprocessingSetting.py 第6行 的 dir_liao_lab 为你的个人目录，即 path_base
-   # e.g. dir_liao_lab='/home/test/work/DeepSS2GO_AB/' 
-  
-
-   
-   ```
-
 
 1. 准备初始fasta文件，aa格式，存放在：pub_data/data_new/new_aa.fa  
 2. 执行 s1_DataPreprocessing_New中的step1-8:
@@ -214,6 +190,60 @@ new_clean_ss8.fa
 
 #### CrossSpecies/s2_TrainTest/step9-10
 
+
+
+3. 执行 CrossSpecies/s2_TrainTest/step9_cpData_Diamond4New.sh：把这4个pkl/fa文件cp到对应文件夹中，并diamond。      
+
+   e.g. output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel8_Filter65536_Ontsall/data/
+   
+4. 执行 CrossSpecies/s2_TrainTest/step10_Predict_New: 根据aa/ss8 对未知数据进行预测
+
+
+
+
+
+
+### case 1: 用 aa_model + ss8_model + Diamond 预测
+#### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
+同 case0 数据预处理 (PredictNew/s1_DataPreprocessing_PredictNew/)
+
+
+#### CrossSpecies/s3_AlphaBeta/step6-7
+
+3. 执行 CrossSpecies/s3_AlphaBeta/step6_cpData_Diamond4New.sh
+
+4. 执行 CrossSpecies/s3_AlphaBeta/step7_PredictAlphaBeta_new.sh
+
+test
+
+
+
+> 内部测试：(只用 aa/ss8_model + Diamond 预测)
+
+- conda环境文件：/home/fsong/work/py_proj/prot_data/conda_env/CondaEnv_PT18PY38.tar.gz
+
+- 登录test@ml-apus账户
+
+- 执行下面程序
+
+   ```bash
+   cd work
+   # clone前说一声，把private改public
+   git clone https://github.com/orca233/DeepSS2GO.git  
+   cd DeepSS2GO
+   
+   # 从本地cp预处理文件（以后放在云上）
+   cp /home/fsong/work/py_proj/prot_algo/DeepSS2GO/temp/pub_data.tar.gz . 
+   tar -xzvf pub_data.tar.gz
+   
+   # 进入下面文件夹，准备新的待测的fasta文件
+   cd PredictNew/s1_DataPreprocessing_PredictNew
+   # 修改 step0_DataPreprocessingSetting.py 第6行 的 dir_liao_lab 为你的个人目录，path_base
+   # e.g. dir_liao_lab='/home/test/work/DeepSS2GO_AB/' 
+    
+   ```
+
+
 > 内部文件，回头把整个test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/上传
  
 
@@ -224,11 +254,6 @@ new_clean_ss8.fa
    cp -rf /home/fsong/work/py_proj/prot_algo/DeepSS2GO/output/Best4PredictNew/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel32_Filter16384_Ontsall .
    ```
 
-3. 执行 CrossSpecies/s2_TrainTest/step9_cpData_Diamond4New.sh：把这4个pkl/fa文件cp到对应文件夹中，并diamond。      
-
-   e.g. output/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel8_Filter65536_Ontsall/data/
-   
-4. 执行 CrossSpecies/s2_TrainTest/step10_Predict_New: 根据aa/ss8 对未知数据进行预测
 
 
 如果用aa预测结果：
@@ -247,22 +272,6 @@ bash step9.5_Predict_New_ss8.sh
 
 ```
 
-
-
-
-
-### case 1: 用 aa_model + ss8_model + Diamond 预测
-#### PredictNew/s1_DataPreprocessing_PredictNew/ 预处理数据
-同 case0 数据预处理 (PredictNew/s1_DataPreprocessing_PredictNew/)
-
-
-#### CrossSpecies/s3_AlphaBeta/step6-7
-
-3. 执行 CrossSpecies/s3_AlphaBeta/step6_cpData_Diamond4New.sh
-
-4. 执行 CrossSpecies/s3_AlphaBeta/step7_PredictAlphaBeta_new.sh
-
-test
 
 
 <font face="STCAIYUN">******** And they all lived happily ever after! ********</font>
