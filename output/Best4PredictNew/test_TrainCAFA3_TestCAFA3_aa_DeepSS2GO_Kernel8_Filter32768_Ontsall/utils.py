@@ -6,7 +6,9 @@ import numpy as np
 from xml.etree import ElementTree as ET
 import math
 import torch
-from step0_TrainTestSetting_local import *
+# from step0_TrainTestSetting_local import *
+# from step0_TrainTestSetting_global import path_base
+
 #
 
 
@@ -60,7 +62,7 @@ def is_exp_code(code):
 
 class Ontology(object):
     # def __init__(self, filename='../../pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
-    def __init__(self, filename=params_local['path_base'] + 'pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
+    def __init__(self, filename='data/go.obo', with_rels=False):  # original: 'data/go.obo'   # '../../pub_data/go.obo'
 
         # print(os.getcwd())
         os.system('ls %s' % filename)

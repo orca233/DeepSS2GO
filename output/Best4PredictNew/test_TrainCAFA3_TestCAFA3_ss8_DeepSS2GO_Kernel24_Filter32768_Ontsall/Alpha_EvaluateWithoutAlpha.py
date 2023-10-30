@@ -20,6 +20,8 @@ from matplotlib import pyplot as plt
 import json
 # from step0_TrainTestSetting_global import *
 from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_global import path_base
+
 
 # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
@@ -33,7 +35,8 @@ from step0_TrainTestSetting_local import *
 # @ck.option('--diamond-scores-file', '-dsf', default='data/diamond_aa.res', help='Diamond output')
 @ck.option('--ont', '-o', default='mf', help='GO subontology (bp, mf, cc)')
 @ck.option('--alpha', '-a', default='json', help='alpha = json(with quote) or 0-1(without quote, eg 0.3 float)')  # 如果alpha='json'，则采用json数据，否则alpha=数字，或外来click引入
-@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 # @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--run-label-block', '-rbx', default='T', help='judge whether run block X')
 

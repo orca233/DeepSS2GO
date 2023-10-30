@@ -13,6 +13,7 @@ from utils import FUNC_DICT, Ontology, NAMESPACES
 from joblib import Parallel, delayed
 import json
 import os
+from step0_TrainTestSetting_global import path_base
 
 # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
@@ -21,7 +22,8 @@ import os
 # os.system('mkdir -p results_alphabeta')
 
 @ck.command()
-@ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')  # ../../pub_data/go.obo
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # ../../pub_data/go.obo
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='Data file with training features')
 @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
 # @ck.option('--test-data-file', '-tsdf', default='data/predictions.pkl', help='Test data file') # original for test_data

@@ -9,22 +9,22 @@ import numpy as np
 
 print('step0 starting ##############################')
 
-#################### path_base ################
-### fpath  判断root根目录，看是HPC还是lab的workstation，设置path_base=绝对路径
-# dir_sustech_hpc = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
-# lab_linux3090 = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
+################### path_base ################
+## fpath  判断root根目录，看是HPC还是lab的workstation，设置path_base=绝对路径
+dir_sustech_hpc = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
+lab_linux3090 = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
 
-# path_base = ''
-# # 判断该路径是否存在，决定path_base是采用HPC集群路径，或是实验室的Liao_lab路径
-# if os.path.exists(dir_sustech_hpc):
-#     path_base = dir_sustech_hpc
-# elif os.path.exists(lab_linux3090):
-#     path_base = lab_linux3090
-# else:
-#     print('HOLY SHIT, NO --path_base-- available !!!')
+path_base = ''
+# 判断该路径是否存在，决定path_base是采用HPC集群路径，或是实验室的Liao_lab路径
+if os.path.exists(dir_sustech_hpc):
+    path_base = dir_sustech_hpc
+elif os.path.exists(lab_linux3090):
+    path_base = lab_linux3090
+else:
+    print('HOLY SHIT, NO --path_base-- available !!!')
 
-##### path_base = 相对路径
-path_base = '../'  # cd到 /home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/ 目录下
+# ##### path_base = 相对路径
+# path_base = '../'  # cd到 /home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/ 目录下
 
 os.chdir(path_base)
 print('path_base = ', os.getcwd())
@@ -65,7 +65,7 @@ params_global_constant = {
     # 'path_pub_data': path_base + 'pub_data/',
     # 'path_redundancy': path_base + 'redundancy/',
     # 'path_s2_TrainTest': path_base + 's2_TrainTest/',
-    'go_file': path_base + 'pub_data/go.obo',
+    'go_file': 'data/go.obo',
 
     # model 软件训练参数
     'GOMinRepeat': 50,  # 最少GO term出现次数, GO Min Repeat - gominre

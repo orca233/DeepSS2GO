@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DeepSS2GO_AB.iml" filepath="$PROJECT_DIR$/.idea/DeepSS2GO_AB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/DeepSS2GO.iml" filepath="$PROJECT_DIR$/.idea/DeepSS2GO.iml" />
     </modules>
   </component>
 </project>

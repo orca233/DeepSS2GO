@@ -6,6 +6,7 @@ from xml.etree import ElementTree as ET
 import math
 from step0_DataPreprocessingSetting import *  # 和stage2不一样
 
+
 '''
 go.calculate_ic
 GO:0004693': 0.05062607306996814, 很具体
@@ -54,7 +55,9 @@ def is_exp_code(code):
 
 
 class Ontology(object):
-    def __init__(self, filename=path_pub_data + 'go.obo', with_rels=False):  # original: 'data/go.obo'
+    # def __init__(self, filename=path_base + 'pub_data/go.obo', with_rels=False):  # original: 'data/go.obo'
+    def __init__(self, filename='data/go.obo', with_rels=False):  # original: 'data/go.obo'
+
         self.ont = self.load(filename, with_rels)
         self.ic = None
 

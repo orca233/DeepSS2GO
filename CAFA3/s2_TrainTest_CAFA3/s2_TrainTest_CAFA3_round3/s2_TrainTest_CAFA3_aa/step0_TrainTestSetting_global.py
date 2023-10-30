@@ -22,6 +22,14 @@ elif os.path.exists(lab_linux3090):
 else:
     print('HOLY SHIT, NO --path_base-- available !!!')
 
+# 相对路径 path_base
+# # 获取当前文件夹路径
+# current_directory = os.getcwd()
+# # 选择上推两层的文件夹路径
+# path_base = os.path.abspath(os.path.join(current_directory, '..', '..'))
+# path_base = path_base + '/'
+# print('path_base = ', path_base)
+
 
 
 ################################################
@@ -54,7 +62,8 @@ params_global_constant = {
 
     'path_base': path_base,
     'path_pub_data': path_base + 'pub_data/',
-    'go_file': path_base + 'pub_data/go.obo',
+    'go_file': 'data/go.obo',
+    # 'go_file': path_base + 'pub_data/go.obo',
     # 'path_redundancy': path_base + 'redundancy/',
 
     # model 软件训练参数

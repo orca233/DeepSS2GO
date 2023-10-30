@@ -15,6 +15,8 @@ import pandas as pd
 # from step0_TrainTestSetting_global import *
 from step0_TrainTestSetting_local import *  # 里面有aa_ss信息
 from utils import pkl2fa
+from step0_TrainTestSetting_global import path_base
+
 
 @ck.command()
 # @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')
@@ -31,7 +33,7 @@ from utils import pkl2fa
 # @ck.option('--test-data', '-ted', default=params_local['test_data'], help='HUMAN/ECOLI/...')
 # @ck.option('--aa-ss', '-aass', default=params_local['aa_ss'], help='aa/ss8/ss3')
 # @ck.option('--gominrepeat', '-gmr', default=params_local['GOMinRepeat'], help='GO min repeat times')
-@ck.option('--path-base', '-pb', default=params_local['path_base'], help='..')
+@ck.option('--path-base', '-pb', default=path_base, help='..')
 
 
 def main(train_data_file, test_data_file, path_base):

@@ -22,6 +22,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import json
 from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_global import path_base
 
 MAXLEN = params_local['MAXLEN']
 
@@ -32,8 +33,8 @@ MAXLEN = params_local['MAXLEN']
 @ck.option('--out-file-cc', '-of', default='data/results_cc.csv', help='Output result file')
 @ck.option('--out-file-mf', '-of', default='data/results_mf.csv', help='Output result file')
 
-
-@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--model-file', '-mf', default='data/model_checkpoint.pth', help='Tensorflow model file')
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
 @ck.option('--annotations-file', '-tf', default='data/train_data.pkl', help='Experimental annotations')

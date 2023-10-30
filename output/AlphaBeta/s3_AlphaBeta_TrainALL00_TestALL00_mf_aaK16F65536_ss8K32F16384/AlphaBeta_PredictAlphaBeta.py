@@ -26,6 +26,7 @@ import json
 # 在本轮的step1中提前把 step0_TrainTestSetting_local_aa/ss8 拷贝好
 from step0_TrainTestSetting_local_aa import params_local as params_local_aa
 from step0_TrainTestSetting_local_ss8 import params_local as params_local_ss8
+from step0_TrainTestSetting_global import path_base
 
 
 MAXLEN = params_local_aa['MAXLEN']
@@ -39,8 +40,8 @@ MAXLEN = params_local_aa['MAXLEN']
 @ck.option('--out-file-cc', '-of', default='data/results_cc.csv', help='Output result file')
 @ck.option('--out-file-mf', '-of', default='data/results_mf.csv', help='Output result file')
 
-
-@ck.option('--go-file', '-gf', default=params_local_aa['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--model-file-aa', '-mf', default='data/model_checkpoint_aa.pth', help='Tensorflow model file')
 @ck.option('--model-file-ss8', '-mf', default='data/model_checkpoint_ss8.pth', help='Tensorflow model file')
 

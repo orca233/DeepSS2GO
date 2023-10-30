@@ -23,6 +23,14 @@ else:
     print('HOLY SHIT, NO --path_base-- available !!!')
 
 
+# # 相对路径path_base
+# # 获取当前文件夹路径
+# current_directory = os.getcwd()
+# # 选择上推两层的文件夹路径
+# path_base = os.path.abspath(os.path.join(current_directory, '..', '..'))
+# path_base = path_base + '/'
+# print('path_base = ', path_base)
+
 
 ################################################
 ############# params_global_constant ###########

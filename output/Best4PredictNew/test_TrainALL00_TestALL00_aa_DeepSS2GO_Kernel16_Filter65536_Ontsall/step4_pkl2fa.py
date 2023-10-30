@@ -1,34 +1,11 @@
 """
 README
-分几个步骤
 
-第一步，为Diamond做数据预处理，得到 train/test_data.fa文件
+为Diamond做数据预处理，得到 train/test_data.fa文件
 case 0) if CAFA3
 case 1) elif aa_ss = aa & test_data != 'New', 分三步：pkl2fa, build *dmnd, querying 生成 diamond_aa.res
 case 2) elif aa_ss = ss8/ss3 & test_data != 'New'，则先转化会aa，然后再 上面3步
 case 3) elif test_data != 'New'，这是测试新的数据集，完全未知的。此时fa应该是现成的，需要做的事把fa转成pkl方便再predict.py里进行model.pth预测
-
-
-
-
-
-
-
-# 第二步，Diamond  (不论 aa / ss，都是用 aa 做diamond比对)
-#
-# -d          = train_data.dmnd (数据库)
-# -q (query)  = test_data.fa （要查询的文件）
-# -o (output) = test_diamond.res （输出文件）
-# qseqid      = Query Seq-id    查询列
-# qseqid      = Subject Seq-id  数据库列
-# bitscore    = Bit score     分数
-#
-# IN:
-# train_data.dmnd    Diamond数据库
-# test_data.fa            查询文件
-#
-# OUT:
-# diamond_aa.res
 """
 
 
@@ -38,27 +15,29 @@ import pandas as pd
 # from step0_TrainTestSetting_global import *
 from step0_TrainTestSetting_local import *  # 里面有aa_ss信息
 from utils import pkl2fa
+from step0_TrainTestSetting_global import path_base
+
 
 @ck.command()
 # @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='train data file')
 @ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')
+#
+# @ck.option('--terms-gominrepeat-file', '-tgf', default='data/terms_gominre.pkl', help='XX')  # 针对CAFA3_round4，只满足条件1
+# @ck.option('--terms-gominrepeat-trainxtest-file', '-tgtf', default='data/terms_gominre_trxte.pkl', help='XX')  # 同时满足条件1 & 2
+# @ck.option('--terms-bp-file', '-tbf', default='data/terms_bp.pkl', help='XX')  # 从 terms_GOMinRepeat_trainXtest_file 分化出来（同时满足条件1&2）
+# @ck.option('--terms-cc-file', '-tcf', default='data/terms_cc.pkl', help='XX')
+# @ck.option('--terms-mf-file', '-tmf', default='data/terms_mf.pkl', help='XX')
+#
+# @ck.option('--train-data', '-trd', default=params_local['train_data'], help='HUMAN/ECOLI/...')
+# @ck.option('--test-data', '-ted', default=params_local['test_data'], help='HUMAN/ECOLI/...')
+# @ck.option('--aa-ss', '-aass', default=params_local['aa_ss'], help='aa/ss8/ss3')
+# @ck.option('--gominrepeat', '-gmr', default=params_local['GOMinRepeat'], help='GO min repeat times')
+@ck.option('--path-base', '-pb', default=path_base, help='..')
 
-@ck.option('--terms-gominrepeat-file', '-tgf', default='data/terms_gominre.pkl', help='XX')  # 针对CAFA3_round4，只满足条件1
-@ck.option('--terms-gominrepeat-trainxtest-file', '-tgtf', default='data/terms_gominre_trxte.pkl', help='XX')  # 同时满足条件1 & 2
-@ck.option('--terms-bp-file', '-tbf', default='data/terms_bp.pkl', help='XX')  # 从 terms_GOMinRepeat_trainXtest_file 分化出来（同时满足条件1&2）
-@ck.option('--terms-cc-file', '-tcf', default='data/terms_cc.pkl', help='XX')
-@ck.option('--terms-mf-file', '-tmf', default='data/terms_mf.pkl', help='XX')
 
-@ck.option('--train-data', '-trd', default=params_local['train_data'], help='HUMAN/ECOLI/...')
-@ck.option('--test-data', '-ted', default=params_local['test_data'], help='HUMAN/ECOLI/...')
-@ck.option('--aa-ss', '-aass', default=params_local['aa_ss'], help='aa/ss8/ss3')
-@ck.option('--gominrepeat', '-gmr', default=params_local['GOMinRepeat'], help='GO min repeat times')
-@ck.option('--path-base', '-pb', default=params_local['path_base'], help='..')
-
-
-def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrepeat_trainxtest_file,
-         terms_bp_file, terms_cc_file, terms_mf_file, train_data, test_data, aa_ss, gominrepeat, path_base):
+def main(train_data_file, test_data_file, path_base):
+    # terms_gominrepeat_file, terms_gominrepeat_trainxtest_file, terms_bp_file, terms_cc_file, terms_mf_file, train_data, test_data, aa_ss, gominrepeat
 
     print('\n################## a long, long time ago ... ##################\n')
     print('# starting step4_FindAlpha #')
@@ -68,7 +47,7 @@ def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrep
     path_pub_data = path_base + 'pub_data/'
 
     ################################################################################
-    ############ 第一步，为diamond做数据预处理，得到 train/test_data.fa 文件 #############
+    ############ 为diamond做数据预处理，得到 train/test_data.fa 文件 #############
     ################################################################################
 
     # case 0, CAFA3， 直接cp过来， 两个fa文件已经在s1中预处理好了
@@ -133,7 +112,6 @@ def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrep
         # os.system('python FS_ss8_2_aa.py')
 
 
-
         # pkl2fa
         print('pkl-2-fa starting ...')
         pkl2fa('data/train_data_aa.pkl', 'data/train_data.fa')  # data/train_data.pkl  # 这里改动了！！！20230630. 另外train_data_file在前面也不对！
@@ -144,27 +122,7 @@ def main(train_data_file, test_data_file, terms_gominrepeat_file, terms_gominrep
     else:
         print('Holy crap! No specific cases...')
 
-
-
-    #
-    # ######################################################################
-    # ###################### 第二步，diamond #################################
-    # ######################################################################
-    #
-    # # 建库， train_data.fa--> train_data.dmnd 库
-    # print('\n-------------- build database train_data.dmnd --------------')
-    # os.system('diamond makedb --in data/train_data.fa -d data/train_data')
-    # print('\n')
-    #
-    # # 比对 查询 querying
-    # print('-------------- querying from database, creating diamond_aa.res --------------')
-    # os.system('diamond blastp -d data/train_data.dmnd --more-sensitive -t /tmp '
-    #           '-q data/test_data.fa --outfmt 6 qseqid sseqid bitscore -o data/diamond_aa.res')
-
-
     print('\n################## And they all lived happily ever after! ##################\n')
-
-    ############# end #################
 
 
 

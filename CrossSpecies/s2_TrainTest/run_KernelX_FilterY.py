@@ -49,7 +49,7 @@ for kernel_temp in params_global_dynamic['kernels']:   # ----- change -----
 
             os.chdir(dir1_path)  # 进入该文件夹 output/dir0/dir1
             os.system('mkdir -p data')  # dir1/下新建data/，有了也无妨
-            # os.system('cp %s/pub_data/go.obo data/' % path_base)  # 在dir1中执行此命令  ########## 新添加 ##############
+            os.system('cp %s/pub_data/go.obo data/' % path_base)  # 在dir1中执行此命令  ########## 新添加 ##############
             os.system('mkdir -p results')
             os.system('mkdir -p results_Alpha')
             os.system('mkdir -p results_AlphaBeta')

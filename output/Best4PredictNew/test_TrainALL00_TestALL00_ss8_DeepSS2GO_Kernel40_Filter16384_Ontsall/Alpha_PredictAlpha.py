@@ -9,7 +9,6 @@
 如果是全新的未知的测试，一般会给出aa.fa文件，
 if 用aa预测，转成pkl，准备好test_data.fa & test_data.pkl即可
 elif 用ss8测试，转成ss8.fa，在转成pkl，再准备test_data.fa & test_data.pkl
-
 '''
 
 import click as ck
@@ -23,6 +22,8 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import json
 from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_global import path_base
+
 
 MAXLEN = params_local['MAXLEN']
 
@@ -33,8 +34,8 @@ MAXLEN = params_local['MAXLEN']
 @ck.option('--out-file-cc', '-of', default='data/results_cc.csv', help='Output result file')
 @ck.option('--out-file-mf', '-of', default='data/results_mf.csv', help='Output result file')
 
-
-@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--model-file', '-mf', default='data/model_checkpoint.pth', help='Tensorflow model file')
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
 @ck.option('--annotations-file', '-tf', default='data/train_data.pkl', help='Experimental annotations')
@@ -142,10 +143,11 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
             annots[go_id] = score
         diamond_preds[prot_id] = annots
 
-    print('22222222')
+    print('22222222 diamond_preds = ')
 
-    print(type(diamond_preds))
+    print(len(diamond_preds))
     # print(diamond_preds)
+    # diamond_preds = {'6PGD1_YEAST': {'GO:0000166': 0.90855575, 'GO:0000255': 0.09144427,}, 'prot':{GO1:X, GO2,X}...}
 
 
 
@@ -271,11 +273,18 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
         else:  # alpha = int，也就是在click中又指定
             print('alpha is from click, alpha = ', alpha)
             print('type_alpha = ', type(alpha))
+            alpha = float(alpha)
             alphas[NAMESPACES[ont]] = alpha
+            print('updated_type_alpha = ', type(alphas[NAMESPACES[ont]]))
 
         ###########################################################
         # FS   alpha & 1-alpha 对调  这是核心！！！！！！！
         ###########################################################
+        # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
+        # alpha=0: 全由 diamond 统计
+        # alpha=1: 全由 deepSS2GO_aa 统计
+        # beta=1: 全由 deepSS2GO_ss8 统计
+
         for prot_id in prot_ids:  # 逐一过 test_data.fa
             annots = {}
             if prot_id in diamond_preds:  # blast/diamond * (1-alpha)

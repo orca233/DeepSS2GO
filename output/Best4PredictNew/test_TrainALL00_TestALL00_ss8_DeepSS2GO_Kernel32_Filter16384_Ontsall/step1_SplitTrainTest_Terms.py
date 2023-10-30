@@ -55,6 +55,8 @@ import os
 # import sys
 from utils import Ontology, NAMESPACES
 from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_global import path_base
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -63,11 +65,12 @@ os.system('mkdir -p results')
 
 @ck.command()
 # @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')
-@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
-@ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='train data file')
-@ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='train data file')  # output
+@ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')  # output
 
-@ck.option('--terms-gominrepeat-file', '-tgf', default='data/terms_gominre.pkl', help='XX')  # 针对CAFA3_round4，只满足条件1
+@ck.option('--terms-gominrepeat-file', '-tgf', default='data/terms_gominre.pkl', help='XX')  # 针对CAFA3_round4，只满足条件1 !!!!
 @ck.option('--terms-gominrepeat-trainxtest-file', '-tgtf', default='data/terms_gominre_trxte.pkl', help='XX')  # 同时满足条件1 & 2
 @ck.option('--terms-bp-file', '-tbf', default='data/terms_bp.pkl', help='XX')  # 从 terms_GOMinRepeat_trainXtest_file 分化出来（同时满足条件1&2）
 @ck.option('--terms-cc-file', '-tcf', default='data/terms_cc.pkl', help='XX')
@@ -156,6 +159,7 @@ def main(go_file, train_data_file, test_data_file, terms_gominrepeat_file, terms
 
     elif train_data == test_data and train_data == 'CAFA3':  # 针对CAFA3，train_data & test_data已经确定好了，只需要把terms搞定即可
         print('\n------ case 2: train_data == test_data == CAFA3 -------')  # logging.info
+        # 数据来源： CAFA3_train_data_clean_aa/ss8.pkl / CAFA3_test_data_clean_aa/ss8.pkl
         os.system('cp %sdata_cafa3/CAFA3_train_data_clean_%s.pkl data/train_data.pkl' % (path_pub_data, aa_ss))
         os.system('cp %sdata_cafa3/CAFA3_test_data_clean_%s.pkl data/test_data.pkl' % (path_pub_data, aa_ss))
 

@@ -22,7 +22,8 @@ elif os.path.exists(lab_linux3090):
 else:
     print('HOLY SHIT, NO --path_base-- available !!!')
 
-
+# 相对路径
+path_base = '../../'
 
 ################################################
 ############# params_global_constant ###########

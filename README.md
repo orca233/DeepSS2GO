@@ -215,7 +215,7 @@ new_clean_ss8.fa
 #### CrossSpecies/s2_TrainTest/step9-10
 
 > 内部文件，回头把整个test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/上传
-> 
+ 
 
    ```
    cd output/Best4PredictNew
@@ -262,58 +262,9 @@ bash step9.5_Predict_New_ss8.sh
 
 4. 执行 CrossSpecies/s3_AlphaBeta/step7_PredictAlphaBeta_new.sh
 
+test
 
 
 <font face="STCAIYUN">******** And they all lived happily ever after! ********</font>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

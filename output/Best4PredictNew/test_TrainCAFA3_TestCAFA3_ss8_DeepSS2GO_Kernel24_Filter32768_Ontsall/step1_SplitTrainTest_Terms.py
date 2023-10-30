@@ -55,6 +55,8 @@ import os
 # import sys
 from utils import Ontology, NAMESPACES
 from step0_TrainTestSetting_local import *
+from step0_TrainTestSetting_global import path_base
+
 logging.basicConfig(level=logging.INFO)
 
 
@@ -63,7 +65,8 @@ os.system('mkdir -p results')
 
 @ck.command()
 # @ck.option('--go-file', '-gf', default='../../pub_data/go.obo', help='Gene Ontology file in OBO Format')
-@ck.option('--go-file', '-gf', default=params_local['path_base'] + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
 @ck.option('--train-data-file', '-trdf', default='data/train_data.pkl', help='train data file')  # output
 @ck.option('--test-data-file', '-tedf', default='data/test_data.pkl', help='XX')  # output
 

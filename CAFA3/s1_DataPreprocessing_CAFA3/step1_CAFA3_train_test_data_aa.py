@@ -1,14 +1,5 @@
 #!/usr/bin/env python
 
-import click as ck
-import numpy as np
-import pandas as pd
-from collections import Counter
-from utils import Ontology, FUNC_DICT, read_fasta
-import logging
-from step0_DataPreprocessingSetting import *
-
-logging.basicConfig(level=logging.INFO)
 
 
 '''
@@ -57,8 +48,21 @@ test_data_file  -- 3328 -- 'data_cafa3/CAFA3_test_data_raw.pkl'  -- 更新
 
 '''
 
+import click as ck
+import numpy as np
+import pandas as pd
+from collections import Counter
+from utils import Ontology, FUNC_DICT, read_fasta
+import logging
+from step0_DataPreprocessingSetting import *
+
+logging.basicConfig(level=logging.INFO)
+
+
+
 @ck.command()
-@ck.option('--go-file', '-gf', default=path_pub_data + 'go.obo', help='Gene Ontology file in OBO Format')  # original: 'data_cafa3/go.obo'
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # original: 'data_cafa3/go.obo'
 ### input
 @ck.option('--train-sequences-file', '-trsf', default=path_pub_data + 'data_cafa3/CAFA3_training_data/uniprot_sprot_exp.fasta', help='CAFA training sequences fasta')
 @ck.option('--train-annotations-file', '-traf', default=path_pub_data + 'data_cafa3/CAFA3_training_data/uniprot_sprot_exp.txt', help='CAFA training annotations fasta')

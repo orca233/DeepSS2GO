@@ -22,13 +22,16 @@ import multiprocessing
 import json
 # from step0_TrainTestSetting_global import *  # 这一行有问题，一旦取消注释 找不到data/terms_....pkl
 
-from step0_TrainTestSetting_local_aa import *
+# from step0_TrainTestSetting_local_aa import *
+# from step0_TrainTestSetting_global import path_base
+
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
 
 
 @ck.command()
-@ck.option('--go-file', '-gf', default=params_local['path_base']+'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # original: 'data/go.obo'  此行原本没有，FS加
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')  # original: 'data/go.obo'  此行原本没有，FS加
 @ck.option('--train-data-file', '-trdf', default='data/train_data_aa.pkl', help='Data file with training features')
 # @ck.option('--predictions-file', '-pf', default='data/predictions.pkl', help='XX')
 @ck.option('--test-data-file-aa-ss8', '-tsdf', default='data/predictions_aa_ss8.pkl', help='Test data file')  # test_data_file_aa_ss8 只有一个 prop_annotations, 两个 preds_aa & preds_ss8

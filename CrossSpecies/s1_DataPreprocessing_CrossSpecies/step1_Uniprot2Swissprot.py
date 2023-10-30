@@ -13,9 +13,10 @@ logging.basicConfig(level=logging.INFO)
 
 
 @ck.command()
-@ck.option('--go-file', '-gf', default=path_pub_data+'go.obo', help='Gene Ontology file in OBO Format')
-@ck.option('--swissprot-file', '-sf', default=path_pub_data+'uniprot_sprot.dat.gz', help='UniProt/SwissProt knowledgebase file in text format (archived)')
-@ck.option('--out-file', '-o', default=path_pub_data+'swissprot.pkl', help='Result file with a list of proteins, sequences and annotations')
+@ck.option('--go-file', '-gf', default='data/go.obo', help='Gene Ontology file in OBO Format')  # FS 添加
+# @ck.option('--go-file', '-gf', default=path_base + 'pub_data/go.obo', help='Gene Ontology file in OBO Format')
+@ck.option('--swissprot-file', '-sf', default=path_base + 'pub_data/uniprot_sprot.dat.gz', help='UniProt/SwissProt knowledgebase file in text format (archived)')
+@ck.option('--out-file', '-o', default=path_base + 'pub_data/swissprot.pkl', help='Result file with a list of proteins, sequences and annotations')
 
 def main(go_file, swissprot_file, out_file):
     print('\n################## a long, long time ago ... ##################\n')

@@ -13,7 +13,7 @@ from step0_DataPreprocessingSetting import *
 print('\n################## a long, long time ago ... ##################\n')
 print('# starting step2_Swissprot_x_SPOT1DLM #')
 
-df = pd.read_pickle(path_pub_data + 'swissprot.pkl')  # 全集 79230
+df = pd.read_pickle(path_base + 'pub_data/swissprot.pkl')  # 全集 79230
 print('original swissprot.pkl::::::::::::::::::')
 print(df.info())
 print(df)

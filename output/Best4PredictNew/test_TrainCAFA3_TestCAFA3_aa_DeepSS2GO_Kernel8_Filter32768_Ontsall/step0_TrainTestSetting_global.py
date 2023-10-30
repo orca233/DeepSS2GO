@@ -54,7 +54,7 @@ params_global_constant = {
 
     'path_base': path_base,
     'path_pub_data': path_base + 'pub_data/',
-    'go_file': path_base + 'pub_data/go.obo',
+    'go_file': 'data/go.obo',
     # 'path_redundancy': path_base + 'redundancy/',
 
     # model 软件训练参数

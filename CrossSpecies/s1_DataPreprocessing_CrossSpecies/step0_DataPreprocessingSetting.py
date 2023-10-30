@@ -13,6 +13,21 @@ else:
     print('NO path_base avail')
 
 
+
+# # 获取当前文件夹路径
+# current_directory = os.getcwd()
+# # 选择上推两层的文件夹路径
+# path_base = os.path.abspath(os.path.join(current_directory, '..', '..'))
+# path_base = path_base + '/'
+# print('path_base = ', path_base)
+
+
+
+
+
+
+
+
 path_Prot_T5_XL_UniRef50 = '/scem/work/songfu/py_proj/prot_data/Prot_T5_XL_UniRef50'  # HPC change ---------------
 # path_Prot_T5_XL_UniRef50 = '/home/fsong/work/py_proj/prot_data/Prot_T5_XL_UniRef50'  # local lab_linux
 # path_esm1b = '/home/fsong/work/py_proj/prot_data/esm'  # change ---------------

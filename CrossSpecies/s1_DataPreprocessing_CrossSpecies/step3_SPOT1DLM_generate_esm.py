@@ -35,7 +35,7 @@ model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR
 batch_converter = alphabet.get_batch_converter()
 model = model.to(args.device)
 
-fpath = path_pub_data + 'swissprot_clean_ALL00_aa.pkl'  # 对于所有 swissprot_cleanup 一起算71000个
+fpath = path_base + 'pub_data/swissprot_clean_ALL00_aa.pkl'  # 对于所有 swissprot_cleanup 一起算71000个
 prot_df = pd.read_pickle(fpath)  # 包含prot_name & seq
 
 esm_count = 0  # 统计生成了多少个esm文件，  i: 第几轮，esm_count:本轮进行了多少个
