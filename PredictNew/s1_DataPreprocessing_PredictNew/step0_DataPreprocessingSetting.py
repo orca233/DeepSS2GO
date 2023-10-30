@@ -2,8 +2,8 @@ import os
 
 
 ### fpath
-dir_SUSTech_HPC = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_AB/'  # change ----------------- original: DeepSS2GO_Pytorch
-dir_liao_lab = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/'  # change ----------------- original: DeepSS2GO_Pytorch
+dir_SUSTech_HPC = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO/'  # change ----------------- original: DeepSS2GO_Pytorch
+dir_liao_lab = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/'  # change ----------------- original: DeepSS2GO_Pytorch
 
 if os.path.exists(dir_SUSTech_HPC):
     path_base = dir_SUSTech_HPC

@@ -218,15 +218,17 @@ test
 
 
 
-> 内部测试：(只用 aa/ss8_model + Diamond 预测)
+> 内部测试：(预测新序列)
+> 首先预处理新的序列文件
 
 - conda环境文件：/home/fsong/work/py_proj/prot_data/conda_env/CondaEnv_PT18PY38.tar.gz
 
 - 登录test@ml-apus账户
 
-- 执行下面程序
+- 执行下面程序，预处理文件。
 
    ```bash
+  
    cd work
    # clone前说一声，把private改public
    git clone https://github.com/orca233/DeepSS2GO.git  
@@ -238,39 +240,63 @@ test
    
    # 进入下面文件夹，准备新的待测的fasta文件
    cd PredictNew/s1_DataPreprocessing_PredictNew
-   # 修改 step0_DataPreprocessingSetting.py 第6行 的 dir_liao_lab 为你的个人目录，path_base
-   # e.g. dir_liao_lab='/home/test/work/DeepSS2GO_AB/' 
+   # 修改 step0_DataPreprocessingSetting.py 第6行 的 dir_liao_lab 为你的个人主目录，path_base
+   # e.g. dir_liao_lab='/home/test/work/DeepSS2GO/' 
+  
+   python step1/2/3/4/5/6/7/8  
+   # step3/4会默认下载预处理文件。
+   # step4的pre-trained model保存在：/home/fsong/work/py_proj/prot_data/Prot_T5_XL_UniRef50
     
    ```
 
+> 其次，执行预测命令。
+> case 0: 只用 aa/ss8_model + Diamond 预测
 
-> 内部文件，回头把整个test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/上传
- 
+- 执行下面程序，拷贝 aa 或 ss8 的训练好的模型：
 
-   ```
+   ```bash
+   # 内部文件，回头把整个test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall/上传
    cd output/Best4PredictNew
    
-   cp -rf /home/fsong/work/py_proj/prot_algo/DeepSS2GO/output/Best4PredictNew/test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall .
-   cp -rf /home/fsong/work/py_proj/prot_algo/DeepSS2GO/output/Best4PredictNew/test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel32_Filter16384_Ontsall .
+   rsync -avP /home/fsong/work/py_proj/prot_algo/DeepSS2GO/output/Best4PredictNew/test_TrainALL00_TestALL00_* .
+
    ```
 
 
+- 如果用aa预测结果：
 
-如果用aa预测结果：
+   ```bash
+   cd test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall  
+   bash step9_Predict_New_aa.sh
+   python step10_Predict_New.py 
+   # 输出结果在 data/results.csv
+   ```
 
-```
-cd test_TrainALL00_TestALL00_aa_DeepSS2GO_Kernel16_Filter65536_Ontsall  
-bash step9.0_Predict_New_aa.sh
-bash step10.0_Predict_New_aa.sh
-# 输出结果在 data/results.csv
-```
+- 如果用ss8预测结果：
+  
+   ```bash
+   cd test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel32_Filter16384_Ontsall
+   bash step9_Predict_New_aa.sh
+   python step10_Predict_New.py 
+   # 输出结果在 data/results.csv
+   ```
 
-如果用ss8预测结果：
-```
-cd test_TrainALL00_TestALL00_ss8_DeepSS2GO_Kernel32_Filter16384_Ontsall
-bash step9.5_Predict_New_ss8.sh
+> 再次，更高精度的预测命令。
+> case 1: 用 aa_model + ss8 model + Diamond 预测 
 
-```
+- 执行下面程序，
+
+   ```bash
+   cd  output/AlphaBeta/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F65536_ss8K48F8192
+   # 修改 step1_cpData_Combine_Predictions_aass8.sh 第12行为个人根目录
+  
+   bash step1_cpData_Combine_Predictions_aass8.sh
+   bash step6_cpData_Diamond4New.sh
+   bash step7_PredictAlphaBeta_New.sh
+  
+   # 输出结果在 data/results.csv
+  
+   ```
 
 
 

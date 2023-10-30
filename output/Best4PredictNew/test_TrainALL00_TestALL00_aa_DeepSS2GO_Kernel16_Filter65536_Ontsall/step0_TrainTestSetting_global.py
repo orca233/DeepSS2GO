@@ -11,8 +11,8 @@ print('step0 starting ##############################')
 
 ################### path_base ################
 ## fpath  判断root根目录，看是HPC还是lab的workstation，设置path_base=绝对路径
-dir_sustech_hpc = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
-lab_linux3090 = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO_Pytorch/'  # change -----------------
+dir_sustech_hpc = '/scem/work/songfu/py_proj/prot_algo/DeepSS2GO/'  # change -----------------
+lab_linux3090 = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/'  # change -----------------
 
 path_base = ''
 # 判断该路径是否存在，决定path_base是采用HPC集群路径，或是实验室的Liao_lab路径
@@ -29,7 +29,6 @@ else:
 # path_base = os.path.abspath(os.path.join(current_directory, '..', '..'))
 # path_base = path_base + '/'
 # print('path_base = ', path_base)
-
 
 ################################################
 ############# params_global_constant ###########

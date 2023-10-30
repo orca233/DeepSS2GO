@@ -22,7 +22,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import json
 from step0_TrainTestSetting_local import *
-from step0_TrainTestSetting_global import path_base
+# from step0_TrainTestSetting_global import path_base
 
 
 MAXLEN = params_local['MAXLEN']

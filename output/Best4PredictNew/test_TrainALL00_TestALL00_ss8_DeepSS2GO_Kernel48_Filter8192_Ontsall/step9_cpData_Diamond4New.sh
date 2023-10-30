@@ -4,7 +4,7 @@
 # 3）预测，step9 或 step10运行一个即可，因为一个文件夹下只有一个用aa或ss8训练的model.pth
 
 path_current="$(pwd)/"  # path_current后面没有/
-path_base="/home/fsong/work/py_proj/prot_algo/DeepSS2GO_AB/"
+path_base="/home/fsong/work/py_proj/prot_algo/DeepSS2GO/"
 #path_base=$(cd ../../ && pwd)
 #path_base="$(path_base)/"
 
