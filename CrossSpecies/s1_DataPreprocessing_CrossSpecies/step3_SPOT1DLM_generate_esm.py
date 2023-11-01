@@ -23,6 +23,7 @@ model, alphabet = torch.hub.load("facebookresearch/esm:main", "esm1b_t33_650M_UR
 
 ### 方法二： FS try 2 用esm方法下载： 把hub下载好的加载到对应文件夹，适合在lab——linux_3090上运行 #####
 # model, alphabet = esm.pretrained.esm1b_t33_650M_UR50S()
+# # /home/fsong/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S-contact-regression.pt & esm1b_t33_650M_UR50S.pt
 
 # ### 方法三 FS: load model  不好使。。。 ###
 # model_path = '/home/fsong/work/py_proj/prot_data/esm/esm1b_t33_650M_UR50S.pt'

@@ -245,6 +245,7 @@ test
   
    python step1/2/3/4/5/6/7/8  
    # step3/4会默认下载预处理文件。
+   # step3的pre-trained model在：/home/fsong/.cache/torch/hub/checkpoints
    # step4的pre-trained model保存在：/home/fsong/work/py_proj/prot_data/Prot_T5_XL_UniRef50
     
    ```
