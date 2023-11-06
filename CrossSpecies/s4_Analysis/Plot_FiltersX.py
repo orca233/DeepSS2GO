@@ -81,10 +81,19 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 # kernel_range = [4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
 # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
+# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_CAFA3/test_CAFA3_round3_ss8/step3_done/'
+# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+
+
+# CAFA3_round5
+root_path = path_base + 'DeepSS2GO_Pytorch/output/test_CAFA5/test_CAFA3_round3_aa_APUS/step3_done/'
+kernel_range = [4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+
 root_path = path_base + 'DeepSS2GO_Pytorch/output/test_CAFA3/test_CAFA3_round3_ss8/step3_done/'
 kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
 filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
 
 
 ############## TrainALL00 ##################

@@ -45,7 +45,7 @@ for kernel_temp in params_global_dynamic['kernels']:   # ----- change -----
             os.makedirs(dir1_path, exist_ok=True)  # exist_ok 类似于 mkdir -p，已存在则跳过。创建 output/dir0/dir1/文件夹
             # os.system('cp %s*.py %s' % (path_base + 's2_TrainTest/', dir1_path))  # cp s2_TrainTest/*py 到 dir1/
 
-            os.system(f'cp {current_dir}/*py {dir1_path}')  # cp 当前文件夹s2_TrainTest_xxx/*py 到 dir1/
+            os.system(f'cp {current_dir}/* {dir1_path}')  # cp 当前文件夹s2_TrainTest_xxx/*py 到 dir1/
 
             os.chdir(dir1_path)  # 进入该文件夹 output/dir0/dir1
             os.system('mkdir -p data')  # dir1/下新建data/，有了也无妨
@@ -93,13 +93,13 @@ for kernel_temp in params_global_dynamic['kernels']:   # ----- change -----
             if params_global_constant['run_step4_pkl2fa'] == 'T':
                 os.system('python step4_pkl2fa.py')  #
             if params_global_constant['run_step5_Diamond4CrossSpecies'] == 'T':
-                os.system('python step5_Diamond4CrossSpecies.py')  #
+                os.system('bash step5_Diamond4CrossSpecies.sh')  #
             if params_global_constant['run_step6_FindAlpha'] == 'T':
-                os.system('python step6_FindAlpha.py')  #
+                os.system('bash step6_FindAlpha.sh')  #
             if params_global_constant['run_step7_EvaluateAlpha'] == 'T':
-                os.system('python step7_EvaluateAlpha.py')  #
+                os.system('bash step7_EvaluateAlpha.sh')  #
             if params_global_constant['run_step8_PredictAlpha'] == 'T':
-                os.system('python step8_PredictAlpha.py')  #
+                os.system('bash step8_PredictAlpha.sh')  #
 
             os.chdir(dir0_path)  # 回到dir0
 
