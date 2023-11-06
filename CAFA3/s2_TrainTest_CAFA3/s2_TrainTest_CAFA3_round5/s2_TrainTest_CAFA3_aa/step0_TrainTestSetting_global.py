@@ -46,10 +46,14 @@ params_global_constant = {
     'run_step2_Train': 'T',  # 如果 train = T，则 不加载 pretrained model，需要预训练
     'run_step3_Test': 'T',  #
     'run_step4_pkl2fa': 'T',  #
-    'run_step5_Diamond4CrossSpecies': 'T',  #
-    'run_step6_FindAlpha': 'T',
-    'run_step7_EvaluateAlpha': 'T',  # 评价三大指标，Fmax, AUPR, Smin，分别用带alpha的和不带alpha的
-    'run_step8_PredictAlpha': 'T',
+
+    'run_step7.1_EvaluateWithoutAlpha': 'T',
+    'run_step8.1_PredictWithoutAlpha': 'F',  # 只要evaluate即可，不用predict
+
+    'run_step5_Diamond4CrossSpecies': 'F',  #
+    'run_step6_FindAlpha': 'F',
+    'run_step7_EvaluateAlpha': 'F',  # 评价三大指标，Fmax, AUPR, Smin，分别用带alpha的和不带alpha的
+    'run_step8_PredictAlpha': 'F',
 
     # 下面这几个可能会和 global_dynamic的互换：
     'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
@@ -102,7 +106,7 @@ params_global_dynamic = {
     # 在 param_local.py 只有一个str: all/bp/cc/mf 四选一
     'onts': ['all'],  # onts 有几种形式： ['bp'], ['cc'], ['mf'], ['gominre_trxte'], ['gominre], ['bp', 'cc', 'mf']  # 旧版本有 ['all'], ['gominre']只针对>50条件1
 
-    'kernels': [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256],
+    'kernels': [64, 72, 80, 88, 96, 104, 112, 120, 128, 256],
     'filters': [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]   # 不需要变成 tuple
 
     # 顺序

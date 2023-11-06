@@ -51,8 +51,8 @@ for kernel_temp in params_global_dynamic['kernels']:   # ----- change -----
             os.system('mkdir -p data')  # dir1/下新建data/，有了也无妨
             os.system('cp %s/pub_data/go.obo data/' % path_base)  # 在dir1中执行此命令  ########## 新添加 ##############
             os.system('mkdir -p results')
-            os.system('mkdir -p results_Alpha')
-            os.system('mkdir -p results_AlphaBeta')
+            os.system('mkdir -p results_alpha')
+            os.system('mkdir -p results_alphabeta')
             # os.chdir(dir0_path)  # 退回到output/文件夹
 
             # 第二步：生成：dir1/step0_TrainTestSetting_local.py， 包含params_local字典
@@ -92,6 +92,12 @@ for kernel_temp in params_global_dynamic['kernels']:   # ----- change -----
                 os.system('python step3_Test.py')  #
             if params_global_constant['run_step4_pkl2fa'] == 'T':
                 os.system('python step4_pkl2fa.py')  #
+
+            if params_global_constant['run_step7.1_EvaluateWithoutAlpha'] == 'T':
+                os.system('bash step7.1_EvaluateWithoutAlpha.sh')
+            if params_global_constant['run_step8.1_PredictWithoutAlpha'] == 'T':
+                os.system('bash step8.1_PredictWithoutAlpha.sh')
+
             if params_global_constant['run_step5_Diamond4CrossSpecies'] == 'T':
                 os.system('bash step5_Diamond4CrossSpecies.sh')  #
             if params_global_constant['run_step6_FindAlpha'] == 'T':
