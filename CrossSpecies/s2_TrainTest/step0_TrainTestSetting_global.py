@@ -126,6 +126,9 @@ params_global_dynamic = {
 
 print('step0 done ')
 
+
+### 一些尝试：###
+
 ###### TrainHUMAN_TestHUMAN_KernelX_FilterY  ######
 # 单核下：cuda:3  VS  [3]，区别不大
 # kernel=8, filter=262,144,   HPC V100，双核不可算。            lab_linux_3090，单核不可算，双核不可算，四核不可算。即使onts只算bp/cc/mf也无用
@@ -192,8 +195,7 @@ kernels = [[8, 8], [16, 16], [24, 24]], filters': [[32, 32], [64, 64]]
 # 答案：如果运行ALL00，要考虑的是，不要TrainALL00_TestHUMAN  ！！ 在 两个list里会交叉选，
 # 比如 train_data = [ALL00, HUMAN, MOUSE], test_data = [ALL00, ECOLI]，就会出现 TrainALL00_TestECOLI
 
-# run_trainall00_testall00 = F
-# run_trainx_testy = 'T'
+
 
 
 

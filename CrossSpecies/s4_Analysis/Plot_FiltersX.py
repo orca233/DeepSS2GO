@@ -88,11 +88,11 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 # CAFA3_round5
 # root_path = path_base + 'DeepSS2GO/output/test_CAFA3_round5_aa/'
-# kernel_range = [8, 16, 24]  # lack:
+# kernel_range = [8, 16, 24, 32, 40, 48, 56]  # lack:
 # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 root_path = path_base + 'DeepSS2GO/output/test_CAFA3_round5_ss8/'
-kernel_range = [8, 16, 24]  # lack:
+kernel_range = [8, 16, 24, 32, 40, 48, 56]  # lack:
 filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 
