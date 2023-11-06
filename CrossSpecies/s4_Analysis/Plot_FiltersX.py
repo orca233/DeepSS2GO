@@ -87,12 +87,12 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 
 # CAFA3_round5
-root_path = path_base + 'DeepSS2GO_Pytorch/output/test_CAFA5/test_CAFA3_round3_aa_APUS/step3_done/'
-kernel_range = [4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+# root_path = path_base + 'DeepSS2GO/output/test_CAFA3_round5_aa/'
+# kernel_range = [8, 16, 24]  # lack:
+# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
-root_path = path_base + 'DeepSS2GO_Pytorch/output/test_CAFA3/test_CAFA3_round3_ss8/step3_done/'
-kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+root_path = path_base + 'DeepSS2GO/output/test_CAFA3_round5_ss8/'
+kernel_range = [8, 16, 24]  # lack:
 filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 
@@ -480,13 +480,14 @@ table_data = []
 for filter_size in filter_range:
     row_data = [filter_size]
     for kernel_size in kernel_range:
-        # 构建结果文件夹路径
-        if 'Pytorch' in root_path:
-            folder_name = f"DeepSS2GO_Kernel{kernel_size}_Filter{filter_size}_Onts{onts}"  # 这里有3个txt  for Pytorch
-        else:
-            folder_name = f"DeepSS2GO_Kernel{kernel_size}_Filter{filter_size}"  # 这里有3个txt   for Keras
+        folder_name = f"DeepSS2GO_Kernel{kernel_size}_Filter{filter_size}_Onts{onts}"
+        # # 构建结果文件夹路径
+        # if 'Pytorch' in root_path:
+        #     folder_name = f"DeepSS2GO_Kernel{kernel_size}_Filter{filter_size}_Onts{onts}"  # 这里有3个txt  for Pytorch
+        # else:
+        #     folder_name = f"DeepSS2GO_Kernel{kernel_size}_Filter{filter_size}"  # 这里有3个txt   for Keras
 
-        folder_path = os.path.join(root_path, folder_name, 'results')
+        folder_path = os.path.join(root_path, folder_name, 'results_alpha')
         # 检查文件夹是否存在
         if not os.path.exists(folder_path):
             print(f"Folder {folder_path} does not exist")
@@ -502,9 +503,10 @@ for filter_size in filter_range:
         # 遍历txt文件夹
         for filename in os.listdir(folder_path):
             if filename.endswith('.txt'):
+                # print(filename)
 
                 # 提取类别
-                category = filename.split('_')[-1].split('.')[0]
+                category = filename.split('_')[3].split('.')[0]  # 不能用倒数第一个了，用第0123个 Fmax_AUPR_Smin_cc_1.00.txt  original: category = filename.split('_')[-1].split('.')[0]
                 # 提取Fmax和AUPR信息
                 with open(os.path.join(folder_path, filename), 'r') as f:
                     lines = f.readlines()
@@ -594,6 +596,12 @@ column_names = ['bp_Fmax', 'cc_Fmax', 'mf_Fmax', 'bp_AUPR', 'cc_AUPR', 'mf_AUPR'
 
 # 生成一个大图，包含9个小图
 fig, axs = plt.subplots(3, 3, figsize=(12, 12))
+
+# Add a general title above the subplots  总标题
+parts = root_path.split('/')
+folder_name = parts[-2]  # 倒数第二个部分就是目标文件夹名称
+print('folder_name=', folder_name)
+fig.suptitle(folder_name, fontsize=16)
 
 
 # 循环遍历每个小图的索引和对应的列名
