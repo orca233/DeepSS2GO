@@ -5,9 +5,9 @@ CAFA3/ALL/HUMAN/ECOLI/....每一个类别在一个单独文件夹，该文件夹
 
 '''
 
-
 import pandas as pd
 import numpy as np
+
 
 # fpath = '/home/fsong/work/py_proj/prot_algo/DeepSS2GO/CrossSpecies/s4_Analysis/prot_num_in_ont/TrainECOLI_TestECOLI/'  # 修改！！！！！！
 fpath = './'  # 修改！！！！！！
@@ -20,8 +20,8 @@ df_train = pd.read_pickle(fpath + 'train_data.pkl')
 df_test = pd.read_pickle(fpath + 'test_data.pkl')
 
 # 修改下面两行， 分别交叉计算下面 3*2 的结果  # 修改！！！！！！
-df_terms = df_bp  # df_bp, df_cc, df_mf
-df_dataset = df_train  # df_train, df_test
+df_terms = df_mf  # df_bp, df_cc, df_mf
+df_dataset = df_test  # df_train, df_test
 
 k = 0
 prot_with_ont = 0
