@@ -22,8 +22,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import json
 from step0_TrainTestSetting_local import *
-# from step0_TrainTestSetting_global import path_base
-
+from step0_TrainTestSetting_global import path_base
 
 MAXLEN = params_local['MAXLEN']
 
@@ -40,7 +39,7 @@ MAXLEN = params_local['MAXLEN']
 @ck.option('--terms-file', '-tf', default='data/terms_gominre_trxte.pkl', help='List of predicted terms')  # 这个是从s2_TrainTest/step1中，结合train&test_data交叉的到的
 @ck.option('--annotations-file', '-tf', default='data/train_data.pkl', help='Experimental annotations')
 @ck.option('--chunk-size', '-cs', default=100000, help='Number of sequences to read at a time')  # original 1000
-@ck.option('--diamond-file', '-df', default='data/diamond_aa.res', help='Diamond Mapping file')
+# @ck.option('--diamond-file', '-df', default='data/diamond_aa.res', help='Diamond Mapping file')
 @ck.option('--threshold', '-t', default=0.1, help='Prediction threshold')
 @ck.option('--batch-size', '-bs', default=32, help='Batch size for prediction model')
 # @ck.option('--maxlen', '-ml', default=params_local['MAXLEN'])
@@ -61,9 +60,9 @@ MAXLEN = params_local['MAXLEN']
 
 
 def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, terms_file,  # out_file
-         annotations_file, chunk_size, diamond_file, threshold, batch_size,
+         annotations_file, chunk_size, threshold, batch_size,
          test_data_file, aa_ss, prot_letter_aa, prot_letter_ss8, prot_letter_ss3,
-         kernels_list, filters_list, ont, alpha):  # maxlen
+         kernels_list, filters_list, ont, alpha):  # maxlen  diamond_file
 
 
     #######################################################################
@@ -98,7 +97,7 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
     terms_classes = len(terms_dict)
 
 
-
+    ''' withoutAlpha 注释掉
     ############################################################################
     ############ 第一步：计算diamond的IC 还是别的啥，反正和IC相关? ##################
     ############################################################################
@@ -148,6 +147,7 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
     print(len(diamond_preds))
     # print(diamond_preds)
     # diamond_preds = {'6PGD1_YEAST': {'GO:0000166': 0.90855575, 'GO:0000255': 0.09144427,}, 'prot':{GO1:X, GO2,X}...}
+    '''
 
 
 
@@ -218,8 +218,7 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
         out_file_ont = out_file_mf
 
     w = open(out_file_ont, 'wt')
-    # swissprot中的test_data.fa不论aa/ss8都是aa的格式，本来是为了diamond。但在predict.py中，似乎in_file中的sequence没有用到
-    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa。
+    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
         total_seq += len(prot_ids)
         deep_preds = {}
         ids, data = get_data(sequences, PROT_LETTER_len, PROT_INDEX)
@@ -288,11 +287,13 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
 
         for prot_id in prot_ids:  # 逐一过 test_data.fa
             annots = {}
+            ''' withoutAlpha 注释掉
             if prot_id in diamond_preds:  # blast/diamond * (1-alpha)
                 for go_id, score in diamond_preds[prot_id].items():
                     # print('go.get_namespace(go_id) = ', go.get_namespace(go_id))  # 其实这里还是混着的,3种GO都有
                     # print('alphas[go.get_namespace(go_id)] = ', alphas[go.get_namespace(go_id)])
                     annots[go_id] = score * (1 - alphas[go.get_namespace(go_id)])
+            '''
             for go_id, score in deep_preds[prot_id].items():
                 if go_id in annots:
                     annots[go_id] += alphas[go.get_namespace(go_id)] * score

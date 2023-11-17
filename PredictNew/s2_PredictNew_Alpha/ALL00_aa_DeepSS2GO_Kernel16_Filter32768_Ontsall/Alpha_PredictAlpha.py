@@ -22,7 +22,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader
 import json
 from step0_TrainTestSetting_local import *
-# from step0_TrainTestSetting_global import path_base
+from step0_TrainTestSetting_global import path_base
 
 
 MAXLEN = params_local['MAXLEN']
@@ -218,8 +218,7 @@ def main(in_file, out_file_bp, out_file_cc, out_file_mf, go_file, model_file, te
         out_file_ont = out_file_mf
 
     w = open(out_file_ont, 'wt')
-    # swissprot中的test_data.fa不论aa/ss8都是aa的格式，本来是为了diamond。但在predict.py中，似乎in_file中的sequence没有用到
-    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa。
+    for prot_ids, sequences in read_fasta(in_file, chunk_size):  # 这里输入的是*.fa文件，test_data.fa
         total_seq += len(prot_ids)
         deep_preds = {}
         ids, data = get_data(sequences, PROT_LETTER_len, PROT_INDEX)

@@ -1,0 +1,24 @@
+
+# single
+cd /home/fsong/work/py_proj/prot_algo/DeepSS2GO/Evaluate_HUMAN_MOUSE/EvaluateMOUSE_s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768 || exit
+echo 1111_EvaluateMOUSE_s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768
+bash step3.0_FindAlphaBeta_CoarseScreening.sh
+
+
+
+cd /home/fsong/work/py_proj/prot_algo/DeepSS2GO/Evaluate_HUMAN_MOUSE/EvaluateMOUSE_s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384 || exit
+echo 22222_EvaluateMOUSE_s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384
+bash step3.0_FindAlphaBeta_CoarseScreening.sh
+
+
+
+cd /home/fsong/work/py_proj/prot_algo/DeepSS2GO/Evaluate_HUMAN_MOUSE/EvaluateMOUSE_s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768 || exit
+echo 33333_EvaluateMOUSE_s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768
+bash step3.0_FindAlphaBeta_CoarseScreening.sh
+
+
+
+
+
+echo happy_ending
+echo happy_ending
