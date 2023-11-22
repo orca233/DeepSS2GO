@@ -36,18 +36,18 @@ else:
 
 params_global_constant = {
     # 硬件参数
-    'device_ids': [2, 3],  # 单一gpu运算：str='cuda:3',   多GPU并行: list=[0, 1, 2, 3]， CPU计算: str='cpu'
+    'device_ids': [0, 1],  # 单一gpu运算：str='cuda:3',   多GPU并行: list=[0, 1, 2, 3]， CPU计算: str='cpu'
 
 
     # 下面这几个可能会和 global_dynamic的互换：
     'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
     'train_data': 'MOUSE',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
-    'test_data': 'MOUSE',  # ['HUMAN', 'MOUSE']
+    'test_data': 'ARATH',  # ['HUMAN', 'MOUSE']
 
 
     # 文件夹
     # dir0 = 是“非变量，不参与循环”       dir1 = 变量，参与循环
-    'dir0': 'test_TrainMOUSE_TestMOUSE_aa/',  # output/dir0/ 同一批次实验的root文件夹， change -----
+    'dir0': 'test_TrainMOUSE_TestARATH_aa/',  # output/dir0/ 同一批次实验的root文件夹， change -----
 
 
     ##### 下面这几行内容，是打算分开计算 Train & Test

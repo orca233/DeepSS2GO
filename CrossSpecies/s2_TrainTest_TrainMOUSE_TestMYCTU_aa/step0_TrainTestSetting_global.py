@@ -42,12 +42,12 @@ params_global_constant = {
     # 下面这几个可能会和 global_dynamic的互换：
     'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
     'train_data': 'MOUSE',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
-    'test_data': 'HUMAN',  # ['HUMAN', 'MOUSE']
+    'test_data': 'MYCTU',  # ['HUMAN', 'MOUSE']
 
 
     # 文件夹
     # dir0 = 是“非变量，不参与循环”       dir1 = 变量，参与循环
-    'dir0': 'test_TrainMOUSE_TestHUMAN_aa/',  # output/dir0/ 同一批次实验的root文件夹， change -----
+    'dir0': 'test_TrainMOUSE_TestMYCTU_aa/',  # output/dir0/ 同一批次实验的root文件夹， change -----
 
 
     ##### 下面这几行内容，是打算分开计算 Train & Test

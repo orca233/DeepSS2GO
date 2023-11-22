@@ -2,7 +2,7 @@
 
 params_local = {
     # from params_global_constant
-    'device_ids': [0, 1],
+    'device_ids': [2, 3],
     'run_step1_SplitTrainTest_Terms': 'T',
     'run_step2_Train': 'T',
     'run_step3_Test': 'T',

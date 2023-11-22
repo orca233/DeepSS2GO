@@ -198,7 +198,7 @@ def main(train_data_file, test_data_file, terms_file, ont, alpha, go_file, run_l
     # alpha=1: 全由 deepSS2GO_aa 统计
     # beta=1: 全由 deepSS2GO_ss8 统计
 
-    blast_preds = [{} for _ in range(10000)]  # blast_preds = [{},{},{},{},{},...10000个{}]  # 专为Evaluate Without Alpha准备！！！
+    blast_preds = [{} for _ in range(1000000)]  # blast_preds = [{},{},{},{},{},...10000个{}]  # 专为Evaluate Without Alpha准备！！！
 
     for i, row in enumerate(test_df.itertuples()):
         annots_dict = blast_preds[i].copy()
