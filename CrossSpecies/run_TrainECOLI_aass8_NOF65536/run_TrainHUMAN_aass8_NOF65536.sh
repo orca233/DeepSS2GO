@@ -1,47 +1,61 @@
-echo HUMAN_GPU2-3
+echo TrainECOLI NOF65536, pluto, GPU0-1,,
 
-echo ------s2_TrainTest_TrainHUMAN_TestARATH_aa------
-cd ../s2_TrainTest_TrainHUMAN_TestARATH_aa || exit
+echo ------s2_TrainTest_TrainECOLI_TestARATH_aa_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestARATH_aa_NOF65536 || exit
 python run_KernelX_FilterY.py
 
-echo ------s2_TrainTest_TrainHUMAN_TestARATH_ss8------
-cd ../s2_TrainTest_TrainHUMAN_TestARATH_ss8 || exit
-python run_KernelX_FilterY.py
-
-echo ------s2_TrainTest_TrainHUMAN_TestECOLI_aa------
-cd ../s2_TrainTest_TrainHUMAN_TestECOLI_aa || exit
-python run_KernelX_FilterY.py
-
-echo ------s2_TrainTest_TrainHUMAN_TestECOLI_ss8------
-cd ../s2_TrainTest_TrainHUMAN_TestECOLI_ss8 || exit
+echo ------s2_TrainTest_TrainECOLI_TestARATH_ss8_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestARATH_ss8_NOF65536 || exit
 python run_KernelX_FilterY.py
 
 
 
-echo ------s2_TrainTest_TrainHUMAN_TestMOUSE_aa------
-cd ../s2_TrainTest_TrainHUMAN_TestMOUSE_aa || exit
+echo ------s2_TrainTest_TrainECOLI_TestECOLI_aa_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestECOLI_aa_NOF65536 || exit
 python run_KernelX_FilterY.py
 
-echo ------s2_TrainTest_TrainHUMAN_TestMOUSE_ss8------
-cd ../s2_TrainTest_TrainHUMAN_TestMOUSE_ss8 || exit
-python run_KernelX_FilterY.py
-
-echo ------s2_TrainTest_TrainHUMAN_TestMYCTU_aa------
-cd ../s2_TrainTest_TrainHUMAN_TestMYCTU_aa || exit
-python run_KernelX_FilterY.py
-
-echo ------s2_TrainTest_TrainHUMAN_TestMYCTU_ss8------
-cd ../s2_TrainTest_TrainHUMAN_TestMYCTU_ss8 || exit
+echo ------s2_TrainTest_TrainECOLI_TestECOLI_ss8_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestECOLI_ss8_NOF65536 || exit
 python run_KernelX_FilterY.py
 
 
 
-echo ------s2_TrainTest_TrainHUMAN_TestYEAST_aa------
-cd ../s2_TrainTest_TrainHUMAN_TestYEAST_aa || exit
+echo ------s2_TrainTest_TrainECOLI_TestHUMAN_aa_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestHUMAN_aa_NOF65536 || exit
 python run_KernelX_FilterY.py
 
-echo ------s2_TrainTest_TrainHUMAN_TestYEAST_ss8------
-cd ../s2_TrainTest_TrainHUMAN_TestYEAST_ss8 || exit
+echo ------s2_TrainTest_TrainECOLI_TestHUMAN_ss8_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestHUMAN_ss8_NOF65536 || exit
+python run_KernelX_FilterY.py
+
+
+
+echo ------s2_TrainTest_TrainECOLI_TestMOUSE_aa_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestMOUSE_aa_NOF65536 || exit
+python run_KernelX_FilterY.py
+
+echo ------s2_TrainTest_TrainECOLI_TestMOUSE_ss8_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestMOUSE_ss8_NOF65536 || exit
+python run_KernelX_FilterY.py
+
+
+
+echo ------s2_TrainTest_TrainECOLI_TestMYCTU_aa_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestMYCTU_aa_NOF65536 || exit
+python run_KernelX_FilterY.py
+
+echo ------s2_TrainTest_TrainECOLI_TestMYCTU_ss8_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestMYCTU_ss8_NOF65536 || exit
+python run_KernelX_FilterY.py
+
+
+
+echo ------s2_TrainTest_TrainECOLI_TestYEAST_aa_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestYEAST_aa_NOF65536 || exit
+python run_KernelX_FilterY.py
+
+echo ------s2_TrainTest_TrainECOLI_TestYEAST_ss8_NOF65536------
+cd ../s2_TrainTest_TrainECOLI_TestYEAST_ss8_NOF65536 || exit
 python run_KernelX_FilterY.py
 
 

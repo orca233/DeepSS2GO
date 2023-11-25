@@ -3,6 +3,7 @@
 # pre_setting 数据和参数的预处理
 # 训练部分，
 # 测试部分
+# 好像没给全连接层dense/FC_depth加上relu激活层？
 
 
 '''
