@@ -133,9 +133,24 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 # kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
 # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
-root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8/'
-kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72]  # lack: , 80, 88, 96, 104, 112, 120, 128
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8/'
+# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72]  # lack: , 80, 88, 96, 104, 112, 120, 128
+# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+
+
+
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestARATH_aa/'
+
+root_path = path_base + 'DeepSS2GO/output/test_TrainMOUSE_TestARATH_aa/'
+
+kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
 filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestARATH_ss8/'
+# # kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72]  # lack: , 80, 88, 96, 104, 112, 120, 128
+# # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+
+
 
 
 
