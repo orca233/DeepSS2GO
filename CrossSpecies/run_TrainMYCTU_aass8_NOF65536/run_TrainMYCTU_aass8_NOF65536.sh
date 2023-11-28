@@ -1,12 +1,12 @@
 echo TrainMYCTU NOF65536, haumea, GPU0-1
 
-echo ------s2_TrainTest_TrainMYCTU_TestARATH_aa_NOF65536------
-cd ../s2_TrainTest_TrainMYCTU_TestARATH_aa_NOF65536 || exit
-python run_KernelX_FilterY.py
-
-echo ------s2_TrainTest_TrainMYCTU_TestARATH_ss8_NOF65536------
-cd ../s2_TrainTest_TrainMYCTU_TestARATH_ss8_NOF65536 || exit
-python run_KernelX_FilterY.py
+#echo ------s2_TrainTest_TrainMYCTU_TestARATH_aa_NOF65536------
+#cd ../s2_TrainTest_TrainMYCTU_TestARATH_aa_NOF65536 || exit
+#python run_KernelX_FilterY.py
+#
+#echo ------s2_TrainTest_TrainMYCTU_TestARATH_ss8_NOF65536------
+#cd ../s2_TrainTest_TrainMYCTU_TestARATH_ss8_NOF65536 || exit
+#python run_KernelX_FilterY.py
 
 
 

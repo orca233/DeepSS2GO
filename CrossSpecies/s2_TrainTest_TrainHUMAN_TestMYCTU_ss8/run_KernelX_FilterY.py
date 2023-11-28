@@ -91,10 +91,10 @@ for kernel_temp in params_global_dynamic['kernels']:   # ----- change -----
             if params_global_constant['run_step3_Test'] == 'T':
                 os.system('python step3_Test.py')  #
             if params_global_constant['run_step4_pkl2fa'] == 'T':
-                os.system('python step4_pkl2fa.py')  #
+                os.system('python step4_pkl2fa.py &')  # 这里可以同时跑
 
             if params_global_constant['run_step7.1_EvaluateWithoutAlpha'] == 'T':
-                os.system('bash step7.1_EvaluateWithoutAlpha.sh')
+                os.system('bash step7.1_EvaluateWithoutAlpha.sh &')  # 这里可以同时跑
             if params_global_constant['run_step8.1_PredictWithoutAlpha'] == 'T':
                 os.system('bash step8.1_PredictWithoutAlpha.sh')
 

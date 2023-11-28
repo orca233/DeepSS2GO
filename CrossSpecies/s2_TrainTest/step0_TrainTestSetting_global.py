@@ -55,9 +55,9 @@ params_global_constant = {
     'run_step1_SplitTrainTest_Terms': 'T',
     'run_step2_Train': 'T',  # 如果 train = T，则 不加载 pretrained model，需要预训练
     'run_step3_Test': 'T',  #
-    'run_step4_pkl2fa': 'T',  #
+    'run_step4_pkl2fa': 'T',  #  # 这里可以同时跑
 
-    'run_step7.1_EvaluateWithoutAlpha': 'T',
+    'run_step7.1_EvaluateWithoutAlpha': 'T',  # 这里可以同时跑
     'run_step8.1_PredictWithoutAlpha': 'F',  # 只要evaluate即可，不用predict
 
     'run_step5_Diamond4CrossSpecies': 'F',  #

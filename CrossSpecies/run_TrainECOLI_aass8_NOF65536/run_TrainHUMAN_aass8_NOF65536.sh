@@ -1,8 +1,8 @@
 echo TrainECOLI NOF65536, pluto, GPU0-1,,
 
-echo ------s2_TrainTest_TrainECOLI_TestARATH_aa_NOF65536------
-cd ../s2_TrainTest_TrainECOLI_TestARATH_aa_NOF65536 || exit
-python run_KernelX_FilterY.py
+#echo ------s2_TrainTest_TrainECOLI_TestARATH_aa_NOF65536------
+#cd ../s2_TrainTest_TrainECOLI_TestARATH_aa_NOF65536 || exit
+#python run_KernelX_FilterY.py
 
 echo ------s2_TrainTest_TrainECOLI_TestARATH_ss8_NOF65536------
 cd ../s2_TrainTest_TrainECOLI_TestARATH_ss8_NOF65536 || exit
