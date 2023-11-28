@@ -1,4 +1,8 @@
 # DeepSS2GO
+
+> 静候英文版 lol
+
+
 3个板块：     
 CrossSpecies/ 不同物种之间的交叉训练验证     
 CAFA3/ 横向对比三大指标结果  
