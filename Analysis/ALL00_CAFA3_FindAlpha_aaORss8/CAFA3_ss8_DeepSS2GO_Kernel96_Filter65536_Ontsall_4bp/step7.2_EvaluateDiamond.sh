@@ -1,5 +1,4 @@
-# 之所以除了step7还要单独设置step7.1，是因为如果运行step7的话，还需要step6生成的文件FindAlpha文件。
-# 为了批量运算时跳过step6，就单独写了个step7.1
+# 这个只用于evaluate alpha=0的情况，完全有diamond统计得分
 
 
 
@@ -25,14 +24,13 @@ mkdir -p results_alphabeta
 # alpha=1: 全由 deepSS2GO_aa 统计
 # beta=1: 全由 deepSS2GO_ss8 统计
 
+
+
 echo evaluate bp
-python Alpha_EvaluateWithoutAlpha.py -o bp --alpha 1 # 0.6
+python Alpha_EvaluateAlpha.py -o bp --alpha 0 # 0.6
 echo evaluate cc
-python Alpha_EvaluateWithoutAlpha.py -o cc --alpha 1
+python Alpha_EvaluateAlpha.py -o cc --alpha 0
 echo evaluate mf
-python Alpha_EvaluateWithoutAlpha.py -o mf --alpha 1
-
-
-
+python Alpha_EvaluateAlpha.py -o mf --alpha 0
 
 

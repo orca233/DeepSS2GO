@@ -1,3 +1,6 @@
+# 之所以除了step7还要单独设置step7.1，是因为如果运行step7的话，还需要step6生成的文件FindAlpha文件。
+# 为了批量运算时跳过step6，就单独写了个step7.1
+
 '''
 from DeepGOPlus: evaluate_deepgoplus.py
 
