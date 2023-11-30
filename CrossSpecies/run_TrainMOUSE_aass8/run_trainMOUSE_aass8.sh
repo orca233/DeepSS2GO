@@ -8,22 +8,22 @@ echo MOUSE_GPU2-3
 #cd ../s2_TrainTest_TrainMOUSE_TestARATH_ss8 || exit
 #python run_KernelX_FilterY.py
 
-echo ------s2_TrainTest_TrainMOUSE_TestECOLI_aa------
-cd ../s2_TrainTest_TrainMOUSE_TestECOLI_aa || exit
-python run_KernelX_FilterY.py
-
-echo ------s2_TrainTest_TrainMOUSE_TestECOLI_ss8------
-cd ../s2_TrainTest_TrainMOUSE_TestECOLI_ss8 || exit
-python run_KernelX_FilterY.py
+#echo ------s2_TrainTest_TrainMOUSE_TestECOLI_aa------
+#cd ../s2_TrainTest_TrainMOUSE_TestECOLI_aa || exit
+#python run_KernelX_FilterY.py
+#
+#echo ------s2_TrainTest_TrainMOUSE_TestECOLI_ss8------
+#cd ../s2_TrainTest_TrainMOUSE_TestECOLI_ss8 || exit
+#python run_KernelX_FilterY.py
 
 
 
 echo ------s2_TrainTest_TrainMOUSE_TestHUMAN_aa------
-cd ../s2_TrainTest_TrainMOUSE_TestMOUSE_aa || exit
+cd ../s2_TrainTest_TrainMOUSE_TestHUMAN_aa || exit
 python run_KernelX_FilterY.py
 
 echo ------s2_TrainTest_TrainMOUSE_TestHUMAN_ss8------
-cd ../s2_TrainTest_TrainMOUSE_TestMOUSE_ss8 || exit
+cd ../s2_TrainTest_TrainMOUSE_TestHUMAN_ss8 || exit
 python run_KernelX_FilterY.py
 
 echo ------s2_TrainTest_TrainMOUSE_TestMYCTU_aa------

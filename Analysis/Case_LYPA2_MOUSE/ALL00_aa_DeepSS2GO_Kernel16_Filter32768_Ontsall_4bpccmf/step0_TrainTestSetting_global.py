@@ -30,25 +30,15 @@ else:
 # path_base = path_base + '/'
 # print('path_base = ', path_base)
 
+
+
 ################################################
 ############# params_global_constant ###########
 ################################################
 
 params_global_constant = {
     # 硬件参数
-    'device_ids': [2, 3],  # 单一gpu运算：str='cuda:3',   多GPU并行: list=[0, 1, 2, 3]， CPU计算: str='cpu'
-
-
-    # 下面这几个可能会和 global_dynamic的互换：
-    'aa_ss': 'ss8',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
-    'train_data': 'HUMAN',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
-    'test_data': 'ECOLI',  # ['HUMAN', 'MOUSE']
-
-
-    # 文件夹
-    # dir0 = 是“非变量，不参与循环”       dir1 = 变量，参与循环
-    'dir0': 'test_TrainHUMAN_TestECOLI_ss8/',  # output/dir0/ 同一批次实验的root文件夹， change -----
-
+    'device_ids': [0, 1],  # 单一gpu运算：str='cuda:3',   多GPU并行: list=[0, 1, 2, 3]， CPU计算: str='cpu'
 
     ##### 下面这几行内容，是打算分开计算 Train & Test
     # 是否运行哪几个step，
@@ -65,7 +55,14 @@ params_global_constant = {
     'run_step7_EvaluateAlpha': 'F',  # 评价三大指标，Fmax, AUPR, Smin，分别用带alpha的和不带alpha的
     'run_step8_PredictAlpha': 'F',
 
+    # 下面这几个可能会和 global_dynamic的互换：
+    'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
+    'train_data': 'ALL00',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
+    'test_data': 'ALL00',  # ['HUMAN', 'MOUSE']
 
+    # 文件夹
+    # dir0 = 是“非变量，不参与循环”       dir1 = 变量，参与循环
+    'dir0': 'test_TrainALL00_TestALL00_aa/',  # output/dir0/ 同一批次实验的root文件夹， change -----
 
     'path_base': path_base,
     'path_pub_data': path_base + 'pub_data/',
@@ -96,7 +93,6 @@ params_global_constant = {
 }
 
 
-
 ###############################################
 ############# params_global_dynamic ###########
 ###############################################
@@ -110,7 +106,7 @@ params_global_dynamic = {
     # 在 param_local.py 只有一个str: all/bp/cc/mf 四选一
     'onts': ['all'],  # onts 有几种形式： ['bp'], ['cc'], ['mf'], ['gominre_trxte'], ['gominre], ['bp', 'cc', 'mf']  # 旧版本有 ['all'], ['gominre']只针对>50条件1
 
-    'kernels': [112, 120, 128],  # 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104,
+    'kernels': [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128],
     'filters': [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]   # 不需要变成 tuple
 
     # 顺序
