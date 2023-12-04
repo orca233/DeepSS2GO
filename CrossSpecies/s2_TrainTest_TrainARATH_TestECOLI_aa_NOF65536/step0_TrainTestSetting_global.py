@@ -36,7 +36,7 @@ else:
 
 params_global_constant = {
     # 硬件参数
-    'device_ids': [2, 3],  # 单一gpu运算：str='cuda:3',   多GPU并行: list=[0, 1, 2, 3]， CPU计算: str='cpu'
+    'device_ids': [0, 1],  # 单一gpu运算：str='cuda:3',   多GPU并行: list=[0, 1, 2, 3]， CPU计算: str='cpu'
 
 
     # 下面这几个可能会和 global_dynamic的互换：
@@ -110,7 +110,7 @@ params_global_dynamic = {
     # 在 param_local.py 只有一个str: all/bp/cc/mf 四选一
     'onts': ['all'],  # onts 有几种形式： ['bp'], ['cc'], ['mf'], ['gominre_trxte'], ['gominre], ['bp', 'cc', 'mf']  # 旧版本有 ['all'], ['gominre']只针对>50条件1
 
-    'kernels': [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128],
+    'kernels': [120, 128],  # 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112,
     'filters': [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768]   # 不需要变成 tuple
 
     # 顺序
