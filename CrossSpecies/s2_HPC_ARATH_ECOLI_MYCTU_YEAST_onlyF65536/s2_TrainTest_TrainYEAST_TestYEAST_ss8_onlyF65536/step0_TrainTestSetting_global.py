@@ -40,14 +40,14 @@ params_global_constant = {
 
 
     # 下面这几个可能会和 global_dynamic的互换：
-    'aa_ss': 'aa',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
-    'train_data': 'MOUSE',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
-    'test_data': 'HUMAN',  # ['HUMAN', 'MOUSE']
+    'aa_ss': 'ss8',  # aa, ss8, ss3 三个选项  ['aa', 'ss8']
+    'train_data': 'YEAST',  #  只写具体物种 HUMAN, MOUSE, ARATH。。。，不用写ALL00， ['HUMAN', 'MOUSE']
+    'test_data': 'YEAST',  # ['HUMAN', 'MOUSE']
 
 
     # 文件夹
     # dir0 = 是“非变量，不参与循环”       dir1 = 变量，参与循环
-    'dir0': 'test_TrainX_TestY_aa/',  # output/dir0/ 同一批次实验的root文件夹， change -----
+    'dir0': 'test_TrainYEAST_TestYEAST_ss8/',  # output/dir0/ 同一批次实验的root文件夹， change -----
 
 
     ##### 下面这几行内容，是打算分开计算 Train & Test
@@ -55,9 +55,9 @@ params_global_constant = {
     'run_step1_SplitTrainTest_Terms': 'T',
     'run_step2_Train': 'T',  # 如果 train = T，则 不加载 pretrained model，需要预训练
     'run_step3_Test': 'T',  #
-    'run_step4_pkl2fa': 'T',  #  # 这里可以同时跑
+    'run_step4_pkl2fa': 'T',  #
 
-    'run_step7.1_EvaluateWithoutAlpha': 'T',  # 这里可以同时跑
+    'run_step7.1_EvaluateWithoutAlpha': 'T',
     'run_step8.1_PredictWithoutAlpha': 'F',  # 只要evaluate即可，不用predict
 
     'run_step5_Diamond4CrossSpecies': 'F',  #
@@ -92,6 +92,7 @@ params_global_constant = {
     'PROT_LETTER_ss3': ['C', 'E', 'H'],  # C = C+S+T    E = E+B     H = H+G+I
 
 
+
 }
 
 
@@ -110,7 +111,7 @@ params_global_dynamic = {
     'onts': ['all'],  # onts 有几种形式： ['bp'], ['cc'], ['mf'], ['gominre_trxte'], ['gominre], ['bp', 'cc', 'mf']  # 旧版本有 ['all'], ['gominre']只针对>50条件1
 
     'kernels': [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128],
-    'filters': [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]   # 不需要变成 tuple
+    'filters': [65536]
 
     # 顺序
     # kernels = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]  # 512
