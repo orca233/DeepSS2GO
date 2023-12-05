@@ -1,6 +1,6 @@
 # PredictNew
 
-[TOC]
+[comment]: <> ([TOC])
 
 ## Introduction
 
@@ -8,7 +8,9 @@ DeepSS2GO is a novel approach in protein function prediction that integrates pri
 
 **Significance:**This innovative method showcases the substantial benefits of incorporating secondary structure information. 
 
-<img src="./assets/image-20231205105651327.png" alt="image-20231205105651327" style="zoom:50%;" />
+<img src="./figs/image-20231205105651327.png" alt="image-20231205105651327" style="zoom:50%;" />
+
+![Img](./figs/image-20231205105651327.png)
 
 ## Environment:
 
