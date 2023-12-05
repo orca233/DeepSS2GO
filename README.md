@@ -10,7 +10,7 @@ DeepSS2GO is a novel approach in protein function prediction that integrates pri
 
 <img src="./figs/image-20231205105651327.png" alt="image-20231205105651327" style="zoom:50%;" />
 
-![Img](./figs/image-20231205105651327.png)
+[comment]: <> (![Img]&#40;./figs/image-20231205105651327.png&#41;)
 
 ## Environment:
 
