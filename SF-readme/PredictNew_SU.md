@@ -150,12 +150,12 @@ Results will be in the `/data/directory/results_bp/cc/mf.csv`
 
 #### bp
 
-![Img](./figs/WechatIMG1342.jpg)
+![Img](./WechatIMG1342.jpg)
 
 #### cc
 
-![Img](./figs/WechatIMG1343.jpg)
+![Img](./WechatIMG1343.jpg)
 
 #### mf
 
-![Img](./figs/WechatIMG1344.jpg)
+![Img](./WechatIMG1344.jpg)
