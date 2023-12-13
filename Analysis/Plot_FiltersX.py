@@ -127,17 +127,60 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 
 
-############### TrainHUMAN_TestHUMAN ################
+############### TrainARATH ################
 
-root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestARATH_aa/'
-# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestHUMAN_ss8/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestARATH_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestARATH_ss8/'
 
-# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestHUMAN_aa/'
-# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestHUMAN_ss8/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestECOLI_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestECOLI_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestHUMAN_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestHUMAN_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestMOUSE_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestMOUSE_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestMYCTU_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestMYCTU_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestYEAST_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestYEAST_ss8/'
+
+
+
+############### TrainECOLI ################
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestARATH_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestARATH_ss8/'
+
+root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMOUSE_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMOUSE_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMYCTU_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMYCTU_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestYEAST_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestYEAST_ss8/'
 
 
 
 
+
+
+
+
+
+
+
+
+##########################
 
 
 
@@ -150,19 +193,6 @@ filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
 #
 # root_path = path_base + 'DeepSS2GO/output/test_TrainMOUSE_TestARATH_aa/'
 #
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestARATH_ss8/'
-# # kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72]  # lack: , 80, 88, 96, 104, 112, 120, 128
-# # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-
-
-
-
 
 
 
@@ -213,228 +243,7 @@ filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
 # root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestARATH_ss8/step3_done/'
 # root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestARATH_ss3/step3_done/'
 
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestECOLI_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestECOLI_ss8/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestECOLI_ss3/step3_done/'
 
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestMOUSE_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestMOUSE_ss8/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestMOUSE_ss3/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestMYCTU_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestMYCTU_ss8/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestMYCTU_ss3/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestYEAST_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestYEAST_ss8/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainHUMAN/test_TrainHUMAN_TestYEAST_ss3/step3_done/'
-
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-################ TrainARATH_TestY ##################
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestARATH_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestARATH_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestECOLI_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestECOLI_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestHUMAN_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestHUMAN_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestMOUSE_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestMOUSE_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestMYCTU_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestMYCTU_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestYEAST_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainARATH/test_TrainARATH_TestYEAST_ss8/step3_done/'
-
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-################ TrainECOLI_TestY ##################
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestARATH_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestARATH_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestECOLI_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestECOLI_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestHUMAN_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestHUMAN_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestMOUSE_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestMOUSE_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestMYCTU_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestMYCTU_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestYEAST_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainECOLI/test_TrainECOLI_TestYEAST_ss8/step3_done/'
-
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-################ TrainMOUSE_TestY ##################
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestARATH_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestARATH_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestECOLI_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestECOLI_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestHUMAN_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestHUMAN_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestMOUSE_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestMOUSE_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestMYCTU_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestMYCTU_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestYEAST_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMOUSE/test_TrainMOUSE_TestYEAST_ss8/step3_done/'
-
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-
-
-################ TrainMYCTU_TestY ##################
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestARATH_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestARATH_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestECOLI_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestECOLI_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestHUMAN_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestHUMAN_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestMOUSE_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestMOUSE_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestMYCTU_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestMYCTU_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestYEAST_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainMYCTU/test_TrainMYCTU_TestYEAST_ss8/step3_done/'
-
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-################ TrainYEAST_TestY ##################
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestARATH_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestARATH_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestECOLI_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestECOLI_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestHUMAN_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestHUMAN_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestMOUSE_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestMOUSE_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestMYCTU_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestMYCTU_ss8/step3_done/'
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestYEAST_aa/step3_done/'
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestYEAST_ss8/step3_done/'
-#
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-
-
-
-
-
-
-############################################
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestARATH_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestARATH_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestECOLI_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-#
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestECOLI_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestHUMAN_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestHUMAN_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestMOUSE_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestMOUSE_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestYEAST_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainYEAST/test_TrainYEAST_TestYEAST_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-
-
-
-
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output_APUS/rsync_TrainECOLI/test_TrainECOLI_TestHUMAN_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output_APUS/rsync_TrainECOLI/test_TrainECOLI_TestHUMAN_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output_APUS/rsync_TrainECOLI/test_TrainECOLI_TestECOLI_aa/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
-# root_path = path_base + 'DeepSS2GO_Pytorch/output_APUS/rsync_TrainECOLI/test_TrainECOLI_TestECOLI_ss8/step3_done/'
 # kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
 # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 

@@ -4,8 +4,11 @@ import matplotlib.pyplot as plt
 
 
 # Load the datasets
-df_aa = pd.read_csv('/mnt/data/CrossSpecies_results_aa.csv')
-df_ss8 = pd.read_csv('/mnt/data/CrossSpecies_results_ss8.csv')
+path_CrossSpecies = '/data1/fsong/py_proj/prot_algo/DeepSS2GO/Analysis/CrossSpecies_HeatMap/'  # /mnt/data/
+df_aa = pd.read_csv(path_CrossSpecies + 'CrossSpecies_results_aa.csv')
+df_ss8 = pd.read_csv(path_CrossSpecies + 'CrossSpecies_results_ss8.csv')
+# df_aa = pd.read_csv('/mnt/data/CrossSpecies_results_aa.csv')
+# df_ss8 = pd.read_csv('/mnt/data/CrossSpecies_results_ss8.csv')
 
 # Species for train and test
 species = ["ARATH", "ECOLI", "HUMAN", "MOUSE", "MYCTU", "YEAST"]
@@ -49,5 +52,5 @@ for ax, (label, data_matrix) in zip(axes.flat, heatmap_data_corrected.items()):
     ax.set_ylabel('Y-axis (Test)')
 
 plt.tight_layout()
-plt.savefig('/mnt/data/heatmap_figures_corrected.png')
+# plt.savefig('/mnt/data/heatmap_figures_corrected.png')
 plt.show()
