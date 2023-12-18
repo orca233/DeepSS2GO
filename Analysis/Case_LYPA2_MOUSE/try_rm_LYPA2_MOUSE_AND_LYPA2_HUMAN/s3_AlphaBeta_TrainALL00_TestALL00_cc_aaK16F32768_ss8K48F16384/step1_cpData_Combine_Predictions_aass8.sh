@@ -14,8 +14,8 @@ path_base="/home/fsong/work/py_proj/prot_algo/DeepSS2GO/"
 #path_base=$(cd ../../ && pwd)
 #path_base="$(path_base)/"
 
-path_aa="${path_base}Analysis/Case_LYPA2_MOUSE/ALL00_aa_DeepSS2GO_Kernel16_Filter32768_Ontsall_4bpccmf/"
-path_ss8="${path_base}Analysis/Case_LYPA2_MOUSE/ALL00_ss8_DeepSS2GO_Kernel48_Filter16384_Ontsall_4bpmf/"
+path_aa="${path_base}Analysis/Case_LYPA2_MOUSE/try_rm_LYPA2_MOUSE_AND_LYPA2_HUMAN/ALL00_aa_DeepSS2GO_Kernel16_Filter32768_Ontsall_4bpccmf/"
+path_ss8="${path_base}Analysis/Case_LYPA2_MOUSE/try_rm_LYPA2_MOUSE_AND_LYPA2_HUMAN/ALL00_ss8_DeepSS2GO_Kernel48_Filter16384_Ontsall_4bpmf/"
 
 
 ###################### predictions.pkl & model_checkpoint.pth 的aa/ss8 最好还是用 link -s .... 要不太大了 #############
