@@ -149,12 +149,17 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 
 
+
+
+
+
+
 ############### TrainECOLI ################
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestARATH_aa/'
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestARATH_ss8/'
 
-root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_aa/'
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_aa/'
@@ -171,12 +176,34 @@ root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI
 
 
 
+############### TrainHUMAN ################
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestARATH_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestARATH_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestECOLI_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestECOLI_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestHUMAN_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestHUMAN_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestMOUSE_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestMOUSE_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestMYCTU_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestMYCTU_ss8/'
+
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestYEAST_aa/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainHUMAN_TestYEAST_ss8/'
 
 
+## FC = 1
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_aa_FC1/'
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8_FC1/'
 
-
-
-
+## FC = 2
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_aa_FC2/'
+root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8_FC2/'
 
 
 
@@ -184,7 +211,9 @@ root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI
 
 
 
-kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+kernel_range = [8, 16, 24, 32]  # lack:
+
 filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 
