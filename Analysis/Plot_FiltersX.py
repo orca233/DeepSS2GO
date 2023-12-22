@@ -163,7 +163,7 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_aa/'
-# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_ss8/'
+root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMOUSE_aa/'
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMOUSE_ss8/'
@@ -203,7 +203,7 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 ## FC = 2
 # root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_aa_FC2/'
-root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8_FC2/'
+# root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8_FC2/'
 
 
 
