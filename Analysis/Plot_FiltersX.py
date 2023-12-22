@@ -211,8 +211,8 @@ root_path = path_base + 'DeepSS2GO/output/test_TrainHUMAN_TestHUMAN_ss8_FC2/'
 
 
 
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-kernel_range = [8, 16, 24, 32]  # lack:
+kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+# kernel_range = [8, 16, 24, 32]  # lack:
 
 filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
