@@ -123,13 +123,12 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 ## FC = 1
 # root_path = path_base + 'DeepSS2GO/output/test_TrainALL00_TestALL00_aa_FC1/'
-root_path = path_base + 'DeepSS2GO/output/test_TrainALL00_TestALL00_ss8_FC1/'
+# root_path = path_base + 'DeepSS2GO/output/test_TrainALL00_TestALL00_ss8_FC1/'
 
 
 # kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-kernel_range = [8, 16, 24, 32, 40, 48]  # lack:
-filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
+# kernel_range = [8, 16, 24, 32, 40, 48]  # lack:
+# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 
 
@@ -140,7 +139,7 @@ filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestARATH_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestECOLI_aa/'
-# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestECOLI_ss8/'
+root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestECOLI_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestHUMAN_aa/'
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestHUMAN_ss8/'
@@ -155,7 +154,8 @@ filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768,
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainARATH_TestYEAST_ss8/'
 
 
-
+kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 
 

@@ -1,6 +1,11 @@
 '''
 README:
-用于
+逐一读取所有cross species的数据
+aa/ss8 * Fmax/AUPR/Smin * bp/cc/mf
+
+生成：
+CrossSpecies_results_aa.csv
+CrossSpecies_results_ss8.csv
 
 
 小tip:

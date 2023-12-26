@@ -20,7 +20,7 @@ df_ss8 = pd.read_csv(path_CrossSpecies + 'CrossSpecies_results_ss8.csv')
 species = ["ARATH", "ECOLI", "HUMAN", "MOUSE", "MYCTU", "YEAST"]
 
 # Set metric choice to 'Fmax' since we are using that data
-metric_choice = 'AUPR'
+metric_choice = 'Smin'  #  Fmax, AUPR, Smin 三选一 ------------------change-------------------------------!!!!!!!!!!!!!!!!!
 
 # Define a function to create a heatmap data matrix
 def create_heatmap_matrix(df, feature):
@@ -97,8 +97,8 @@ axes_order = [(i, j) for i in range(2) for j in range(3)]
 
 
 
-
-
+'''
+# # 不带图标
 # Plot each heatmap
 for ((row, col), title) in zip(axes_order, titles):
     ax = axes[row, col]
@@ -111,7 +111,30 @@ for ((row, col), title) in zip(axes_order, titles):
     ax.xaxis.set_label_position('top')  # Set the x-axis labels' position to the top
     ax.set_xlabel('Train')
     ax.set_ylabel('Test')
+'''
+
+
+# 带图标
+# Define subplot labels
+subplot_labels = ['A', 'C', 'E', 'B', 'D', 'F']
+
+# Plot each heatmap
+for ((row, col), title, label) in zip(axes_order, titles, subplot_labels):
+    ax = axes[row, col]
+    category = title.split('_')[0]
+    vmin, vmax = eval(f'{category}_min'), eval(f'{category}_max')
+    sns.heatmap(heatmap_data[title], ax=ax, cmap=cmap_dict[category], annot=True, fmt=fmt,
+                xticklabels=species, yticklabels=species, vmin=vmin, vmax=vmax)
+    ax.set_title(title.replace('_', ' '))
+    ax.xaxis.set_ticks_position('top')  # Set the x-axis labels to the top
+    ax.xaxis.set_label_position('top')  # Set the x-axis labels' position to the top
+    ax.set_xlabel('Train')
+    ax.set_ylabel('Test')
+
+    # Add the subplot label in the top left corner
+    ax.text(-0.1, 1.1, label, transform=ax.transAxes, fontsize=18, fontweight='bold', va='top', ha='right')
 
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])  # Adjust for main title
 plt.show()
+
 
