@@ -98,14 +98,16 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 ############## TrainALL00 ##################
 
-# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainALL00/test_TrainALL00_TestALL00_aa/step3_done/'
-# kernel_range = [4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144]
 ### F=131072，由KernelX_X_Filter65536_65536通过GPU计算， 有K=4_4, 8_8, 12_12, 16_16, 24_24, 32_32, 40_40, 48_48，再大K算不了
 ### F=262144 由KernelX_X_Filter131072_131072通过CPU计算，有K=4_4, 8_8, 12_12, 16_16, 24_24
 
+# root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainALL00/test_TrainALL00_TestALL00_aa/step3_done/'
 # root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainALL00/test_TrainALL00_TestALL00_ss8/step3_done/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
+
+# kernel_range = [4, 8, 12, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 256]
+# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144]
+
+# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]
 # filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 # root_path = path_base + 'DeepSS2GO_Pytorch/output/test_TrainALL00/test_TrainALL00_TestALL00_ss3/step3_done/'
@@ -114,15 +116,20 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 
 
 
-# 新的 20231110
-
+# 新的ALL00 20231110
 # root_path = path_base + 'DeepSS2GO/output/test_TrainALL00/test_TrainALL00_TestALL00_aa/'
-# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
-
 # root_path = path_base + 'DeepSS2GO/output/test_TrainALL00/test_TrainALL00_TestALL00_ss8/'
+
+
+## FC = 1
+# root_path = path_base + 'DeepSS2GO/output/test_TrainALL00_TestALL00_aa_FC1/'
+root_path = path_base + 'DeepSS2GO/output/test_TrainALL00_TestALL00_ss8_FC1/'
+
+
 # kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+kernel_range = [8, 16, 24, 32, 40, 48]  # lack:
+filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+
 
 
 
@@ -163,7 +170,7 @@ path_base = '/home/fsong/work/py_proj/prot_algo/'  # Pytorch 结果
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestECOLI_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_aa/'
-root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_ss8/'
+# root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestHUMAN_ss8/'
 
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMOUSE_aa/'
 # root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI_TestMOUSE_ss8/'
@@ -211,10 +218,10 @@ root_path = path_base + 'DeepSS2GO/output/test_CrossSpecies/' + 'test_TrainECOLI
 
 
 
-kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
-# kernel_range = [8, 16, 24, 32]  # lack:
-
-filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
+# kernel_range = [8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]  # lack:
+# # kernel_range = [8, 16, 24, 32]  # lack:
+#
+# filter_range = [16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
 
 
 
