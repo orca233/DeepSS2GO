@@ -1,0 +1,36 @@
+slam1, GO:0005575, cellular_component, cellular_component, 0.637
+slam1, GO:0110165, cellular_component, cellular anatomical entity, 0.622
+slam1, GO:0016020, cellular_component, membrane, 0.410
+slam1, GO:0005622, cellular_component, intracellular anatomical structure, 0.360
+slam1, GO:0005737, cellular_component, cytoplasm, 0.339
+slam1, GO:0043226, cellular_component, organelle, 0.332
+slam1, GO:0043229, cellular_component, intracellular organelle, 0.299
+slam1, GO:0043227, cellular_component, membrane-bounded organelle, 0.298
+slam1, GO:0043231, cellular_component, intracellular membrane-bounded organelle, 0.260
+slam1, GO:0071944, cellular_component, cell periphery, 0.225
+slam1, GO:0005886, cellular_component, plasma membrane, 0.220
+slam1, GO:0009279, cellular_component, cell outer membrane, 0.206
+slam1, GO:0031975, cellular_component, envelope, 0.206
+slam1, GO:0030313, cellular_component, cell envelope, 0.206
+slam1, GO:0030312, cellular_component, external encapsulating structure, 0.206
+slam1, GO:0019867, cellular_component, outer membrane, 0.206
+slam1, GO:0005576, cellular_component, extracellular region, 0.162
+
+slam2, GO:0005575, cellular_component, cellular_component, 0.509
+slam2, GO:0110165, cellular_component, cellular anatomical entity, 0.498
+slam2, GO:0016020, cellular_component, membrane, 0.282
+slam2, GO:0009279, cellular_component, cell outer membrane, 0.248
+slam2, GO:0071944, cellular_component, cell periphery, 0.248
+slam2, GO:0031975, cellular_component, envelope, 0.248
+slam2, GO:0005886, cellular_component, plasma membrane, 0.248
+slam2, GO:0030313, cellular_component, cell envelope, 0.248
+slam2, GO:0030312, cellular_component, external encapsulating structure, 0.248
+slam2, GO:0019867, cellular_component, outer membrane, 0.248
+slam2, GO:0005622, cellular_component, intracellular anatomical structure, 0.242
+slam2, GO:0005737, cellular_component, cytoplasm, 0.231
+slam2, GO:0043226, cellular_component, organelle, 0.175
+slam2, GO:0043227, cellular_component, membrane-bounded organelle, 0.173
+slam2, GO:0043229, cellular_component, intracellular organelle, 0.146
+slam2, GO:0043231, cellular_component, intracellular membrane-bounded organelle, 0.144
+slam2, GO:0005576, cellular_component, extracellular region, 0.141
+

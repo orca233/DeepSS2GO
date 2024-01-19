@@ -1,0 +1,54 @@
+slam1, GO:0003674, molecular_function, molecular_function, 0.355
+slam1, GO:0005488, molecular_function, binding, 0.339
+slam1, GO:0005515, molecular_function, protein binding, 0.159
+slam1, GO:0003824, molecular_function, catalytic activity, 0.106
+slam1, GO:0005215, molecular_function, transporter activity, 0.100
+slam1, GO:0022857, molecular_function, transmembrane transporter activity, 0.096
+slam1, GO:0097159, molecular_function, organic cyclic compound binding, 0.074
+slam1, GO:1901363, molecular_function, heterocyclic compound binding, 0.064
+slam1, GO:0003676, molecular_function, nucleic acid binding, 0.063
+slam1, GO:0140096, molecular_function, catalytic activity, acting on a protein, 0.056
+slam1, GO:0016787, molecular_function, hydrolase activity, 0.047
+slam1, GO:0042802, molecular_function, identical protein binding, 0.045
+slam1, GO:0022803, molecular_function, passive transmembrane transporter activity, 0.043
+slam1, GO:0015267, molecular_function, channel activity, 0.043
+slam1, GO:0060090, molecular_function, molecular adaptor activity, 0.031
+slam1, GO:0030674, molecular_function, protein-macromolecule adaptor activity, 0.031
+slam1, GO:0044877, molecular_function, protein-containing complex binding, 0.028
+slam1, GO:0019899, molecular_function, enzyme binding, 0.027
+slam1, GO:0015144, molecular_function, carbohydrate transmembrane transporter activity, 0.025
+slam1, GO:0019904, molecular_function, protein domain specific binding, 0.025
+slam1, GO:0003677, molecular_function, DNA binding, 0.024
+slam1, GO:0043167, molecular_function, ion binding, 0.023
+slam1, GO:0005102, molecular_function, signaling receptor binding, 0.021
+slam1, GO:0015075, molecular_function, monoatomic ion transmembrane transporter activity, 0.020
+
+slam2, GO:0003674, molecular_function, molecular_function, 0.341
+slam2, GO:0005488, molecular_function, binding, 0.277
+slam2, GO:0005515, molecular_function, protein binding, 0.154
+slam2, GO:0003824, molecular_function, catalytic activity, 0.153
+slam2, GO:0005215, molecular_function, transporter activity, 0.118
+slam2, GO:0022857, molecular_function, transmembrane transporter activity, 0.118
+slam2, GO:0016787, molecular_function, hydrolase activity, 0.084
+slam2, GO:0022803, molecular_function, passive transmembrane transporter activity, 0.079
+slam2, GO:0015267, molecular_function, channel activity, 0.079
+slam2, GO:0022829, molecular_function, wide pore channel activity, 0.069
+slam2, GO:0097159, molecular_function, organic cyclic compound binding, 0.058
+slam2, GO:0005102, molecular_function, signaling receptor binding, 0.057
+slam2, GO:0042802, molecular_function, identical protein binding, 0.052
+slam2, GO:1901363, molecular_function, heterocyclic compound binding, 0.048
+slam2, GO:0140096, molecular_function, catalytic activity, acting on a protein, 0.044
+slam2, GO:0016798, molecular_function, hydrolase activity, acting on glycosyl bonds, 0.040
+slam2, GO:0060089, molecular_function, molecular transducer activity, 0.039
+slam2, GO:0038023, molecular_function, signaling receptor activity, 0.035
+slam2, GO:0015144, molecular_function, carbohydrate transmembrane transporter activity, 0.030
+slam2, GO:0043167, molecular_function, ion binding, 0.026
+slam2, GO:0003676, molecular_function, nucleic acid binding, 0.025
+slam2, GO:0036094, molecular_function, small molecule binding, 0.025
+slam2, GO:0008289, molecular_function, lipid binding, 0.023
+slam2, GO:0015075, molecular_function, monoatomic ion transmembrane transporter activity, 0.022
+slam2, GO:0016740, molecular_function, transferase activity, 0.021
+slam2, GO:0033218, molecular_function, amide binding, 0.021
+slam2, GO:0097367, molecular_function, carbohydrate derivative binding, 0.020
+slam2, GO:0043168, molecular_function, anion binding, 0.020
+
