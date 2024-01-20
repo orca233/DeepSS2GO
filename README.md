@@ -36,6 +36,14 @@ tqdm                      4.65.0
 transformers              4.29.2              
 ```
 
+<!-- Conda environment can be found here:
+```
+huggingface-
+``` -->
+
+
+<!-- Modified SPOT-1D-LM algorithm was employed to predict secondary structures from primary sequences  -->
+
 
 
 <!-- ## Content 
@@ -49,13 +57,13 @@ transformers              4.29.2
 ## Usage
 
 
-### Part 1. Set up
+### Part 1. Download and setup pre-trained models
 
-Download and setup for pre-trained models
+Pre-trained models:
 
-- esm1b_t33_650M_UR50S 
+- ESM1b_t33_650M_UR50S 
 - Prot_T5_XL_UniRef50
-- SPOT1DLM_checkpoints
+- SPOT1DLM_checkpoints 
 - model_checkpoint_aa.pth
 - model_checkpoint_ss8.pth
 
@@ -88,9 +96,9 @@ https://huggingface.co/orca233/DeepSS2GO/resolve/main/model_checkpoint_ss8.pth
 
 ### Part 2.  Data Preprocessing
 
-In this section, primary amino sequence (aa.fa) will be converted to secondary structure (ss8.fa) by modified SPOT-1D-LM algorithm.
+In this section, primary amino sequence (aa) will be converted to secondary structure (ss8) by modified SPOT-1D-LM algorithm [Ref](https://zenodo.org/record/4644188).
 
-2.1. Save testing fasta file to: `/pub_data/data_new/new_aa.fa`
+#### 2.1. Save the awating test fasta file to: `/pub_data/data_new/new_aa.fa`
 
 e.g.
 ```plaintext
@@ -101,11 +109,10 @@ MLYFRYGFLVVWCAAGVSAAYGADAPAILDDKALLQVQRSVSDKWAESDWKVENDAPRVVDGDFLLAHPKMLEHSLRDAL
 ```
 
 
-2.2. Navigate to the directory: 
+#### 2.2. Convert primary sequence to secondary structure
+
+Navigate to the directory: 
 `..../DeepSS2GO/PredictNew/s1_DataPreprocessing_PredictNew/`
-
-
-2.3. Convert primary sequence to secondary structure
 
 Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will be generated in `/pub_data/data_new/`:
 - new_clean_aa.pkl 
@@ -117,11 +124,10 @@ Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will
 
 ### Part 3. Prediction
 
-3.1. Navigate to the directory: 
+#### 3.1. Predict BPO/CCO/MFO in a batch for general use:
+
+Navigate to the directory and run: 
 `..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/`
-
-
-3.2. Predict BPO/CCO/MFO with the following directories:
 
 ```bash
 # Modify (step6_cpData_Diamond4New.sh) with your own path
@@ -132,23 +138,28 @@ bash step6_cpData_Diamond4New.sh  # Copy these four *pkl/fa files to the corresp
 bash step7_PredictAlphaBeta_New.sh  # Set the threshold accordingly 
 ```
 
-
-3.3. Find Results in directory: `/data/` as:
+Find Results in directory: `/data/` as:
 - results_bp.csv 
 - results_cc.csv
 - results_mf.csv
 
 
+#### 3.2. Predict BPO/CCO/MFO separately with higher precision:
 
-[comment]: <> (- s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/)
-[comment]: <> (- s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/)
-[comment]: <> (- s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/)
 
-[comment]: <> (Take BPO as an example, navigate to the directory:)
-[comment]: <> (`s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/` )
+3.2.1. Download and unpack the following three directions to: `..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/`, and perform the same steps as section 3.1
 
-[comment]: <> (Perform the same steps for CCO nd MFO in the following directories:)
-[comment]: <> (- `s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/`)
-[comment]: <> (- `s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/`)
+- s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/
+- s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/
+- s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/
+
+Download link:
+```
+Huggingface-
+```
+
+
+
+
 
 
