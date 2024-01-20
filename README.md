@@ -38,15 +38,9 @@ transformers              4.29.2
 
 
 
-## Content 
-
-- PredictNew/
-
-- pub_data/
-
-
-
-
+<!-- ## Content 
+- PredictNew/: Scrpit for predicting new protein function from sequence.
+- pub_data/: Unknown protein fasta files -->
 
 
 
@@ -54,37 +48,49 @@ transformers              4.29.2
 
 ## Usage
 
-### Part 1.  Data Preprocessing
 
-In this section, primary amino sequence (aa.fa) will be converted to secondary structure (ss8.fa) by modified SPOT-1D-LM algorithm.
+### Part 1. Set up
 
-
-Navigate to the directory: 
-`..../DeepSS2GO/PredictNew/s1_DataPreprocessing_PredictNew/`
-
-
-
-#### 1. Download pre-trained models for SPOT-1D-LM
+Download pre-trained models for SPOT-1D-LM 
 
 - esm1b_t33_650M_UR50S 
 - Prot_T5_XL_UniRef50
+- SPOT1DLM_checkpoints
+- model_checkpoint_aa.pth
+- model_checkpoint_ss8.pth
 
 Download links:
-
 ```bash
-# Save ESM-1b pre-trained model to: /home/USERNAME/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S-contact-regression.pt & esm1b_t33_650M_UR50S.pt
+# ESM-1b 
+# Save to: /home/USERNAME/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S-contact-regression.pt & esm1b_t33_650M_UR50S.pt
 https://dl.fbaipublicfiles.com/fair-esm/models/esm1b_t33_650M_UR50S.pt
 
-# Save ProtTrans pre-trained model to the specified directory: /home/USERNAME/.../Prot_T5_XL_UniRef50/
+# ProtTrans
+# Save to: /home/USERNAME/.../Prot_T5_XL_UniRef50/
 https://huggingface.co/Rostlab/prot_t5_xl_uniref50/tree/main
-
-# Modify path_Prot_T5_XL_UniRef50 in step0_DataPreprocessingSetting.py
+# Modify path_Prot_T5_XL_UniRef50 in step0_DataPreprocessingSetting.py according to previous path
 path_Prot_T5_XL_UniRef50 = /home/USERNAME/.../Prot_T5_XL_UniRef50/
+
+# SPOT1DLM_checkpoints.xz
+# Unpack and save to: /home/fsong/work/py_proj/prot_algo/DeepSS2GO_v1/pub_data/SPOT1DLM_checkpoints
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.xz
+
+# model_checkpoint_aa.pth
+# Save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/data
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/model_checkpoint_aa.pth
+
+# model_checkpoint_ss8.pth
+# Save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/data
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/model_checkpoint_ss8.pth
 ```
 
-#### 2. Prepare fasta initial input file,
 
-Save the files as: `/pub_data/data_new/new_aa.fa`
+
+### Part 2.  Data Preprocessing
+
+In this section, primary amino sequence (aa.fa) will be converted to secondary structure (ss8.fa) by modified SPOT-1D-LM algorithm.
+
+2.1. Save testing fasta file to: `/pub_data/data_new/new_aa.fa`
 
 e.g.
 ```plaintext
@@ -94,7 +100,13 @@ MVIFYFCGKTFMPARNRWMLLLPLLASAAYAEETPREPDLRSRPEFRLHEAEVKPIDREKVPGQVREKGKVLQIDGETLL
 MLYFRYGFLVVWCAAGVSAAYGADAPAILDDKALLQVQRSVSDKWAESDWKVENDAPRVVDGDFLLAHPKMLEHSLRDALNGNQADLIASLADLYAKLPDYDAVLYGRARALLAKLAGRPAEAVARYRELHGENAADERILLDLAAAEFDDFRLKSAERHFAEAAKLDLPAPVLENVGRFRKKTEGLTGWRFSGGISPAVNRNANNAAPQYCRQNGGRQICSVSRAERAAGLNYEIEAEKLTPLADNHYLLFRSNIGGTSYYFSKKSAYDDGFGRAYLGWQYKNARQTAGILPFYQVQLSGSDGFDAKTKRVNNRRLPPYMLAHGVGVQLSHTYRPNPGWQFSVALEHYRQRYREQDRAEYNNGRQDGFYVSSAKRLGESATVFGGWQFVRFVPKRETVGGAVNNAAYRRNGVYAGWAQEWRQLGGLNSRVSASYARRNYKGIAAFSTEAQRNREWNVSLALSHDKLSYKGIVPALNYRFGRTESNVPYAKRRNSEVFVSADWRF
 ```
 
-#### 3. Convert primary sequence to secondary structure
+
+2.2. Navigate to the directory: 
+`..../DeepSS2GO/PredictNew/s1_DataPreprocessing_PredictNew/`
+
+
+2.3. Convert primary sequence to secondary structure
+
 Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will be generated in `/pub_data/data_new/`:
 - new_clean_aa.pkl 
 - new_clean_aa.fa
@@ -103,15 +115,13 @@ Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will
 
 
 
-### Part 2. Prediction
+### Part 3. Prediction
 
-Navigate to the directory: 
+3.1. Navigate to the directory: 
 `..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/`
 
 
-#### 2. Predict
-
-Predict BPO/CCO/MFO with the following directories:
+3.2. Predict BPO/CCO/MFO with the following directories:
 
 ```bash
 # Modify (step6_cpData_Diamond4New.sh) with your own path
@@ -123,7 +133,7 @@ bash step7_PredictAlphaBeta_New.sh  # Set the threshold accordingly
 ```
 
 
-Find Results in directory: `/data/` as:
+3.3. Find Results in directory: `/data/` as:
 - results_bp.csv 
 - results_cc.csv
 - results_mf.csv
