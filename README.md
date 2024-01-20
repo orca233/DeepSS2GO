@@ -51,7 +51,7 @@ transformers              4.29.2
 
 ### Part 1. Set up
 
-Download pre-trained models for SPOT-1D-LM 
+Download and setup for pre-trained models
 
 - esm1b_t33_650M_UR50S 
 - Prot_T5_XL_UniRef50
