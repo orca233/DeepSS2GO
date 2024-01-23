@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 
 def get_unnorm_asa_new(rel_asa, seq):
-    rnam1_std = "ACDEFGHIKLMNPQRSTVWY-X"  # not in: BJOUXZ
+    rnam1_std = "ACDEFGHIKLMNPQRSTVWY-X"
 
     ASA_std = (115, 135, 150, 190, 210, 75, 195, 175, 200, 170,
                185, 160, 145, 180, 225, 115, 140, 155, 255, 230, 1, 1)

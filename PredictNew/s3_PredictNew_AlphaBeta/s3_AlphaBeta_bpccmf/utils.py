@@ -96,7 +96,7 @@ class Ontology(object):
 
         return None
 
-    def get_shortest_path_to_root(self, term_id):  # 没啥用
+    def get_shortest_path_to_root(self, term_id):
         shortest_path = self.calculate_shortest_path_to_root(term_id)
         if shortest_path is None:
             return 0

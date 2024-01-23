@@ -15,8 +15,8 @@ from step0_TrainTestSetting_local_ss8 import params_local as params_local_ss8
 MAXLEN = params_local_aa['MAXLEN']
 
 @ck.command()
-@ck.option('--in-file-aa', '-if', default='data/test_data_aa.fa', help='Input FASTA file', required=True)  # 提前准备好
-@ck.option('--in-file-ss8', '-if', default='data/test_data_ss8.fa', help='Input FASTA file', required=True)  # 提前准备好
+@ck.option('--in-file-aa', '-if', default='data/test_data_aa.fa', help='Input FASTA file', required=True)
+@ck.option('--in-file-ss8', '-if', default='data/test_data_ss8.fa', help='Input FASTA file', required=True)
 @ck.option('--out-file-bp', '-of', default='data/results_bp.csv', help='Output result file')
 @ck.option('--out-file-cc', '-of', default='data/results_cc.csv', help='Output result file')
 @ck.option('--out-file-mf', '-of', default='data/results_mf.csv', help='Output result file')
@@ -186,9 +186,8 @@ def main(in_file_aa, in_file_ss8, out_file_bp, out_file_cc, out_file_mf, go_file
     ########## step3 integration
 
     # (1 - alpha - beta) * diamond + alpha * preds_aa + beta * preds_ss8
-    # alphas = {NAMESPACES['mf']: 0.48, NAMESPACES['bp']: 0.4, NAMESPACES['cc']: 0.49}
     alphas = {NAMESPACES['bp']: 0, NAMESPACES['cc']: 0, NAMESPACES['mf']: 0}
-    betas = {NAMESPACES['bp']: 0, NAMESPACES['cc']: 0, NAMESPACES['mf']: 0}  # 初始化，original=0
+    betas = {NAMESPACES['bp']: 0, NAMESPACES['cc']: 0, NAMESPACES['mf']: 0}
 
     if alpha == 'json' and beta == 'json':
         print('alpha/beta is from json, alpha/beta = ', alpha, beta)
@@ -376,7 +375,6 @@ class ProteinGODataset(Dataset):
 
 
 
-######## model
 class Model1(nn.Module):
     def __init__(self, terms_classes, params, kernels_tuple, filters_list):
         super(Model1, self).__init__()

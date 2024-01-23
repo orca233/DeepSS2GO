@@ -3,10 +3,9 @@
 
 ## Introduction
 
-DeepSS2GO is a deep learning predictor th incorporates secondary structure features along with primary sequence and homology information. Experimental results show that the predictor performs well, with an overall accuracy surpassing state-ofthe-art algorithms. It accurately predicts key functions by effectively utilizing secondary structure information, rather than broadly predicting general Gene Ontology terms. Additionally, DeepSS2GO predicts five times faster than advanced algorithms, making it highly applicable to massive sequencing data.
+DeepSS2GO is a deep learning predictor th incorporates secondary structure features along with primary sequence and homology information. The algorithm expertly harnesses the speed of sequence-based analysis and the accuracy of structure-based analysis, streamlining primary sequences and elegantly sidestepping the time-consuming challenges of tertiary structure analysis. The results show that the prediction performance surpasses state-of-the-art algorithms. It has the ability to predict key functions by effectively utilizing secondary structure information, rather than broadly predicting general Gene Ontology terms. Additionally, DeepSS2GO predicts five times faster than advanced algorithms, making it highly applicable to massive sequencing data.
 
-
-![Img](./images/fig_architecture.png)
+![Img](./images/fig_graphical_abstract.png)
 
 
 
@@ -42,7 +41,7 @@ huggingface-
 ``` -->
 
 
-<!-- Modified SPOT-1D-LM algorithm was employed to predict secondary structures from primary sequences  -->
+
 
 
 
@@ -59,13 +58,22 @@ huggingface-
 
 ### Part 1. Download and setup pre-trained models
 
-Pre-trained models:
+Download and setup the following pre-trained models:
 
+> For aa to ss8:
 - ESM1b_t33_650M_UR50S 
-- Prot_T5_XL_UniRef50
-- SPOT1DLM_checkpoints 
-- model_checkpoint_aa.pth
-- model_checkpoint_ss8.pth
+- Prot_T5_XL_UniRef50 
+- SPOT1DLM_checkpoints
+
+> Simply run, predict BPO/CCO/MFO in a batch:
+- s3_AlphaBeta_bpccmf
+
+> For higher precision purpose, predict BPO/CCO/MFO separately:
+- s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768
+- s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384
+- s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768 
+
+
 
 Download links:
 ```bash
@@ -83,14 +91,20 @@ path_Prot_T5_XL_UniRef50 = /home/USERNAME/.../Prot_T5_XL_UniRef50/
 # Unpack and save to: /home/fsong/work/py_proj/prot_algo/DeepSS2GO_v1/pub_data/SPOT1DLM_checkpoints
 https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.xz
 
-# model_checkpoint_aa.pth
-# Save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/data
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/model_checkpoint_aa.pth
+# s3_AlphaBeta_bpccmf/
+# s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/
+# s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/
+# s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/ 
+# Unpack and save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/
 
-# model_checkpoint_ss8.pth
-# Save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/data
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/model_checkpoint_ss8.pth
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_bpccmf.tar.gz?download=true
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768.tar.gz?download=true
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384.tar.gz?download=true
+https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768.tar.gz?download=true
+
 ```
+
+
 
 
 
@@ -124,7 +138,12 @@ Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will
 
 ### Part 3. Prediction
 
-#### 3.1. Predict BPO/CCO/MFO in a batch for general use:
+> If you require general predictions, run only section 3.1. For higher precision, proceed with section 3.2 instead.
+
+#### 3.1. Simply run, predict BPO/CCO/MFO in a batch:
+
+
+<!-- Download and unpack `s3_AlphaBeta_bpccmf` -->
 
 Navigate to the directory and run: 
 `..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_bpccmf/`
@@ -134,7 +153,6 @@ Navigate to the directory and run:
 path_base="/home/USERNAME/work/py_proj/prot_algo/DeepSS2GO/"
 
 bash step6_cpData_Diamond4New.sh  # Copy these four *pkl/fa files to the corresponding directories and run diamond
-
 bash step7_PredictAlphaBeta_New.sh  # Set the threshold accordingly 
 ```
 
@@ -144,19 +162,19 @@ Find Results in directory: `/data/` as:
 - results_mf.csv
 
 
-#### 3.2. Predict BPO/CCO/MFO separately with higher precision:
+#### 3.2. For higher precision purpose, predict BPO/CCO/MFO, separately:
 
 
-3.2.1. Download and unpack the following three directions to: `..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/`, and perform the same steps as section 3.1
+Take BPO as example:
+Navigate to the directory and perform the same steps as section 3.1: 
+`..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/`
 
+Same for CCO and MFO.
 - s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/
 - s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/
 - s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/
 
-Download link:
-```
-Huggingface-
-```
+
 
 
 

@@ -1,8 +1,8 @@
 import pandas as pd
 from step0_DataPreprocessingSetting import *
 
-swissprot_clean_ALL00_aa_df = pd.read_pickle(path_pub_data + 'data_new/new_clean_aa.pkl')  # original: swissprot_clean_ALL00_aa.pkl
-SPOT1DLM_aass3ss8 = pd.read_pickle(path_pub_data + 'data_new/new_SPOT1DLM_aass3ss8.pkl')  # original: SPOT1DLM_aass3ss8.pkl
+swissprot_clean_ALL00_aa_df = pd.read_pickle(path_pub_data + 'data_new/new_clean_aa.pkl')
+SPOT1DLM_aass3ss8 = pd.read_pickle(path_pub_data + 'data_new/new_SPOT1DLM_aass3ss8.pkl')
 print(swissprot_clean_ALL00_aa_df['proteins'])
 print(SPOT1DLM_aass3ss8)
 SPOT1DLM_aass3ss8_dict = SPOT1DLM_aass3ss8.set_index('proteins').T.to_dict('list')

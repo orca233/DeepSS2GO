@@ -9,14 +9,13 @@ from step0_DataPreprocessingSetting import *
 import pandas as pd
 
 
-save_path_npy = path_base + 'redundancy/SPOT1DLM_inputs_new/'  # for step3 & 4, esm/prottrans
+save_path_npy = path_base + 'redundancy/SPOT1DLM_inputs_new/'
 os.system('mkdir -p %s' % save_path_npy)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--device', default='cuda:0', type=str, help=' define the device you want the ')
 args = parser.parse_args()
 
-### '/scem/work/songfu/prot_data/Prot_T5_XL_UniRef50'
 tokenizer = T5Tokenizer.from_pretrained(path_Prot_T5_XL_UniRef50, do_lower_case=False)  #
 model = T5EncoderModel.from_pretrained(path_Prot_T5_XL_UniRef50)
 

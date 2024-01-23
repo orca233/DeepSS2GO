@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="fsong@10.20.36.86:22 password" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="fsong@10.20.36.86:22 password">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/fsong/work/py_proj/prot_algo/DeepSS2GO" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </paths>
@@ -24,5 +24,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

@@ -6,10 +6,10 @@ import numpy as np
 import esm
 from step0_DataPreprocessingSetting import *
 
-save_path_npy = path_base + 'redundancy/SPOT1DLM_inputs_new/'  # for step3 & 4, esm/prottrans
+save_path_npy = path_base + 'redundancy/SPOT1DLM_inputs_new/'
 os.system('mkdir -p %s' % save_path_npy)
 parser = argparse.ArgumentParser()
-parser.add_argument('--device', default='cuda:0', type=str, help=' define the device you want the ')  # original: cpu
+parser.add_argument('--device', default='cuda:0', type=str, help=' define the device you want the ')
 args = parser.parse_args()
 model, alphabet = esm.pretrained.esm1b_t33_650M_UR50S()
 batch_converter = alphabet.get_batch_converter()

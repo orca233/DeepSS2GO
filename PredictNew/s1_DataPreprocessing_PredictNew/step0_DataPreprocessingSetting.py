@@ -12,9 +12,7 @@ else:
     print('NO path_base avail')
 
 
-# path_Prot_T5_XL_UniRef50 = '/scem/work/songfu/py_proj/prot_data/Prot_T5_XL_UniRef50'  # HPC change ---------------
 path_Prot_T5_XL_UniRef50 = '/home/fsong/work/py_proj/prot_data/Prot_T5_XL_UniRef50'  # local lab_linux
-# path_esm1b = '/home/fsong/work/py_proj/prot_data/esm'  # change ---------------
 
 path_pub_data = path_base + 'pub_data/'
 path_SPOT1DLM_checkpoints = path_base + 'pub_data/SPOT1DLM_checkpoints/'
