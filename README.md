@@ -43,32 +43,22 @@ huggingface-
 
 
 
-
-
-<!-- ## Content 
-- PredictNew/: Scrpit for predicting new protein function from sequence.
-- pub_data/: Unknown protein fasta files -->
-
-
-
-
-
 ## Usage
 
 
-### Part 1. Download and setup pre-trained models
+### Step 1. Download and setup pre-trained models
 
 Download and setup the following pre-trained models:
 
-> For aa to ss8:
+> For aa to ss8 (step 2):
 - ESM1b_t33_650M_UR50S 
 - Prot_T5_XL_UniRef50 
 - SPOT1DLM_checkpoints
 
-> Simply run, predict BPO/CCO/MFO in a batch:
+> Simply run, predict BPO/CCO/MFO in a batch (step 3.1):
 - s3_AlphaBeta_bpccmf
 
-> For higher precision purpose, predict BPO/CCO/MFO separately:
+> For higher precision purpose, predict BPO/CCO/MFO separately (step 3.2):
 - s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768
 - s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384
 - s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768 
@@ -89,7 +79,8 @@ path_Prot_T5_XL_UniRef50 = /home/USERNAME/.../Prot_T5_XL_UniRef50/
 
 # SPOT1DLM_checkpoints.xz
 # Unpack and save to: /home/fsong/work/py_proj/prot_algo/DeepSS2GO_v1/pub_data/SPOT1DLM_checkpoints
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.xz
+
+wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.xz
 
 # s3_AlphaBeta_bpccmf/
 # s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/
@@ -97,10 +88,13 @@ https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.xz
 # s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/ 
 # Unpack and save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/
 
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_bpccmf.tar.gz?download=true
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768.tar.gz?download=true
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384.tar.gz?download=true
-https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768.tar.gz?download=true
+wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_bpccmf.tar.gz?download=true
+
+wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768.tar.gz?download=true
+
+wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384.tar.gz?download=true
+
+wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768.tar.gz?download=true
 
 ```
 
@@ -108,14 +102,17 @@ https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_Te
 
 
 
-### Part 2.  Data Preprocessing
+### Step 2.  Data Preprocessing
 
 In this section, primary amino sequence (aa) will be converted to secondary structure (ss8) by modified SPOT-1D-LM algorithm [Ref](https://zenodo.org/record/4644188).
 
 #### 2.1. Save the awating test fasta file to: `/pub_data/data_new/new_aa.fa`
 
-e.g.
-```plaintext
+Input fasta file format should be like: 
+
+> In case your protein name contains dot '.', or sequence in multi-line, please run utils_modified_input_fasta.py to uniform input new_aa.fa as following format.
+
+```
 >slam1
 MVIFYFCGKTFMPARNRWMLLLPLLASAAYAEETPREPDLRSRPEFRLHEAEVKPIDREKVPGQVREKGKVLQIDGETLLKNPELLSRAMYSAVVSNNIAGIRVILPIYLQQAQQDKMLALYAQGILAQADGRVKEAISHYRELIAAQPDAPAVRMRLAAALFENRQNEAAADQFDRLKAENLPPQLMEQVELYRKALRERDAWKVNGGFSVTREHNINQAPKRQQYGKWTFPKQVDGTAVNYRLGAEKKWSLKNGWYTTAGGDVSGRVYPGNKKFNDMTAGVSGGIGFADRRKDAGLAVFHERRTYGNDAYSYTNGARLYFNRWQTPKWQTLSSAEWGRLKNTRRARSDNTHLQISNSLVFYRNARQYWMGGLDFYRERNPADRGDNFNRYGLRFAWGQEWGGSGLSSLLRLGAAKRHYEKPGFFSGFKGERRRDKELNTSLSLWHRALHFKGITPRLTLSHRETRSNDVFNEYEKNRAFVEFNKTF
 >slam2
@@ -136,9 +133,9 @@ Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will
 
 
 
-### Part 3. Prediction
+### Step 3. Prediction
 
-> If you require general predictions, run only section 3.1. For higher precision, proceed with section 3.2 instead.
+> If you require general predictions, run only step 3.1. For higher precision, proceed with step 3.2 instead.
 
 #### 3.1. Simply run, predict BPO/CCO/MFO in a batch:
 
@@ -166,7 +163,7 @@ Find Results in directory: `/data/` as:
 
 
 Take BPO as example:
-Navigate to the directory and perform the same steps as section 3.1: 
+Navigate to the directory and perform the same steps as step 3.1: 
 `..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/`
 
 Same for CCO and MFO.
