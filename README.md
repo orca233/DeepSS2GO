@@ -55,10 +55,10 @@ Download and setup the following pre-trained models:
 - Prot_T5_XL_UniRef50 
 - SPOT1DLM_checkpoints
 
-> Simply run, predict BPO/CCO/MFO in a batch (step 3.1):
+> Simply run, predict BPO/CCO/MFO in a batch [step 3.1](#3.1.-Simply-run,-predict-BPO/CCO/MFO-in-a-batch:):
 - s3_AlphaBeta_bpccmf
 
-> For higher precision purpose, predict BPO/CCO/MFO separately (step 3.2):
+> For higher precision purpose, predict BPO/CCO/MFO separately [step 3.2](#3.2.-For-higher-precision-purpose,-predict-BPO/CCO/MFO,-separately:):
 - s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768
 - s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384
 - s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768 
@@ -79,7 +79,6 @@ path_Prot_T5_XL_UniRef50 = /home/USERNAME/.../Prot_T5_XL_UniRef50/
 
 # SPOT1DLM_checkpoints.xz
 # Unpack and save to: /home/fsong/work/py_proj/prot_algo/DeepSS2GO_v1/pub_data/SPOT1DLM_checkpoints
-
 wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.xz
 
 # s3_AlphaBeta_bpccmf/
@@ -87,18 +86,12 @@ wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/SPOT-LM-checkpoints.x
 # s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/
 # s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/ 
 # Unpack and save to: ..../DeepSS2GO/PredictNew/s3_PredictNew_AlphaBeta/
-
 wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_bpccmf.tar.gz?download=true
-
 wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768.tar.gz?download=true
-
 wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384.tar.gz?download=true
-
 wget https://huggingface.co/orca233/DeepSS2GO/resolve/main/s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768.tar.gz?download=true
 
 ```
-
-
 
 
 
@@ -110,14 +103,14 @@ In this section, primary amino sequence (aa) will be converted to secondary stru
 
 Input fasta file format should be like: 
 
-> In case your protein name contains dot '.', or sequence in multi-line, please run utils_modified_input_fasta.py to uniform input new_aa.fa as following format.
-
 ```
 >slam1
 MVIFYFCGKTFMPARNRWMLLLPLLASAAYAEETPREPDLRSRPEFRLHEAEVKPIDREKVPGQVREKGKVLQIDGETLLKNPELLSRAMYSAVVSNNIAGIRVILPIYLQQAQQDKMLALYAQGILAQADGRVKEAISHYRELIAAQPDAPAVRMRLAAALFENRQNEAAADQFDRLKAENLPPQLMEQVELYRKALRERDAWKVNGGFSVTREHNINQAPKRQQYGKWTFPKQVDGTAVNYRLGAEKKWSLKNGWYTTAGGDVSGRVYPGNKKFNDMTAGVSGGIGFADRRKDAGLAVFHERRTYGNDAYSYTNGARLYFNRWQTPKWQTLSSAEWGRLKNTRRARSDNTHLQISNSLVFYRNARQYWMGGLDFYRERNPADRGDNFNRYGLRFAWGQEWGGSGLSSLLRLGAAKRHYEKPGFFSGFKGERRRDKELNTSLSLWHRALHFKGITPRLTLSHRETRSNDVFNEYEKNRAFVEFNKTF
 >slam2
 MLYFRYGFLVVWCAAGVSAAYGADAPAILDDKALLQVQRSVSDKWAESDWKVENDAPRVVDGDFLLAHPKMLEHSLRDALNGNQADLIASLADLYAKLPDYDAVLYGRARALLAKLAGRPAEAVARYRELHGENAADERILLDLAAAEFDDFRLKSAERHFAEAAKLDLPAPVLENVGRFRKKTEGLTGWRFSGGISPAVNRNANNAAPQYCRQNGGRQICSVSRAERAAGLNYEIEAEKLTPLADNHYLLFRSNIGGTSYYFSKKSAYDDGFGRAYLGWQYKNARQTAGILPFYQVQLSGSDGFDAKTKRVNNRRLPPYMLAHGVGVQLSHTYRPNPGWQFSVALEHYRQRYREQDRAEYNNGRQDGFYVSSAKRLGESATVFGGWQFVRFVPKRETVGGAVNNAAYRRNGVYAGWAQEWRQLGGLNSRVSASYARRNYKGIAAFSTEAQRNREWNVSLALSHDKLSYKGIVPALNYRFGRTESNVPYAKRRNSEVFVSADWRF
 ```
+> In case your protein name contains dot '.', or sequence in multi-line, please run `utils_modified_input_fasta.py` to uniform input `new_aa.fa` as following format.
+
 
 
 #### 2.2. Convert primary sequence to secondary structure

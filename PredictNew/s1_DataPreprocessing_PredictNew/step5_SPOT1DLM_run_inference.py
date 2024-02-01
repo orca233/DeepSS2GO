@@ -29,7 +29,7 @@ prot_df = pd.read_pickle(path_base + 'pub_data/data_new/new_clean_aa.pkl')
 FS_test_set = FS_Proteins_Dataset(prot_df)
 print("test_dataset Loaded with ", len(FS_test_set), "proteins")
 # this implementation has only been tested for batch size 1 only.
-test_loader = DataLoader(FS_test_set, batch_size=1, collate_fn=text_collate_fn, num_workers=16)
+test_loader = DataLoader(FS_test_set, batch_size=1, collate_fn=text_collate_fn, num_workers=16)  # num_workers=16
 
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
