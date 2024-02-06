@@ -101,7 +101,7 @@ In this section, primary amino sequence (aa) will be converted to secondary stru
 
 #### 2.1. Save the awating test fasta file to: `/pub_data/data_new/new_aa.fa`
 
-Input fasta file format should be like: 
+Input fasta file format example: 
 
 ```
 >slam1
@@ -109,7 +109,7 @@ MVIFYFCGKTFMPARNRWMLLLPLLASAAYAEETPREPDLRSRPEFRLHEAEVKPIDREKVPGQVREKGKVLQIDGETLL
 >slam2
 MLYFRYGFLVVWCAAGVSAAYGADAPAILDDKALLQVQRSVSDKWAESDWKVENDAPRVVDGDFLLAHPKMLEHSLRDALNGNQADLIASLADLYAKLPDYDAVLYGRARALLAKLAGRPAEAVARYRELHGENAADERILLDLAAAEFDDFRLKSAERHFAEAAKLDLPAPVLENVGRFRKKTEGLTGWRFSGGISPAVNRNANNAAPQYCRQNGGRQICSVSRAERAAGLNYEIEAEKLTPLADNHYLLFRSNIGGTSYYFSKKSAYDDGFGRAYLGWQYKNARQTAGILPFYQVQLSGSDGFDAKTKRVNNRRLPPYMLAHGVGVQLSHTYRPNPGWQFSVALEHYRQRYREQDRAEYNNGRQDGFYVSSAKRLGESATVFGGWQFVRFVPKRETVGGAVNNAAYRRNGVYAGWAQEWRQLGGLNSRVSASYARRNYKGIAAFSTEAQRNREWNVSLALSHDKLSYKGIVPALNYRFGRTESNVPYAKRRNSEVFVSADWRF
 ```
-> In case your protein name contains dot '.', or sequence in multi-line, please run `utils_modified_input_fasta.py` to uniform input `new_aa.fa` as following format.
+> In case your protein name contains dot '.', or sequence in multi-line, please run `utils_modified_input_fasta.py` to uniform input `new_aa.fa` as the example format.
 
 
 
