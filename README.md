@@ -166,20 +166,28 @@ Same for CCO and MFO.
 
 
 
-## Citing
+## Citation and Contact
+
+### Citation
 
 The paper has been accepted for publication by Briefings in Bioinformatics and will appear in an upcoming issue. Please cite it as follows:
 
+```bibtex
 @article {song2024deepss2go,
 	author = {Song, Fu V and Su, Jiaqi and Huang, Sixing and Zhang, Neng and Li, Kaiyue and Ni, Ming and Liao, Maofu},
 	title = {DeepSS2GO: protein function prediction from secondary structure},
 	year = {2024},
 	doi = {10.1093/bib/bbae196},
-	URL = {https://doi.org/10.1093/bib/bbae196},
+	url = {https://doi.org/10.1093/bib/bbae196},
 	journal = {Briefings in Bioinformatics}
 }
+```
 
 
+### Contact: 
+Fu Song (songf@mail.sustech.edu.cn)
+Ming Ni (niming@mgi-tech.com)
+Maofu Liao (liaomf@sustech.edu.cn)
 
 
 
