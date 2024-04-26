@@ -42,7 +42,6 @@ print(df_output)
 df_output.to_pickle(path_pub_data + 'SPOT1DLM_aass3ss8.pkl')
 
 
-
 print('step6_done')
 print('\n################## And they all lived happily ever after! ##################\n')
 

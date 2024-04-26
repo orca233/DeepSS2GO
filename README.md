@@ -130,7 +130,7 @@ Execute steps 1-8 in `s1_DataPreprocessing_New/`. The following final files will
 
 > If you require general predictions, run only step 3.1. For higher precision, proceed with step 3.2 instead.
 
-#### 3.1. Simply run, predict BPO/CCO/MFO in a batch:
+#### Step 3.1. Simply run, predict BPO/CCO/MFO in a batch:
 
 
 <!-- Download and unpack `s3_AlphaBeta_bpccmf` -->
@@ -152,7 +152,7 @@ Find Results in directory: `/data/` as:
 - results_mf.csv
 
 
-#### 3.2. For higher precision purpose, predict BPO/CCO/MFO, separately:
+#### Step 3.2. For higher precision purpose, predict BPO/CCO/MFO, separately:
 
 
 Take BPO as example:
@@ -163,6 +163,22 @@ Same for CCO and MFO.
 - s3_AlphaBeta_TrainALL00_TestALL00_bp_aaK16F32768_ss8K32F32768/
 - s3_AlphaBeta_TrainALL00_TestALL00_cc_aaK16F32768_ss8K48F16384/
 - s3_AlphaBeta_TrainALL00_TestALL00_mf_aaK16F32768_ss8K32F32768/
+
+
+
+## Citing
+
+The paper has been accepted for publication by Briefings in Bioinformatics and will appear in an upcoming issue. Please cite it as follows:
+
+@article {song2024deepss2go,
+	author = {Song, Fu V and Su, Jiaqi and Huang, Sixing and Zhang, Neng and Li, Kaiyue and Ni, Ming and Liao, Maofu},
+	title = {DeepSS2GO: protein function prediction from secondary structure},
+	year = {2024},
+	doi = {10.1093/bib/bbae196},
+	URL = {https://doi.org/10.1093/bib/bbae196},
+	journal = {Briefings in Bioinformatics}
+}
+
 
 
 
