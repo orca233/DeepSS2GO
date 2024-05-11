@@ -170,23 +170,34 @@ Same for CCO and MFO.
 
 ### Citation
 
-The paper has been accepted for publication by Briefings in Bioinformatics and will appear in an upcoming issue. Please cite it as follows:
+The paper has been published by `Briefings in Bioinformatics`.
+
+https://academic.oup.com/bib/article/25/3/bbae196/7663430
+
+
+Please cite it as follows:
 
 ```bibtex
-@article {song2024deepss2go,
-	author = {Song, Fu V and Su, Jiaqi and Huang, Sixing and Zhang, Neng and Li, Kaiyue and Ni, Ming and Liao, Maofu},
-	title = {DeepSS2GO: protein function prediction from secondary structure},
-	year = {2024},
-	doi = {10.1093/bib/bbae196},
-	url = {https://doi.org/10.1093/bib/bbae196},
-	journal = {Briefings in Bioinformatics}
+@article{song2024deepss2go,
+  title={DeepSS2GO: protein function prediction from secondary structure},
+  author={Song, Fu V and Su, Jiaqi and Huang, Sixing and Zhang, Neng and Li, Kaiyue and Ni, Ming and Liao, Maofu},
+  journal={Briefings in Bioinformatics},
+  volume={25},
+  number={3},
+  year={2024},
+  publisher={Oxford University Press}
+  doi = {10.1093/bib/bbae196},
+  url = {https://doi.org/10.1093/bib/bbae196},
 }
+
 ```
 
 
 ### Contact: 
 Fu Song (songf@mail.sustech.edu.cn)
-Ming Ni (niming@mgi-tech.com)
+
+Ming Ni (niming@mgi-tech.com)  
+
 Maofu Liao (liaomf@sustech.edu.cn)
 
 
