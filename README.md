@@ -9,6 +9,21 @@ DeepSS2GO is a deep learning predictor th incorporates secondary structure featu
 
 
 
+## Quick taste on Colab
+
+Run `DeepSS2GO_v2_colab.ipynb` on Colab pro. 
+All you need is a fasta file.
+https://github.com/orca233/DeepSS2GO_v2_colab/blob/main/DeepSS2GO_v2_colab.ipynb
+
+Details can be found: 
+https://github.com/orca233/DeepSS2GO_v2_colab/
+
+
+> To be noticed, quick and fully use requires colab pro for higher RAM. 
+> 
+> Free version needs to predict the corresponding secondary structure (8-class) of the primary amino acid sequence on other websites and upload both together.
+
+
 ## Dependency
 
 DeepSS2GO is developed under Linux environment with:
