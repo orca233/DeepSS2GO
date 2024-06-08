@@ -7,9 +7,12 @@ DeepSS2GO is a deep learning predictor th incorporates secondary structure featu
 
 ![Img](./images/fig_graphical_abstract.png)
 
+---
 
 
-## Quick taste on Colab
+## Quick taste on Colab  
+
+<img src="./images/google_colab_icon.png" alt="Colab Icon" style="width:150px;height:30px;vertical-align:middle;"> 
 
 - For Colab Pro users, it is recommended to use `DeepSS2GO_v2_colab_pro.ipynb`. Just upload the fasta file in the first step, and you can run all cells with one click.
     
@@ -19,11 +22,11 @@ DeepSS2GO is a deep learning predictor th incorporates secondary structure featu
 - To be noticed, quick and fully use requires Colab Pro for higher RAM. Details can be found here: 
 
 ```bash
-# Pro
-https://github.com/orca233/DeepSS2GO_v2_colab/blob/main/DeepSS2GO_v2_colab_pro.ipynb
+# Colab Pro, GPU=L4, RAM=53GB, GPURAM=22.5GB, Disk=201GB
+https://colab.research.google.com/github/orca233/DeepSS2GO_v2_colab/blob/main/DeepSS2GO_v2_colab_pro.ipynb
 
-# Free
-https://github.com/orca233/DeepSS2GO_v2_colab/blob/main/DeepSS2GO_v2_colab_free.ipynb
+# Colab Free, GPU=T4, RAM=12.7GB, GPURAM=15GB, Disk=78GB
+https://colab.research.google.com/github/orca233/DeepSS2GO_v2_colab/blob/main/DeepSS2GO_v2_colab_free.ipynb
 
 # Details
 https://github.com/orca233/DeepSS2GO_v2_colab/
