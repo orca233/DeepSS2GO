@@ -10,9 +10,7 @@ DeepSS2GO is a deep learning predictor th incorporates secondary structure featu
 ---
 
 
-## Quick taste on Colab  
-
-<img src="./images/google_colab_icon.png" alt="Colab Icon" style="width:150px;height:30px;vertical-align:middle;"> 
+## Quick taste on  -- <img src="./images/google_colab_icon.png" alt="Colab Icon" style="width:180px;height:40px;vertical-align:middle;"> 
 
 - For Colab Pro users, it is recommended to use `DeepSS2GO_v2_colab_pro.ipynb`. Just upload the fasta file in the first step, and you can run all cells with one click.
     
@@ -32,10 +30,21 @@ https://colab.research.google.com/github/orca233/DeepSS2GO_v2_colab/blob/main/De
 https://github.com/orca233/DeepSS2GO_v2_colab/
 ```
 
+<font color="red"> An update free colab version can be find here, with NetSurfP3.0 to predict ss8 from aa. Take a try this one: </font>
+
+
+```bash
+https://colab.research.google.com/github/orca233/DeepSS2GO_v2_colab/blob/main/DeepSS2GO_v2_colab_free_NetSurfP3.ipynb
+
+```
+
+
 
 
 
 ## Dependency
+
+
 
 DeepSS2GO is developed under Linux environment with:
 
