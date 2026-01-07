@@ -229,7 +229,7 @@ Please cite it as follows:
 
 
 ### Contact: 
-Fu Song (songf@mail.sustech.edu.cn)
+Fu Song (fu.song@outlook.com; songf@mail.sustech.edu.cn)
 
 Ming Ni (niming@mgi-tech.com)  
 
